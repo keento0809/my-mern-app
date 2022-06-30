@@ -15,6 +15,7 @@ const getOne = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 const postData = async (req, res) => {
   try {
     res.status(200).json({ mssg: "POST DATA" });
@@ -22,6 +23,7 @@ const postData = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 const updateData = async (req, res) => {
   try {
     res.status(200).json({ mssg: "UPDATE DATA" });
@@ -29,6 +31,7 @@ const updateData = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 const deleteData = async (req, res) => {
   try {
     res.status(200).json({ mssg: "DELETE DATA" });
