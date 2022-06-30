@@ -1,19 +1,13 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const Routes = require("./routers/router");
 const port = process.env.PORT || 4000;
 // activate express
 const app = express();
 
 app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.json({ mssg: "home" });
-});
-
-app.get("/:id", (req, res) => {
-  const { id } = req.params;
-  res.send(`Your ID is ${id}!`);
-});
+app.use("/", Routes);
 
 app.listen(port, () => {
   console.log(`Server listening on ${port}`);
