@@ -5,6 +5,7 @@ const {
   postItem,
   updateItem,
   deleteItem,
+  reset,
 } = require("../controllers/controllers");
 const router = express.Router();
 
@@ -12,6 +13,8 @@ router.get("/", getAllItem);
 router.get("/:id", getOneItem);
 router.post("/", postItem);
 router.patch("/:id", updateItem);
+// test
+router.delete("/", reset);
 router.delete("/:id", deleteItem);
 
 module.exports = router;
