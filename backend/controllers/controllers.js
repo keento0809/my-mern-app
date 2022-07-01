@@ -56,6 +56,20 @@ const updateItem = async (req, res) => {
   }
 };
 
+const reset = async (req, res) => {
+  try {
+    const allItems = await Item.deleteMany({});
+
+    if (!allItems) {
+      return res.status(400).json({ error: "Items not exist" });
+    }
+
+    res.status(200).json(allItems);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
 const deleteItem = async (req, res) => {
   try {
     const { id } = req.params;
@@ -79,4 +93,5 @@ module.exports = {
   postItem,
   updateItem,
   deleteItem,
+  reset,
 };
