@@ -3,19 +3,15 @@ const {
   getAllItem,
   getOneItem,
   postItem,
+  updateItem,
+  deleteItem,
 } = require("../controllers/controllers");
 const router = express.Router();
 
 router.get("/", getAllItem);
 router.get("/:id", getOneItem);
 router.post("/", postItem);
-router.patch("/:id", (req, res) => {
-  const { id } = req.params;
-  res.send(`UPDATE REQ / id: ${id}`);
-});
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  res.send(`DELETE REQ / id: ${id}`);
-});
+router.patch("/:id", updateItem);
+router.delete("/:id", deleteItem);
 
 module.exports = router;
