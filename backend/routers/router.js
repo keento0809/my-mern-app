@@ -1,16 +1,14 @@
 const express = require("express");
+const {
+  getAllItem,
+  getOneItem,
+  postItem,
+} = require("../controllers/controllers");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("GET REQ");
-});
-router.get("/:id", (req, res) => {
-  const { id } = req.params;
-  res.send(`GET REQ / id: ${id} `);
-});
-router.post("/", (req, res) => {
-  res.send("POST REQ");
-});
+router.get("/", getAllItem);
+router.get("/:id", getOneItem);
+router.post("/", postItem);
 router.patch("/:id", (req, res) => {
   const { id } = req.params;
   res.send(`UPDATE REQ / id: ${id}`);

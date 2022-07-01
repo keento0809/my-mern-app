@@ -1,41 +1,60 @@
+const Item = require("../models/ItemModels");
+
 // GET all requests
-const getAll = async (req, res) => {
+const getAllItem = async (req, res) => {
   try {
-    // const data = await
-    res.status(200).json({ mssg: "GET REQ" });
+    const allItems = await Item.find({}).sort({ created: -1 });
+    res.status(200).json(allItems);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-const getOne = async (req, res) => {
+const getOneItem = async (req, res) => {
   try {
-    res.status(200).json({ mssg: "GET REQ ONE" });
+    const { id } = req.params;
+    const item = await Item.findById(id);
+    res.status(200).json(item);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-const postData = async (req, res) => {
+const postItem = async (req, res) => {
+  if (!req.body.itemName || !req.body.amount) {
+    res.status(400);
+    throw Error("Invalid request");
+  }
   try {
-    res.status(200).json({ mssg: "POST DATA" });
+    const newItem = await Item.create({
+      itemName: req.body.itemName,
+      amount: req.body.amount,
+      description: req.body.description ? req.body.description : "",
+    });
+    res.status(200).json(newItem);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-const updateData = async (req, res) => {
+const updateItem = async (req, res) => {
   try {
-    res.status(200).json({ mssg: "UPDATE DATA" });
+    res.status(200).json({ mssg: "UPDATE Item" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-const deleteData = async (req, res) => {
+const deleteItem = async (req, res) => {
   try {
-    res.status(200).json({ mssg: "DELETE DATA" });
+    res.status(200).json({ mssg: "DELETE Item" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
+};
+
+module.exports = {
+  getAllItem,
+  getOneItem,
+  postItem,
 };
