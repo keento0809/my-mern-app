@@ -1,3 +1,5 @@
+const { default: mongoose } = require("mongoose");
+const { findByIdAndUpdate } = require("../models/ItemModels");
 const Item = require("../models/ItemModels");
 
 // GET all requests
@@ -39,6 +41,15 @@ const postItem = async (req, res) => {
 
 const updateItem = async (req, res) => {
   try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "No item found" });
+    }
+    const item = await findByIdAndUpdate({ _id: id });
+
+    if (!item) {
+      return res.status(400).json({ error: "No item found" });
+    }
     res.status(200).json({ mssg: "UPDATE Item" });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -47,7 +58,16 @@ const updateItem = async (req, res) => {
 
 const deleteItem = async (req, res) => {
   try {
-    res.status(200).json({ mssg: "DELETE Item" });
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "No item found" });
+    }
+    const item = await Item.findByIdAndDelete({ _id: id });
+
+    if (!item) {
+      return res.status(400).json({ error: "No item found" });
+    }
+    res.status(200).json(item);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -57,4 +77,6 @@ module.exports = {
   getAllItem,
   getOneItem,
   postItem,
+  updateItem,
+  deleteItem,
 };
