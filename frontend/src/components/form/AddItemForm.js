@@ -1,7 +1,11 @@
 import React from "react";
+import { categories } from "../../data/data";
 
 const AddItemForm = () => {
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitted!");
+  };
   return (
     <>
       <h4>AddItemForm</h4>
@@ -13,8 +17,10 @@ const AddItemForm = () => {
         <input id="itemName" type="text" placeholder="Enter ItemName" />
         <label htmlFor="amount">Amount</label>
         <input id="amount" type="number" placeholder="Enter Amount" />
-        <label htmlFor="price">Price</label>
-        <input id="price" type="number" placeholder="Enter Price" />
+        <label htmlFor="category">Category</label>
+        <select name="" id="category">
+          <option value="">Select</option>
+        </select>
         <label htmlFor="price">Description</label>
         <textarea
           name=""

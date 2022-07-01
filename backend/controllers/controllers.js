@@ -31,6 +31,7 @@ const postItem = async (req, res) => {
     const newItem = await Item.create({
       itemName: req.body.itemName,
       amount: req.body.amount,
+      category: req.body.category,
       description: req.body.description ? req.body.description : "",
     });
     res.status(200).json(newItem);
