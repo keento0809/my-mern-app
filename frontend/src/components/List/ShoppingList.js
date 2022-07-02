@@ -13,12 +13,14 @@ const ShoppingList = () => {
   const { items, dispatch } = useItemsContext();
 
   const fetchItems = () => {
+    setIsLoading(true);
     axios
       .get("/items")
       .then((res) => {
         dispatch({ type: "SET_ITEMS", payload: res.data });
       })
       .catch((error) => console.log(error.message));
+    setIsLoading(false);
   };
 
   function handleSetCategory(e) {
@@ -40,7 +42,6 @@ const ShoppingList = () => {
 
   useEffect(() => {
     setTempList(items);
-    console.log(items.length, items);
   }, [items.length]);
 
   return (
@@ -59,8 +60,12 @@ const ShoppingList = () => {
       </div>
       <ul style={{ paddingLeft: "0" }}>
         {/* original */}
-        {tempList && tempList.length === 0 && <p>No Item Found</p>}
-        {tempList &&
+        {isLoading && <p>Loading...</p>}
+        {!isLoading && tempList && tempList.length === 0 && (
+          <p>No Item Found</p>
+        )}
+        {!isLoading &&
+          tempList &&
           tempList.map((item, index) => {
             return (
               <li
