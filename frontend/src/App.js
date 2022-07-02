@@ -4,13 +4,13 @@ import Main from "./pages/Main";
 
 function App() {
   return (
-    // <ItemsProvider>
     <BrowserRouter>
-      <div className="App">
-        <Main />
-      </div>
+      <ItemsProvider>
+        <div className="App">
+          <Main />
+        </div>
+      </ItemsProvider>
     </BrowserRouter>
-    // </ItemsProvider>
   );
 }
 

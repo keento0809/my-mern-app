@@ -1,7 +1,29 @@
 import React from "react";
 
-const ItemsReducer = () => {
-  return <div>ItemsReducer</div>;
+const ItemsReducer = (state, action) => {
+  switch (action.type) {
+    case "SET_ITEMS": {
+      return {
+        items: [...action.payload],
+      };
+    }
+    case "ADD_NEW_ITEM": {
+      return {
+        items: [...state.items, action.payload],
+      };
+    }
+    case "DELETE_ITEM": {
+      const updatedItems = state.items.filter(
+        (item) => item.id !== action.payload
+      );
+      return {
+        items: updatedItems,
+      };
+    }
+    default: {
+      return state;
+    }
+  }
 };
 
 export default ItemsReducer;
