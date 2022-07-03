@@ -3,6 +3,7 @@ import { categories } from "../../data/data";
 import Item from "../item/Item";
 import useItemsContext from "../../hooks/useItemsContext";
 import axios from "axios";
+import { Select } from "@chakra-ui/react";
 
 const ShoppingList = () => {
   const [chosenCategory, setChosenCategory] = useState("");
@@ -24,8 +25,9 @@ const ShoppingList = () => {
   };
 
   function handleSetCategory(e) {
+    console.log(e.target.value);
     setChosenCategory(e.target.value);
-    if (items.length > 0 && e.target.value === "Select") {
+    if (items.length > 0 && e.target.value === "") {
       setTempList(items);
     } else {
       const selectedCategory = e.target.value;
@@ -48,7 +50,14 @@ const ShoppingList = () => {
     <>
       <div className="">
         <span>Filtered by: </span>
-        <select onChange={handleSetCategory} name="" id="category">
+        <Select
+          // focusBorderColor="green.100"
+          // backgroundColor="green.100"
+          onChange={handleSetCategory}
+          name=""
+          id="category"
+          placeholder="Select"
+        >
           {categories.map((category, index) => {
             return (
               <option key={index} value={category}>
@@ -56,7 +65,7 @@ const ShoppingList = () => {
               </option>
             );
           })}
-        </select>
+        </Select>
       </div>
       <ul style={{ paddingLeft: "0" }}>
         {/* original */}

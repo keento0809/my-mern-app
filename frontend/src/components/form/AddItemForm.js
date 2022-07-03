@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import { categories } from "../../data/data";
 import useItemsContext from "../../hooks/useItemsContext";
 import axios from "axios";
+import { Button, Input, Select, Textarea, FormLabel } from "@chakra-ui/react";
+import { MdBuild } from "react-icons/md";
 
 const AddItemForm = () => {
   // declare useState
@@ -45,7 +47,7 @@ const AddItemForm = () => {
         itemNameInputRef.current.value = "";
         amountInputRef.current.value = "";
         descriptionInputRef.current.value = "";
-        setChosenCategory("");
+        setChosenCategory("Select");
       })
       .catch((error) => console.log(error.message));
 
@@ -53,27 +55,44 @@ const AddItemForm = () => {
   };
   return (
     <>
-      <h4>AddItemForm</h4>
+      {/* <Text fontSize="1.3em" fontWeight="bold">
+        AddItemForm
+      </Text> */}
       <form
         onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column" }}
       >
-        <label htmlFor="itemName">ItemName</label>
-        <input
+        <FormLabel htmlFor="itemName">ItemName</FormLabel>
+        <Input
+          px={4}
+          py={1}
+          // focusBorderColor="blue.100"
+          // backgroundColor="blue.100"
           ref={itemNameInputRef}
           id="itemName"
           type="text"
           placeholder="Enter ItemName"
         />
-        <label htmlFor="amount">Amount</label>
-        <input
+        <FormLabel htmlFor="amount">Amount</FormLabel>
+        <Input
+          px={4}
+          py={1}
+          // focusBorderColor="green.100"
+          // backgroundColor="green.100"
           ref={amountInputRef}
           id="amount"
           type="number"
           placeholder="Enter Amount"
         />
-        <label htmlFor="category">Category</label>
-        <select onChange={handleSetCategory} name="" id="category">
+        <FormLabel htmlFor="category">Category</FormLabel>
+        <Select
+          // focusBorderColor="orange.100"
+          // backgroundColor="orange.100"
+          onChange={handleSetCategory}
+          name=""
+          id="category"
+          placeholder="Select"
+        >
           {categories.map((category, index) => {
             return (
               <option key={index} value={category}>
@@ -81,17 +100,30 @@ const AddItemForm = () => {
               </option>
             );
           })}
-        </select>
+        </Select>
         <label htmlFor="price">Description</label>
-        <textarea
+        <Textarea
+          px={4}
+          py={1}
+          // focusBorderColor="pink.100"
+          // backgroundColor="pink.100"
           name=""
           ref={descriptionInputRef}
           id="description"
           cols="10"
           rows="4"
           placeholder="Enter Description"
-        ></textarea>
-        <button type="submit">Add</button>
+        ></Textarea>
+        <Button
+          type="submit"
+          leftIcon={<MdBuild />}
+          // focusBorderColor="blue.100"
+          backgroundColor="pink.100"
+          variant="solid"
+        >
+          Add
+        </Button>
+        {/* <button type="submit">Add</button> */}
       </form>
     </>
   );
