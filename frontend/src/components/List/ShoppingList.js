@@ -10,6 +10,7 @@ const ShoppingList = () => {
   const [tempList, setTempList] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
 
   const { items, dispatch } = useItemsContext();
 
@@ -44,7 +45,9 @@ const ShoppingList = () => {
 
   useEffect(() => {
     setTempList(items);
-  }, [items.length]);
+  }, [items.length, isUpdate]);
+
+  console.log("Re-rendered", items);
 
   return (
     <>
@@ -69,10 +72,14 @@ const ShoppingList = () => {
       </div>
       <ul style={{ paddingLeft: "0" }}>
         {/* original */}
-        {isLoading && <p>Loading...</p>}
-        {!isLoading && tempList && tempList.length === 0 && (
-          <p>No Item Found</p>
-        )}
+        {isLoading ||
+          (tempList && tempList.length === 0 && chosenCategory === "" && (
+            <p>Loading...</p>
+          ))}
+        {!isLoading &&
+          tempList &&
+          tempList.length === 0 &&
+          chosenCategory !== "" && <p>No Item Found</p>}
         {!isLoading &&
           tempList &&
           tempList.map((item, index) => {
@@ -87,6 +94,7 @@ const ShoppingList = () => {
                   amount={item.amount}
                   category={item.category}
                   description={item.description}
+                  setIsUpdate={setIsUpdate}
                 />
               </li>
             );

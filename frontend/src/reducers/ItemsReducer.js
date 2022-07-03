@@ -13,12 +13,13 @@ const ItemsReducer = (state, action) => {
       };
     }
     case "UPDATE_ITEM": {
-      const item = state.items.find((item) => item._id === action.payload.id);
-      item.itemName = action.payload.itemName;
-      item.amount = action.payload.amount;
-      item.category = action.payload.category;
-      item.description = action.payload.description;
-      console.log(item);
+      const selectedItem = state.items.find(
+        (item) => item._id === action.payload._id
+      );
+      selectedItem.itemName = action.payload.itemName;
+      selectedItem.amount = action.payload.amount;
+      selectedItem.category = action.payload.category;
+      selectedItem.description = action.payload.description;
       return {
         items: state.items,
       };
