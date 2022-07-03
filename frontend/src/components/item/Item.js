@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 import useItemsContext from "../../hooks/useItemsContext";
 import { categories } from "../../data/data";
+import { Box } from "@chakra-ui/react";
 
 const Item = ({ id, itemName, amount, category, description }) => {
   const { dispatch } = useItemsContext();
@@ -39,11 +40,11 @@ const Item = ({ id, itemName, amount, category, description }) => {
       .then((res) => {
         console.log(res);
         dispatch({ type: "UPDATE_ITEM", payload: enteredInfo });
+        setIsUpdateBtn(false);
+        setIsEditing(false);
       })
       .catch((error) => console.log(error));
     setVal("");
-    setIsUpdateBtn(false);
-    setIsEditing(false);
   };
 
   const handleDeleteItem = () => {
@@ -69,7 +70,7 @@ const Item = ({ id, itemName, amount, category, description }) => {
   );
 
   return (
-    <div style={{ padding: "1.5rem", border: "1px solid #333" }}>
+    <Box p={6} border="1px solid rgb(226, 232, 240)" borderRadius={8}>
       <p>
         Name:{" "}
         {isEditing && val === "NAME" ? (
@@ -137,7 +138,7 @@ const Item = ({ id, itemName, amount, category, description }) => {
         </button>
       </p>
       <button onClick={handleDeleteItem}>Delete</button>
-    </div>
+    </Box>
   );
 };
 
