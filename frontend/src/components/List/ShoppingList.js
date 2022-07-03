@@ -72,10 +72,14 @@ const ShoppingList = () => {
       </div>
       <ul style={{ paddingLeft: "0" }}>
         {/* original */}
-        {isLoading && <p>Loading...</p>}
-        {!isLoading && tempList && tempList.length === 0 && (
-          <p>No Item Found</p>
-        )}
+        {isLoading ||
+          (tempList && tempList.length === 0 && chosenCategory === "" && (
+            <p>Loading...</p>
+          ))}
+        {!isLoading &&
+          tempList &&
+          tempList.length === 0 &&
+          chosenCategory !== "" && <p>No Item Found</p>}
         {!isLoading &&
           tempList &&
           tempList.map((item, index) => {
