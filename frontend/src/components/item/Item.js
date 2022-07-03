@@ -2,9 +2,9 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 import useItemsContext from "../../hooks/useItemsContext";
 import { categories } from "../../data/data";
-import { Box } from "@chakra-ui/react";
+import { Box, Select } from "@chakra-ui/react";
 
-const Item = ({ id, itemName, amount, category, description }) => {
+const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
   const { dispatch } = useItemsContext();
   const [isEditing, setIsEditing] = useState(false);
   const [isUpdateBtn, setIsUpdateBtn] = useState(false);
@@ -28,18 +28,20 @@ const Item = ({ id, itemName, amount, category, description }) => {
 
   const handleUpdateItem = () => {
     const enteredInfo = {
-      id: id,
+      _id: id,
       itemName: val === "NAME" ? itemNameInputRef.current.value : itemName,
       amount: val === "AMOUNT" ? amountInputRef.current.value : amount,
       category: val === "CATEGORY" ? chosenCategory : category,
       description:
         val === "NOTE" ? descriptionInputRef.current.value : description,
     };
+    console.log(enteredInfo);
     axios
-      .patch(`/items/${id}`)
+      .patch(`/items/${id}`, enteredInfo)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({ type: "UPDATE_ITEM", payload: enteredInfo });
+        setIsUpdate(true);
         setIsUpdateBtn(false);
         setIsEditing(false);
       })
@@ -58,7 +60,7 @@ const Item = ({ id, itemName, amount, category, description }) => {
   };
 
   const selectOptionTag = (
-    <select onChange={handleSetCategory} name="" id="category">
+    <Select onChange={handleSetCategory} placeholder="Select" id="category">
       {categories.map((category, index) => {
         return (
           <option key={index} value={category}>
@@ -66,7 +68,7 @@ const Item = ({ id, itemName, amount, category, description }) => {
           </option>
         );
       })}
-    </select>
+    </Select>
   );
 
   return (
@@ -103,7 +105,7 @@ const Item = ({ id, itemName, amount, category, description }) => {
           {isUpdateBtn && val === "AMOUNT" ? "Update" : "Edit"}
         </button>
       </p>
-      <p>
+      <div>
         Category: {isEditing && val === "CATEGORY" ? selectOptionTag : category}
         <button
           onClick={
@@ -114,7 +116,7 @@ const Item = ({ id, itemName, amount, category, description }) => {
         >
           {isUpdateBtn && val === "CATEGORY" ? "Update" : "Edit"}
         </button>
-      </p>
+      </div>
       <p style={{ display: "flex", flexDirection: "row" }}>
         Note:{" "}
         {isEditing && val === "NOTE" ? (
