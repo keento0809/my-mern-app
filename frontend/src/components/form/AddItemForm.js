@@ -2,8 +2,16 @@ import React, { useRef, useState } from "react";
 import { categories } from "../../data/data";
 import useItemsContext from "../../hooks/useItemsContext";
 import axios from "axios";
-import { Button, Input, Select, Textarea, FormLabel } from "@chakra-ui/react";
+import {
+  Button,
+  Input,
+  Select,
+  Textarea,
+  FormLabel,
+  Box,
+} from "@chakra-ui/react";
 import { MdBuild } from "react-icons/md";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const AddItemForm = () => {
   // declare useState
@@ -54,7 +62,7 @@ const AddItemForm = () => {
     console.log("Submitted!");
   };
   return (
-    <>
+    <Box py={6}>
       {/* <Text fontSize="1.3em" fontWeight="bold">
         AddItemForm
       </Text> */}
@@ -73,7 +81,9 @@ const AddItemForm = () => {
           type="text"
           placeholder="Enter ItemName"
         />
-        <FormLabel htmlFor="amount">Amount</FormLabel>
+        <FormLabel htmlFor="amount" pt={4}>
+          Amount
+        </FormLabel>
         <Input
           px={4}
           py={1}
@@ -84,7 +94,9 @@ const AddItemForm = () => {
           type="number"
           placeholder="Enter Amount"
         />
-        <FormLabel htmlFor="category">Category</FormLabel>
+        <FormLabel htmlFor="category" pt={4}>
+          Category
+        </FormLabel>
         <Select
           // focusBorderColor="orange.100"
           // backgroundColor="orange.100"
@@ -101,7 +113,9 @@ const AddItemForm = () => {
             );
           })}
         </Select>
-        <label htmlFor="price">Description</label>
+        <FormLabel htmlFor="price" pt={4}>
+          Description
+        </FormLabel>
         <Textarea
           px={4}
           py={1}
@@ -115,17 +129,20 @@ const AddItemForm = () => {
           placeholder="Enter Description"
         ></Textarea>
         <Button
+          my={8}
           type="submit"
-          leftIcon={<MdBuild />}
+          leftIcon={<AiOutlinePlus />}
+          // leftIcon={<MdBuild />}
           // focusBorderColor="blue.100"
           backgroundColor="pink.100"
           variant="solid"
+          // fontSize="1.2rem"
         >
           Add
         </Button>
         {/* <button type="submit">Add</button> */}
       </form>
-    </>
+    </Box>
   );
 };
 

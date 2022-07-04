@@ -5,7 +5,9 @@ const Item = require("../models/ItemModels");
 // GET all requests
 const getAllItem = async (req, res) => {
   try {
-    const allItems = await Item.find({}).sort({ created: -1 });
+    // original
+    // const allItems = await Item.find({}).sort({ created: -1 });
+    const allItems = await Item.find({}).sort({ _id: -1 });
     res.status(200).json(allItems);
   } catch (error) {
     res.status(400).json({ error: error.message });

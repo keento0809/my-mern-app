@@ -3,7 +3,7 @@ import { categories } from "../../data/data";
 import Item from "../item/Item";
 import useItemsContext from "../../hooks/useItemsContext";
 import axios from "axios";
-import { Select } from "@chakra-ui/react";
+import { Select, Box } from "@chakra-ui/react";
 
 const ShoppingList = () => {
   const [chosenCategory, setChosenCategory] = useState("");
@@ -51,7 +51,7 @@ const ShoppingList = () => {
 
   return (
     <>
-      <div className="">
+      <Box className="" py={8}>
         <span>Filtered by: </span>
         <Select
           // focusBorderColor="green.100"
@@ -69,7 +69,7 @@ const ShoppingList = () => {
             );
           })}
         </Select>
-      </div>
+      </Box>
       <ul style={{ paddingLeft: "0" }}>
         {/* original */}
         {isLoading ||
