@@ -8,8 +8,9 @@ const ItemsReducer = (state, action) => {
       };
     }
     case "ADD_NEW_ITEM": {
+      let newItems = [...state.items, action.payload];
       return {
-        items: [...state.items, action.payload],
+        items: [action.payload, ...state.items],
       };
     }
     case "UPDATE_ITEM": {
