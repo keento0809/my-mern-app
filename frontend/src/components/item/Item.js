@@ -1,8 +1,17 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import useItemsContext from "../../hooks/useItemsContext";
 import { categories } from "../../data/data";
-import { Box, Select } from "@chakra-ui/react";
+import {
+  Box,
+  Select,
+  Button,
+  Flex,
+  Input,
+  Textarea,
+  useColorMode,
+} from "@chakra-ui/react";
+import { AiOutlineEdit } from "react-icons/ai";
 
 const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
   const { dispatch } = useItemsContext();
@@ -10,6 +19,8 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
   const [isUpdateBtn, setIsUpdateBtn] = useState(false);
   const [chosenCategory, setChosenCategory] = useState("");
   const [val, setVal] = useState("");
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   // declare useRef
   const itemNameInputRef = useRef();
@@ -35,7 +46,15 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
       description:
         val === "NOTE" ? descriptionInputRef.current.value : description,
     };
-    console.log(enteredInfo);
+    if (
+      enteredInfo.itemName === "" ||
+      enteredInfo.amount === "" ||
+      enteredInfo.category === "" ||
+      enteredInfo.description === ""
+    ) {
+      alert("Invalid update! Value must not be blank.");
+      return;
+    }
     axios
       .patch(`/items/${id}`, enteredInfo)
       .then((res) => {
@@ -72,74 +91,127 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
   );
 
   return (
-    <Box p={6} border="1px solid rgb(226, 232, 240)" borderRadius={8}>
-      <p>
-        Name:{" "}
-        {isEditing && val === "NAME" ? (
-          <input ref={itemNameInputRef} type="text" placeholder={itemName} />
-        ) : (
-          itemName
-        )}
-        <button
+    <Box
+      p={6}
+      border={`1px solid`}
+      bgColor={
+        colorMode === "dark"
+          ? "inherit"
+          : category === "Vegetable"
+          ? "green.200"
+          : category === "Meat"
+          ? "pink.200"
+          : categories === "Other"
+          ? "blue.200"
+          : "orange.200"
+      }
+      borderColor={
+        category === "Vegetable"
+          ? "green.300"
+          : category === "Meat"
+          ? "pink.300"
+          : categories === "Other"
+          ? "blue.300"
+          : "orange.300"
+      }
+      borderRadius={8}
+    >
+      <Flex justifyContent="space-between" alignItems="center">
+        <Flex
+          flexDirection="row"
+          alignItems="center"
+          fontWeight="bold"
+          color={
+            colorMode === "light"
+              ? "black"
+              : category === "Vegetable"
+              ? "green.300"
+              : category === "Meat"
+              ? "pink.300"
+              : categories === "Other"
+              ? "blue.300"
+              : "orange.300"
+          }
+        >
+          Name:{" "}
+          {isEditing && val === "NAME" ? (
+            <Input ref={itemNameInputRef} type="text" placeholder={itemName} />
+          ) : (
+            itemName
+          )}
+        </Flex>
+        <Button
+          variant="outline"
           onClick={
             isUpdateBtn ? handleUpdateItem : () => handleOpenEditMode("NAME")
           }
         >
-          {isUpdateBtn && val === "NAME" ? "Update" : "Edit"}
-        </button>
-      </p>
-      <p>
-        Amount:{" "}
-        {isEditing && val === "AMOUNT" ? (
-          <input ref={amountInputRef} type="number" placeholder={amount} />
-        ) : (
-          amount
-        )}
-        <button
+          {isUpdateBtn && val === "NAME" ? "Update" : <AiOutlineEdit />}
+        </Button>
+      </Flex>
+      <Flex justifyContent="space-between" alignItems="center">
+        <Flex flexDirection="row" alignItems="center">
+          Amount:{" "}
+          {isEditing && val === "AMOUNT" ? (
+            <Input ref={amountInputRef} type="number" placeholder={amount} />
+          ) : (
+            amount
+          )}
+        </Flex>
+        <Button
+          variant="outline"
           onClick={
             isUpdateBtn && val === "AMOUNT"
               ? handleUpdateItem
               : () => handleOpenEditMode("AMOUNT")
           }
         >
-          {isUpdateBtn && val === "AMOUNT" ? "Update" : "Edit"}
-        </button>
-      </p>
-      <div>
-        Category: {isEditing && val === "CATEGORY" ? selectOptionTag : category}
-        <button
+          {isUpdateBtn && val === "AMOUNT" ? "Update" : <AiOutlineEdit />}
+        </Button>
+      </Flex>
+      <Flex justifyContent="space-between" alignItems="center">
+        <Flex flexDirection="row" alignItems="center">
+          Category:{" "}
+          {isEditing && val === "CATEGORY" ? selectOptionTag : category}
+        </Flex>
+        <Button
+          variant="outline"
           onClick={
             isUpdateBtn && val === "CATEGORY"
               ? handleUpdateItem
               : () => handleOpenEditMode("CATEGORY")
           }
         >
-          {isUpdateBtn && val === "CATEGORY" ? "Update" : "Edit"}
-        </button>
-      </div>
-      <p style={{ display: "flex", flexDirection: "row" }}>
-        Note:{" "}
-        {isEditing && val === "NOTE" ? (
-          <textarea
-            name=""
-            ref={descriptionInputRef}
-            // id="description"
-            cols="10"
-            rows="4"
-            placeholder={description}
-          ></textarea>
-        ) : (
-          description
-        )}
-        <button
+          {isUpdateBtn && val === "CATEGORY" ? "Update" : <AiOutlineEdit />}
+        </Button>
+      </Flex>
+      <Flex justifyContent="space-between" alignItems="center">
+        <Flex flexDirection="row" alignItems="flex-start">
+          Note:{" "}
+          {isEditing && val === "NOTE" ? (
+            <Textarea
+              name=""
+              ref={descriptionInputRef}
+              cols="26"
+              rows="4"
+              placeholder={description}
+            ></Textarea>
+          ) : (
+            description
+          )}
+        </Flex>
+        <Button
+          variant="outline"
           onClick={
             isUpdateBtn ? handleUpdateItem : () => handleOpenEditMode("NOTE")
           }
         >
-          {isUpdateBtn && val === "NOTE" ? "Update" : "Edit"}
-        </button>
-      </p>
-      <button onClick={handleDeleteItem}>Delete</button>
+          {isUpdateBtn && val === "NOTE" ? "Update" : <AiOutlineEdit />}
+        </Button>
+      </Flex>
+      <Button onClick={handleDeleteItem} mt={4}>
+        Delete
+      </Button>
     </Box>
   );
 };
