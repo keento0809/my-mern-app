@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { categories } from "../../data/data";
 import useItemsContext from "../../hooks/useItemsContext";
+import useAlertContext from "../../hooks/useAlertContext";
 import axios from "axios";
 import {
   Button,
@@ -22,6 +23,7 @@ const AddItemForm = () => {
   const descriptionInputRef = useRef();
 
   const { dispatch } = useItemsContext();
+  const { setAlert } = useAlertContext();
 
   function handleSetCategory(e) {
     setChosenCategory(e.target.value);
@@ -60,6 +62,10 @@ const AddItemForm = () => {
       .catch((error) => console.log(error.message));
 
     console.log("Submitted!");
+    setAlert(true);
+    setTimeout(() => {
+      setAlert(false);
+    }, 2000);
   };
   return (
     <Box py={6}>
@@ -74,8 +80,7 @@ const AddItemForm = () => {
         <Input
           px={4}
           py={1}
-          // focusBorderColor="blue.100"
-          // backgroundColor="blue.100"
+          focusBorderColor="pink.100"
           ref={itemNameInputRef}
           id="itemName"
           type="text"
@@ -87,8 +92,7 @@ const AddItemForm = () => {
         <Input
           px={4}
           py={1}
-          // focusBorderColor="green.100"
-          // backgroundColor="green.100"
+          focusBorderColor="pink.100"
           ref={amountInputRef}
           id="amount"
           type="number"
@@ -98,8 +102,7 @@ const AddItemForm = () => {
           Category
         </FormLabel>
         <Select
-          // focusBorderColor="orange.100"
-          // backgroundColor="orange.100"
+          focusBorderColor="pink.100"
           onChange={handleSetCategory}
           name=""
           id="category"
@@ -119,8 +122,7 @@ const AddItemForm = () => {
         <Textarea
           px={4}
           py={1}
-          // focusBorderColor="pink.100"
-          // backgroundColor="pink.100"
+          focusBorderColor="pink.100"
           name=""
           ref={descriptionInputRef}
           id="description"
@@ -132,15 +134,11 @@ const AddItemForm = () => {
           my={8}
           type="submit"
           leftIcon={<AiOutlinePlus />}
-          // leftIcon={<MdBuild />}
-          // focusBorderColor="blue.100"
           backgroundColor="pink.100"
           variant="solid"
-          // fontSize="1.2rem"
         >
           Add
         </Button>
-        {/* <button type="submit">Add</button> */}
       </form>
     </Box>
   );

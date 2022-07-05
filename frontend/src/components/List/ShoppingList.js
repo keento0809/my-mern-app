@@ -47,15 +47,12 @@ const ShoppingList = () => {
     setTempList(items);
   }, [items.length, isUpdate]);
 
-  console.log("Re-rendered", items);
-
   return (
     <>
       <Box className="" py={8}>
         <span>Filtered by: </span>
         <Select
-          // focusBorderColor="green.100"
-          // backgroundColor="green.100"
+          focusBorderColor="pink.100"
           onChange={handleSetCategory}
           name=""
           id="category"
@@ -86,7 +83,7 @@ const ShoppingList = () => {
             return (
               <li
                 key={index}
-                style={{ listStyle: "none", paddingBottom: "0.5rem" }}
+                style={{ listStyle: "none", paddingBottom: "1rem" }}
               >
                 <Item
                   id={item._id}
