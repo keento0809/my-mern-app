@@ -22,9 +22,9 @@ const Nav = () => {
           </Text>
           <Text fontSize="1.3rem">
             {colorMode === "light" ? (
-              <BsSun onClick={toggleColorMode} />
-            ) : (
               <BsMoonStars onClick={toggleColorMode} />
+            ) : (
+              <BsSun onClick={toggleColorMode} />
             )}
           </Text>
         </Flex>

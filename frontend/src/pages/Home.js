@@ -4,9 +4,12 @@ import ShoppingList from "../components/List/ShoppingList";
 import { Text, Container, Alert, AlertIcon } from "@chakra-ui/react";
 import Nav from "../components/nav/Nav";
 import useAlertContext from "../hooks/useAlertContext";
+import SuccessAlert from "../components/Alert/SuccessAlert";
+import WarnAlert from "../components/Alert/WarnAlert";
 
 const Home = () => {
-  const { alert } = useAlertContext;
+  const { alert } = useAlertContext();
+  console.log(alert);
   return (
     <>
       <Nav />
@@ -14,20 +17,8 @@ const Home = () => {
         <AddItemForm />
         <ShoppingList />
       </Container>
-      {alert && (
-        <Alert
-          status="success"
-          variant="left-accent"
-          position="fixed"
-          bottom={9}
-          left={4}
-          width="90%"
-          zIndex={10}
-        >
-          <AlertIcon />
-          Item successfully added to List!
-        </Alert>
-      )}
+      <SuccessAlert />
+      <WarnAlert />
     </>
   );
 };
