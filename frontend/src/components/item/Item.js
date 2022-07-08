@@ -149,6 +149,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
         </Flex>
         <Button
           variant="outline"
+          border="none"
           onClick={
             isUpdateBtn ? handleUpdateItem : () => handleOpenEditMode("NAME")
           }
@@ -167,6 +168,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
         </Flex>
         <Button
           variant="outline"
+          border="none"
           onClick={
             isUpdateBtn && val === "AMOUNT"
               ? handleUpdateItem
@@ -183,6 +185,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
         </Flex>
         <Button
           variant="outline"
+          border="none"
           onClick={
             isUpdateBtn && val === "CATEGORY"
               ? handleUpdateItem
@@ -209,6 +212,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
         </Flex>
         <Button
           variant="outline"
+          border="none"
           onClick={
             isUpdateBtn ? handleUpdateItem : () => handleOpenEditMode("NOTE")
           }
@@ -216,7 +220,24 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
           {isUpdateBtn && val === "NOTE" ? "Update" : <AiOutlineEdit />}
         </Button>
       </Flex>
-      <Button onClick={handleDeleteItem} mt={4}>
+      <Button
+        onClick={handleDeleteItem}
+        mt={4}
+        bgColor="inherit"
+        border={`1px solid #333`}
+        borderColor={
+          // colorMode === "light"
+          //   ? "#E2E8F0"
+          //   :
+          category === "Vegetable"
+            ? "green.300"
+            : category === "Meat"
+            ? "pink.300"
+            : categories === "Other"
+            ? "blue.300"
+            : "orange.300"
+        }
+      >
         Delete
       </Button>
     </Box>
