@@ -11,7 +11,6 @@ import {
   FormLabel,
   Box,
 } from "@chakra-ui/react";
-import { MdBuild } from "react-icons/md";
 import { AiOutlinePlus } from "react-icons/ai";
 
 const AddItemForm = () => {
@@ -69,9 +68,6 @@ const AddItemForm = () => {
   };
   return (
     <Box py={6}>
-      {/* <Text fontSize="1.3em" fontWeight="bold">
-        AddItemForm
-      </Text> */}
       <form
         onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column" }}

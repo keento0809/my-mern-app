@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import useItemsContext from "../../hooks/useItemsContext";
+import useAlertContext from "../../hooks/useAlertContext";
 import { categories } from "../../data/data";
 import {
   Box,
@@ -15,6 +16,8 @@ import { AiOutlineEdit } from "react-icons/ai";
 
 const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
   const { dispatch } = useItemsContext();
+  const { warnAlert, setWarnAlert } = useAlertContext();
+
   const [isEditing, setIsEditing] = useState(false);
   const [isUpdateBtn, setIsUpdateBtn] = useState(false);
   const [chosenCategory, setChosenCategory] = useState("");
@@ -74,6 +77,10 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
       .then((res) => {
         console.log(res);
         dispatch({ type: "DELETE_ITEM", payload: id });
+        setWarnAlert(true);
+        setTimeout(() => {
+          setWarnAlert(false);
+        }, 1500);
       })
       .catch((error) => console.log(error));
   };
@@ -142,6 +149,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
         </Flex>
         <Button
           variant="outline"
+          border="none"
           onClick={
             isUpdateBtn ? handleUpdateItem : () => handleOpenEditMode("NAME")
           }
@@ -160,6 +168,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
         </Flex>
         <Button
           variant="outline"
+          border="none"
           onClick={
             isUpdateBtn && val === "AMOUNT"
               ? handleUpdateItem
@@ -176,6 +185,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
         </Flex>
         <Button
           variant="outline"
+          border="none"
           onClick={
             isUpdateBtn && val === "CATEGORY"
               ? handleUpdateItem
@@ -202,6 +212,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
         </Flex>
         <Button
           variant="outline"
+          border="none"
           onClick={
             isUpdateBtn ? handleUpdateItem : () => handleOpenEditMode("NOTE")
           }
@@ -209,7 +220,24 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
           {isUpdateBtn && val === "NOTE" ? "Update" : <AiOutlineEdit />}
         </Button>
       </Flex>
-      <Button onClick={handleDeleteItem} mt={4}>
+      <Button
+        onClick={handleDeleteItem}
+        mt={4}
+        bgColor="inherit"
+        border={`1px solid #333`}
+        borderColor={
+          // colorMode === "light"
+          //   ? "#E2E8F0"
+          //   :
+          category === "Vegetable"
+            ? "green.300"
+            : category === "Meat"
+            ? "pink.300"
+            : categories === "Other"
+            ? "blue.300"
+            : "orange.300"
+        }
+      >
         Delete
       </Button>
     </Box>
