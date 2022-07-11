@@ -6,14 +6,9 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  FormControl,
-  FormLabel,
-  Input,
-  Container,
   Box,
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -35,10 +30,6 @@ const FormModal = () => {
       >
         Add Item
       </Button>
-      {/* <Button ml={4} ref={finalRef}>
-        I'll receive focus on close
-      </Button> */}
-
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
@@ -47,18 +38,11 @@ const FormModal = () => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add New Shopping Item</ModalHeader>
+          <ModalHeader textAlign="center">Add New Shopping Item</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <AddItemForm onClose={onClose} />
           </ModalBody>
-
-          {/* <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Save
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter> */}
         </ModalContent>
       </Modal>
     </Box>
