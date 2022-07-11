@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 
-const AddItemForm = () => {
+const AddItemForm = ({ onClose }) => {
   // declare useState
   const [chosenCategory, setChosenCategory] = useState("");
   // declare useRef
@@ -60,14 +60,15 @@ const AddItemForm = () => {
       })
       .catch((error) => console.log(error.message));
 
-    console.log("Submitted!");
     setAlert(true);
+    // test
+    onClose();
     setTimeout(() => {
       setAlert(false);
     }, 2000);
   };
   return (
-    <Box py={6}>
+    <Box pt={6}>
       <form
         onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column" }}
