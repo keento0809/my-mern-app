@@ -6,6 +6,7 @@ import Nav from "../components/nav/Nav";
 import useAlertContext from "../hooks/useAlertContext";
 import SuccessAlert from "../components/Alert/SuccessAlert";
 import WarnAlert from "../components/Alert/WarnAlert";
+import FormModal from "../components/modal/FormModal";
 
 const Home = () => {
   const { alert } = useAlertContext();
@@ -14,7 +15,8 @@ const Home = () => {
     <>
       <Nav />
       <Container>
-        <AddItemForm />
+        <FormModal />
+        {/* <AddItemForm /> */}
         <ShoppingList />
       </Container>
       <SuccessAlert />
