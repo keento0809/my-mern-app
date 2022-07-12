@@ -11,18 +11,25 @@ import {
   FormLabel,
   FormControl,
   Box,
-  FormHelperText,
   FormErrorMessage,
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 
 const AddItemForm = ({ onClose }) => {
   // declare useState
-  const [chosenCategory, setChosenCategory] = useState("");
+  // const [chosenCategory, setChosenCategory] = useState("");
+  // const [itemName, setItemName] = useState("");
+  // const [itemAmount, setItemAmount] = useState("");
+  const [itemInput, setItemInput] = useState({
+    itemName: "",
+    itemAmount: "",
+    itemCategory: "",
+    itemDescription: "",
+  });
   // declare useRef
-  const itemNameInputRef = useRef();
-  const amountInputRef = useRef();
-  const descriptionInputRef = useRef();
+  // const itemNameInputRef = useRef();
+  // const amountInputRef = useRef();
+  // const descriptionInputRef = useRef();
 
   const { dispatch } = useItemsContext();
   const { setAlert } = useAlertContext();
@@ -31,9 +38,24 @@ const AddItemForm = ({ onClose }) => {
   const [isSubmit, setIsSubmit] = useState(false);
   const [inputVal, setInputVal] = useState("");
   const isError = inputVal === "";
+  // const isItemNameError = itemNameInputRef.current.value === "";
 
-  function handleSetCategory(e) {
-    setChosenCategory(e.target.value);
+  // function handleSetCategory(e) {
+  //   setChosenCategory(e.target.value);
+  // }
+
+  // function handleCheckValue(e) {
+  //   setItemName(e.target.value);
+  // }
+  // function handleCheckValueAmount(e) {
+  //   setItemAmount(e.target.value);
+  // }
+
+  function handleChange(e) {
+    setItemInput({
+      ...itemInput,
+      [e.target.name]: e.target.value,
+    });
   }
 
   const handleSubmit = (e) => {
@@ -41,32 +63,32 @@ const AddItemForm = ({ onClose }) => {
     setIsSubmit(true);
 
     if (
-      itemNameInputRef.current.value === "" ||
-      amountInputRef.current.value === "" ||
-      chosenCategory === ""
+      itemInput.itemName === "" ||
+      itemInput.itemAmount === "" ||
+      itemInput.chosenCategory === ""
     ) {
       console.log("error");
-      // alert("Invalid submission. Please fill out correct information.");
       return;
     }
 
+    // original
     const enteredInfo = {
-      itemName: itemNameInputRef.current.value,
-      amount: amountInputRef.current.value,
-      category: chosenCategory,
-      description: descriptionInputRef.current.value
-        ? descriptionInputRef.current.value
-        : "",
+      itemName: itemInput.itemName,
+      amount: itemInput.itemAmount,
+      category: itemInput.itemCategory,
+      description: itemInput.itemDescription ? itemInput.itemDescription : "",
     };
 
     axios
       .post("/items", enteredInfo)
       .then((res) => {
         dispatch({ type: "ADD_NEW_ITEM", payload: res.data });
-        itemNameInputRef.current.value = "";
-        amountInputRef.current.value = "";
-        descriptionInputRef.current.value = "";
-        setChosenCategory("Select");
+        // itemNameInputRef.current.value = "";
+        // amountInputRef.current.value = "";
+        // descriptionInputRef.current.value = "";
+
+        // test
+        // setChosenCategory("Select");
       })
       .catch((error) => console.log(error.message));
 
@@ -83,30 +105,38 @@ const AddItemForm = ({ onClose }) => {
         onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column" }}
       >
-        <FormControl isInvalid={isSubmit && isError}>
+        <FormControl isInvalid={isSubmit && itemInput.itemName === ""}>
           <FormLabel htmlFor="itemName">ItemName</FormLabel>
           <Input
+            name="itemName"
             px={4}
             py={1}
             focusBorderColor="pink.100"
-            ref={itemNameInputRef}
+            value={itemInput.itemName}
+            // original
+            // onChange={handleCheckValue}
+            onChange={handleChange}
             id="itemName"
             type="text"
             placeholder="Enter ItemName"
           />
           {isSubmit && isError && (
-            <FormErrorMessage>Email is required.</FormErrorMessage>
+            <FormErrorMessage>ItemName is required.</FormErrorMessage>
           )}
         </FormControl>
-        <FormControl isInvalid={isSubmit && isError}>
+        <FormControl isInvalid={isSubmit && itemInput.itemAmount === ""}>
           <FormLabel htmlFor="amount" pt={4}>
             Amount
           </FormLabel>
           <Input
+            name="itemAmount"
             px={4}
             py={1}
             focusBorderColor="pink.100"
-            ref={amountInputRef}
+            // original
+            // onChange={handleCheckValueAmount}
+            value={itemInput.itemAmount}
+            onChange={handleChange}
             id="amount"
             type="number"
             placeholder="Enter Amount"
@@ -115,14 +145,17 @@ const AddItemForm = ({ onClose }) => {
             <FormErrorMessage>Amount is required.</FormErrorMessage>
           )}
         </FormControl>
-        <FormControl isInvalid={isSubmit && isError}>
+        <FormControl isInvalid={isSubmit && itemInput.itemCategory === ""}>
           <FormLabel htmlFor="category" pt={4}>
             Category
           </FormLabel>
           <Select
             focusBorderColor="pink.100"
-            onChange={handleSetCategory}
-            name=""
+            // original
+            // onChange={handleSetCategory}
+            onChange={handleChange}
+            name="itemCategory"
+            value={itemInput.itemCategory}
             id="category"
             placeholder="Select"
           >
@@ -143,11 +176,14 @@ const AddItemForm = ({ onClose }) => {
             Description
           </FormLabel>
           <Textarea
+            name="itemDescription"
             px={4}
             py={1}
             focusBorderColor="pink.100"
-            name=""
-            ref={descriptionInputRef}
+            // original
+            // ref={descriptionInputRef}
+            onChange={handleChange}
+            value={itemInput.itemDescription}
             id="description"
             cols="10"
             rows="4"
