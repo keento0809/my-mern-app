@@ -52,8 +52,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
     if (
       enteredInfo.itemName === "" ||
       enteredInfo.amount === "" ||
-      enteredInfo.category === "" ||
-      enteredInfo.description === ""
+      enteredInfo.category === ""
     ) {
       alert("Invalid update! Value must not be blank.");
       return;
@@ -61,7 +60,6 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
     axios
       .patch(`/items/${id}`, enteredInfo)
       .then((res) => {
-        console.log(res.data);
         dispatch({ type: "UPDATE_ITEM", payload: enteredInfo });
         setIsUpdate(true);
         setIsUpdateBtn(false);
@@ -86,7 +84,12 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
   };
 
   const selectOptionTag = (
-    <Select onChange={handleSetCategory} placeholder="Select" id="category">
+    <Select
+      ml={2}
+      onChange={handleSetCategory}
+      placeholder="Select"
+      id="category"
+    >
       {categories.map((category, index) => {
         return (
           <option key={index} value={category}>
@@ -142,7 +145,12 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
         >
           Name:{" "}
           {isEditing && val === "NAME" ? (
-            <Input ref={itemNameInputRef} type="text" placeholder={itemName} />
+            <Input
+              ml={2}
+              ref={itemNameInputRef}
+              type="text"
+              placeholder={itemName}
+            />
           ) : (
             itemName
           )}
@@ -161,7 +169,12 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
         <Flex flexDirection="row" alignItems="center">
           Amount:{" "}
           {isEditing && val === "AMOUNT" ? (
-            <Input ref={amountInputRef} type="number" placeholder={amount} />
+            <Input
+              ml={2}
+              ref={amountInputRef}
+              type="number"
+              placeholder={amount}
+            />
           ) : (
             amount
           )}
@@ -200,6 +213,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
           Note:{" "}
           {isEditing && val === "NOTE" ? (
             <Textarea
+              ml={2}
               name=""
               ref={descriptionInputRef}
               cols="26"

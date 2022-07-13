@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Flex, Text, useColorMode } from "@chakra-ui/react";
 import { BsMoonStars, BsSun } from "react-icons/bs";
+import { BiUserCircle } from "react-icons/bi";
 
 const Nav = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -8,8 +9,9 @@ const Nav = () => {
     <header>
       <Container>
         <Flex justifyContent="space-between" alignItems="center">
-          <Text fontSize="1.5rem" visibility="hidden">
-            <BsSun onClick={toggleColorMode} />
+          <Text fontSize="1.5rem">
+            <BiUserCircle />
+            {/* <BsSun onClick={toggleColorMode} /> */}
           </Text>
           <Text
             py={4}
