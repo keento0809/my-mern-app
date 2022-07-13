@@ -7,9 +7,44 @@ const LoginForm = () => {
     password: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setFormInput({
+      ...formInput,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("aaa");
+    console.log(formInput);
+
+    // validation
+    if (
+      formInput.email === "" ||
+      formInput.password === ""
+      // !formInput.password.match(
+      //   /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/
+      // )
+    ) {
+      alert("Invalid input");
+      return;
+    }
+
+    const enteredInfo = {
+      email: formInput.email,
+      password: formInput.password,
+    };
+
+    try {
+      const res = await fetch("http://localhost:8080/auth/login", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(enteredInfo),
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -25,7 +60,7 @@ const LoginForm = () => {
             py={1}
             focusBorderColor="pink.100"
             value={formInput.email}
-            //   onChange={handleChange}
+            onChange={handleChange}
             id="email"
             type="email"
             placeholder="Enter email"
@@ -41,7 +76,7 @@ const LoginForm = () => {
             py={1}
             focusBorderColor="pink.100"
             value={formInput.password}
-            //   onChange={handleChange}
+            onChange={handleChange}
             id="password"
             type="password"
             placeholder="Enter password"

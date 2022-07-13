@@ -3,13 +3,31 @@ import { FormControl, FormLabel, Input, Box, Button } from "@chakra-ui/react";
 
 const SignupForm = () => {
   const [formInput, setFormInput] = useState({
-    email: "",
-    password: "",
+    emailForSignup: "",
+    passwordForSignup: "",
+    passwordConfirmation: "",
   });
+
+  const handleChange = (e) => {
+    setFormInput({
+      ...formInput,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("bbb");
+    console.log(formInput);
+
+    // validation
+    if (
+      formInput.emailForSignup === "" ||
+      formInput.passwordForSignup === "" ||
+      formInput.passwordConfirmation === ""
+    ) {
+      alert("Invalid input");
+      return;
+    }
   };
 
   return (
@@ -25,7 +43,7 @@ const SignupForm = () => {
             py={1}
             focusBorderColor="pink.100"
             value={formInput.email}
-            //   onChange={handleChange}
+            onChange={handleChange}
             id="emailForSignup"
             type="email"
             placeholder="Enter email"
@@ -41,7 +59,7 @@ const SignupForm = () => {
             py={1}
             focusBorderColor="pink.100"
             value={formInput.password}
-            //   onChange={handleChange}
+            onChange={handleChange}
             id="passwordForSignup"
             type="password"
             placeholder="Enter password"
@@ -57,7 +75,7 @@ const SignupForm = () => {
             py={1}
             focusBorderColor="pink.100"
             value={formInput.password}
-            //   onChange={handleChange}
+            onChange={handleChange}
             id="passwordConfirmation"
             type="password"
             placeholder="Enter password"
@@ -67,7 +85,6 @@ const SignupForm = () => {
           mt={16}
           w="full"
           type="submit"
-          // leftIcon={<AiOutlinePlus />}
           backgroundColor="pink.100"
           variant="solid"
         >
