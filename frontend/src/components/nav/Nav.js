@@ -7,6 +7,7 @@ import {
   Avatar,
   AvatarBadge,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { BsMoonStars, BsSun } from "react-icons/bs";
 import UserMenu from "../Menu/UserMenu";
 
@@ -18,9 +19,6 @@ const Nav = () => {
       <Container>
         <Flex justifyContent="space-between" alignItems="center">
           <Flex justifyContent="center" textAlign="center">
-            {/* <Avatar size="xs">
-              <AvatarBadge boxSize="1rem" bg="green.500" />
-            </Avatar> */}
             <UserMenu />
           </Flex>
           <Text
@@ -30,7 +28,7 @@ const Nav = () => {
             letterSpacing={-0.5}
             textAlign="center"
           >
-            Shopping List
+            <Link to="/">Shopping List</Link>
           </Text>
           <Flex justifyContent="center" textAlign="center">
             {colorMode === "light" ? (

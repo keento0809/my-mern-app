@@ -13,6 +13,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { AiOutlineUser } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const UserMenu = () => {
   return (
@@ -28,17 +29,11 @@ const UserMenu = () => {
         <MenuList>
           <MenuGroup>
             <MenuItem>Profile</MenuItem>
-            <MenuItem>Logout</MenuItem>
+            {/* temporary */}
+            <MenuItem>
+              <Link to="/auth">Login</Link>
+            </MenuItem>
           </MenuGroup>
-          {/* <MenuGroup title="Profile">
-            <MenuItem>My Account</MenuItem>
-            <MenuItem>Payments </MenuItem>
-          </MenuGroup>
-          <MenuDivider />
-          <MenuGroup title="Help">
-            <MenuItem>Docs</MenuItem>
-            <MenuItem>FAQ</MenuItem>
-          </MenuGroup> */}
         </MenuList>
       </Menu>
     </>
