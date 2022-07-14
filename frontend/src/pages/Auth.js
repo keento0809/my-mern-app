@@ -21,13 +21,13 @@ const Auth = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Text fontSize="2xl" textAlign="center">
+            <Text fontSize="2xl" textAlign="center" pt={4}>
               Login
             </Text>
             <LoginForm />
           </TabPanel>
           <TabPanel>
-            <Text fontSize="2xl" textAlign="center">
+            <Text fontSize="2xl" textAlign="center" pt={4}>
               Signup
             </Text>
             <SignupForm />
