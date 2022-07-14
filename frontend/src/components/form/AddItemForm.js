@@ -16,40 +16,17 @@ import {
 import { AiOutlinePlus } from "react-icons/ai";
 
 const AddItemForm = ({ onClose }) => {
-  // declare useState
-  // const [chosenCategory, setChosenCategory] = useState("");
-  // const [itemName, setItemName] = useState("");
-  // const [itemAmount, setItemAmount] = useState("");
   const [itemInput, setItemInput] = useState({
     itemName: "",
     itemAmount: "",
     itemCategory: "",
     itemDescription: "",
   });
-  // declare useRef
-  // const itemNameInputRef = useRef();
-  // const amountInputRef = useRef();
-  // const descriptionInputRef = useRef();
 
   const { dispatch } = useItemsContext();
   const { setAlert } = useAlertContext();
 
-  // test
   const [isSubmit, setIsSubmit] = useState(false);
-  const [inputVal, setInputVal] = useState("");
-  const isError = inputVal === "";
-  // const isItemNameError = itemNameInputRef.current.value === "";
-
-  // function handleSetCategory(e) {
-  //   setChosenCategory(e.target.value);
-  // }
-
-  // function handleCheckValue(e) {
-  //   setItemName(e.target.value);
-  // }
-  // function handleCheckValueAmount(e) {
-  //   setItemAmount(e.target.value);
-  // }
 
   function handleChange(e) {
     setItemInput({
@@ -71,7 +48,6 @@ const AddItemForm = ({ onClose }) => {
       return;
     }
 
-    // original
     const enteredInfo = {
       itemName: itemInput.itemName,
       amount: itemInput.itemAmount,
@@ -83,10 +59,6 @@ const AddItemForm = ({ onClose }) => {
       .post("/items", enteredInfo)
       .then((res) => {
         dispatch({ type: "ADD_NEW_ITEM", payload: res.data });
-        // itemNameInputRef.current.value = "";
-        // amountInputRef.current.value = "";
-        // descriptionInputRef.current.value = "";
-
         // test
         // setChosenCategory("Select");
       })
@@ -120,7 +92,7 @@ const AddItemForm = ({ onClose }) => {
             type="text"
             placeholder="Enter ItemName"
           />
-          {isSubmit && isError && (
+          {isSubmit && (
             <FormErrorMessage>ItemName is required.</FormErrorMessage>
           )}
         </FormControl>
@@ -141,9 +113,7 @@ const AddItemForm = ({ onClose }) => {
             type="number"
             placeholder="Enter Amount"
           />
-          {isSubmit && isError && (
-            <FormErrorMessage>Amount is required.</FormErrorMessage>
-          )}
+          {isSubmit && <FormErrorMessage>Amount is required.</FormErrorMessage>}
         </FormControl>
         <FormControl isInvalid={isSubmit && itemInput.itemCategory === ""}>
           <FormLabel htmlFor="category" pt={4}>
@@ -167,7 +137,7 @@ const AddItemForm = ({ onClose }) => {
               );
             })}
           </Select>
-          {isSubmit && isError && (
+          {isSubmit && (
             <FormErrorMessage>Category is required.</FormErrorMessage>
           )}
         </FormControl>

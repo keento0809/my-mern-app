@@ -2,18 +2,20 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/login", (req, res) => {
-  if (req.body.email) {
-    res.status(200).json({ msg: "login done" });
+  if (!req.body.email || !req.body.password) {
+    res.status(400);
+    throw Error("Invalid login");
   } else {
-    res.status(400).json({ error: "Invalid login" });
+    res.status(200).json({ msg: "login success" });
   }
 });
 
 router.post("/signup", (req, res) => {
-  if (req.body.email) {
-    res.status(200).json({ msg: "login done" });
+  if (!req.body.email || !req.body.password) {
+    res.status(400);
+    throw Error("Invalid signup");
   } else {
-    res.status(400).json({ error: "Invalid login" });
+    res.status(200).json({ msg: "Signup success" });
   }
 });
 

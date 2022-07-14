@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import { FormControl, FormLabel, Input, Box, Button } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  Input,
+  Box,
+  Button,
+} from "@chakra-ui/react";
+import axios from "axios";
 
 const LoginForm = () => {
   const [formInput, setFormInput] = useState({
     email: "",
     password: "",
   });
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (e) => {
     setFormInput({
@@ -16,7 +25,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formInput);
+    setIsSubmit(true);
 
     // validation
     if (
@@ -26,7 +35,7 @@ const LoginForm = () => {
       //   /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/
       // )
     ) {
-      alert("Invalid input");
+      // alert("Invalid input");
       return;
     }
 
@@ -35,22 +44,22 @@ const LoginForm = () => {
       password: formInput.password,
     };
 
-    try {
-      const res = await fetch("http://localhost:8080/auth/login", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(enteredInfo),
-      });
-      console.log(res);
-    } catch (error) {
-      console.log(error.message);
-    }
+    axios
+      .post("/auth/login", enteredInfo)
+      .then((res) => {
+        console.log(res);
+        setFormInput({
+          email: "",
+          password: "",
+        });
+      })
+      .catch((error) => console.log(error.message));
   };
 
   return (
     <Box pt={6}>
       <form onSubmit={handleSubmit}>
-        <FormControl>
+        <FormControl isInvalid={isSubmit && formInput.email === ""}>
           <FormLabel htmlFor="email" pt={4}>
             Email
           </FormLabel>
@@ -65,8 +74,9 @@ const LoginForm = () => {
             type="email"
             placeholder="Enter email"
           />
+          {isSubmit && <FormErrorMessage>Email is required.</FormErrorMessage>}
         </FormControl>
-        <FormControl>
+        <FormControl isInvalid={isSubmit && formInput.password === ""}>
           <FormLabel htmlFor="password" pt={4}>
             Password
           </FormLabel>
@@ -81,12 +91,14 @@ const LoginForm = () => {
             type="password"
             placeholder="Enter password"
           />
+          {isSubmit && (
+            <FormErrorMessage>Password is required.</FormErrorMessage>
+          )}
         </FormControl>
         <Button
           mt={16}
           w="full"
           type="submit"
-          // leftIcon={<AiOutlinePlus />}
           backgroundColor="pink.100"
           variant="solid"
         >

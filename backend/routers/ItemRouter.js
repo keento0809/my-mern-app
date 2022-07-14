@@ -6,7 +6,7 @@ const {
   updateItem,
   deleteItem,
   reset,
-} = require("../controllers/controllers");
+} = require("../controllers/ItemControllers");
 const router = express.Router();
 
 router.get("/", getAllItem);
