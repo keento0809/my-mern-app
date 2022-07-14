@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FormControl,
   FormLabel,
@@ -16,6 +17,8 @@ const LoginForm = () => {
   });
   const [isSubmit, setIsSubmit] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormInput({
       ...formInput,
@@ -27,15 +30,15 @@ const LoginForm = () => {
     e.preventDefault();
     setIsSubmit(true);
 
+    const regexEmail = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;
+    const regex = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
+
     // validation
     if (
-      formInput.email === "" ||
-      formInput.password === ""
-      // !formInput.password.match(
-      //   /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/
-      // )
+      !formInput.email.match(regexEmail) === "" ||
+      !formInput.password.match(regex)
     ) {
-      // alert("Invalid input");
+      alert("Invalid Credential.");
       return;
     }
 
@@ -48,6 +51,7 @@ const LoginForm = () => {
       .post("/auth/login", enteredInfo)
       .then((res) => {
         console.log(res);
+        navigate("/");
         setFormInput({
           email: "",
           password: "",
