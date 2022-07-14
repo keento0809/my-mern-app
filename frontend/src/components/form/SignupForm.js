@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FormControl,
   FormLabel,
@@ -7,6 +8,7 @@ import {
   Box,
   Button,
 } from "@chakra-ui/react";
+import axios from "axios";
 
 const SignupForm = () => {
   const [formInput, setFormInput] = useState({
@@ -15,6 +17,8 @@ const SignupForm = () => {
     passwordConfirmation: "",
   });
   const [isSubmit, setIsSubmit] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormInput({
@@ -29,14 +33,42 @@ const SignupForm = () => {
 
     setIsSubmit(true);
 
+    const regexEmail = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;
+    const regex = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
+
     // validation
     if (
-      formInput.emailForSignup === "" ||
-      formInput.passwordForSignup === "" ||
-      formInput.passwordConfirmation === ""
+      // formInput.emailForSignup === "" ||
+      !formInput.emailForSignup.match(regexEmail) ||
+      !formInput.passwordForSignup.match(regex) ||
+      !formInput.passwordConfirmation.match(regex)
     ) {
+      alert("Invalid input.");
       return;
     }
+
+    if (formInput.passwordForSignup !== formInput.passwordConfirmation) {
+      alert("Password not matched.");
+      return;
+    }
+
+    const enteredInfo = {
+      email: formInput.emailForSignup,
+      password: formInput.passwordForSignup,
+    };
+
+    axios
+      .post("/auth/signup", enteredInfo)
+      .then((res) => {
+        console.log(res);
+        navigate("/");
+        setFormInput({
+          emailForSignup: "",
+          passwordForSignup: "",
+          passwordConfirmation: "",
+        });
+      })
+      .catch((error) => console.log(error.message));
   };
 
   return (
