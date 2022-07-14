@@ -30,6 +30,8 @@ const LoginForm = () => {
     e.preventDefault();
     setIsSubmit(true);
 
+    if (formInput.email === "" || formInput.password === "") return;
+
     const regexEmail = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;
     const regex = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
 

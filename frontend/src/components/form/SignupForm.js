@@ -33,6 +33,13 @@ const SignupForm = () => {
 
     setIsSubmit(true);
 
+    if (
+      formInput.emailForSignup === "" ||
+      formInput.passwordForSignup === "" ||
+      formInput.passwordConfirmation === ""
+    )
+      return;
+
     const regexEmail = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;
     const regex = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
 
