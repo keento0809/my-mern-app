@@ -8,6 +8,7 @@ import {
   Input,
   Box,
   Button,
+  Text,
 } from "@chakra-ui/react";
 import axios from "axios";
 
@@ -17,6 +18,7 @@ const LoginForm = () => {
     password: "",
   });
   const [isSubmit, setIsSubmit] = useState(false);
+  const [error, setError] = useState();
 
   const { setLoginAlert } = useAlertContext();
 
@@ -40,8 +42,8 @@ const LoginForm = () => {
 
     // validation
     if (
-      !formInput.email.match(regexEmail) === "" ||
-      !formInput.password.match(regex)
+      !formInput.email.match(regexEmail) === ""
+      // !formInput.password.match(regex)
     ) {
       alert("Invalid Credential.");
       return;
@@ -65,11 +67,21 @@ const LoginForm = () => {
           setLoginAlert(false);
         }, 2000);
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => {
+        setError(error.message);
+        console.log(error.message);
+      });
   };
 
   return (
     <Box pt={6}>
+      <Box minHeight={4}>
+        {error && (
+          <Text py={2} textAlign="center" fontSize="md" color="tomato">
+            {error}
+          </Text>
+        )}
+      </Box>
       <form onSubmit={handleSubmit}>
         <FormControl isInvalid={isSubmit && formInput.email === ""}>
           <FormLabel htmlFor="email" pt={4}>
