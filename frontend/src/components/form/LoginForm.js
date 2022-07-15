@@ -11,6 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import axios from "axios";
+import useAuthContext from "../../hooks/useAuthContext";
 
 const LoginForm = () => {
   const [formInput, setFormInput] = useState({
@@ -21,6 +22,7 @@ const LoginForm = () => {
   const [error, setError] = useState();
 
   const { setLoginAlert } = useAlertContext();
+  const { setIsLoggedIn } = useAuthContext();
 
   const navigate = useNavigate();
 
@@ -63,6 +65,7 @@ const LoginForm = () => {
           password: "",
         });
         setLoginAlert(true);
+        setIsLoggedIn(true);
         setTimeout(() => {
           setLoginAlert(false);
         }, 2000);

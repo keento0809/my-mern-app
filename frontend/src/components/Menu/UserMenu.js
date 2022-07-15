@@ -14,8 +14,15 @@ import {
 } from "@chakra-ui/react";
 import { AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import useAuthContext from "../../hooks/useAuthContext";
 
 const UserMenu = () => {
+  const { setIsLoggedIn } = useAuthContext();
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
     <>
       <Menu>
@@ -30,9 +37,7 @@ const UserMenu = () => {
           <MenuGroup>
             <MenuItem>Profile</MenuItem>
             {/* temporary */}
-            <MenuItem>
-              <Link to="/auth">Login</Link>
-            </MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </MenuGroup>
         </MenuList>
       </Menu>

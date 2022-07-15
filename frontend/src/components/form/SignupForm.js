@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAlertContext from "../../hooks/useAlertContext";
+import useAuthContext from "../../hooks/useAuthContext";
 import {
   FormControl,
   FormLabel,
@@ -22,6 +23,7 @@ const SignupForm = () => {
   const [error, setError] = useState();
 
   const { setSignupAlert } = useAlertContext();
+  const { setIsLoggedIn } = useAuthContext();
 
   const navigate = useNavigate();
 
@@ -34,7 +36,6 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formInput);
 
     setIsSubmit(true);
 
@@ -79,6 +80,7 @@ const SignupForm = () => {
           passwordConfirmation: "",
         });
         setSignupAlert(true);
+        setIsLoggedIn(true);
         setTimeout(() => {
           setSignupAlert(false);
         }, 2000);
