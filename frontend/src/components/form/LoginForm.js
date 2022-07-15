@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAlertContext from "../../hooks/useAlertContext";
 import {
   FormControl,
   FormLabel,
@@ -16,6 +17,8 @@ const LoginForm = () => {
     password: "",
   });
   const [isSubmit, setIsSubmit] = useState(false);
+
+  const { setLoginAlert } = useAlertContext();
 
   const navigate = useNavigate();
 
@@ -52,12 +55,15 @@ const LoginForm = () => {
     axios
       .post("/auth/login", enteredInfo)
       .then((res) => {
-        console.log(res);
         navigate("/");
         setFormInput({
           email: "",
           password: "",
         });
+        setLoginAlert(true);
+        setTimeout(() => {
+          setLoginAlert(false);
+        }, 2000);
       })
       .catch((error) => console.log(error.message));
   };
