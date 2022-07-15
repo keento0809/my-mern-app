@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAlertContext from "../../hooks/useAlertContext";
 import {
   FormControl,
   FormLabel,
@@ -17,6 +18,8 @@ const SignupForm = () => {
     passwordConfirmation: "",
   });
   const [isSubmit, setIsSubmit] = useState(false);
+
+  const { setSignupAlert } = useAlertContext();
 
   const navigate = useNavigate();
 
@@ -74,6 +77,10 @@ const SignupForm = () => {
           passwordForSignup: "",
           passwordConfirmation: "",
         });
+        setSignupAlert(true);
+        setTimeout(() => {
+          setSignupAlert(false);
+        }, 2000);
       })
       .catch((error) => console.log(error.message));
   };
