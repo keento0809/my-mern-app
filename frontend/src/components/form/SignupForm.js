@@ -49,9 +49,9 @@ const SignupForm = () => {
     // validation
     if (
       // formInput.emailForSignup === "" ||
-      !formInput.emailForSignup.match(regexEmail) ||
-      !formInput.passwordForSignup.match(regex) ||
-      !formInput.passwordConfirmation.match(regex)
+      !formInput.emailForSignup.match(regexEmail)
+      // !formInput.passwordForSignup.match(regex) ||
+      // !formInput.passwordConfirmation.match(regex)
     ) {
       alert("Invalid input.");
       return;

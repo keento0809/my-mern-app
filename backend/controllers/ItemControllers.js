@@ -1,5 +1,4 @@
 const { default: mongoose } = require("mongoose");
-const { findByIdAndUpdate } = require("../models/ItemModels");
 const Item = require("../models/ItemModels");
 
 // GET all requests
