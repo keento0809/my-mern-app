@@ -1,6 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import { ItemsProvider } from "./contexts/ItemsContext";
 import { AlertProvider } from "./contexts/alertContext";
+import { AuthProvider } from "./contexts/authContext";
 import Main from "./pages/Main";
 
 function App() {
@@ -8,9 +9,11 @@ function App() {
     <BrowserRouter>
       <AlertProvider>
         <ItemsProvider>
-          <div className="App">
-            <Main />
-          </div>
+          <AuthProvider>
+            <div className="App">
+              <Main />
+            </div>
+          </AuthProvider>
         </ItemsProvider>
       </AlertProvider>
     </BrowserRouter>

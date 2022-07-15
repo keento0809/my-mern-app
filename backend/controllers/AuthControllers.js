@@ -13,7 +13,6 @@ const login = async (req, res) => {
   const payload = { email };
   const option = { expiresIn: 3600000 };
   const newToken = await jwt.sign(payload, process.env.SECRET_KEY, option);
-  console.log(loginUser, hashComparison);
 
   if (loginUser && hashComparison) {
     res.json({
@@ -23,7 +22,6 @@ const login = async (req, res) => {
     });
   } else {
     res.status(400).json({ error: "Invalid credentials" });
-    // throw new Error("Invalid credentials");
   }
 };
 
