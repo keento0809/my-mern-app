@@ -8,6 +8,7 @@ import {
   Input,
   Box,
   Button,
+  Text,
 } from "@chakra-ui/react";
 import axios from "axios";
 
@@ -18,6 +19,7 @@ const SignupForm = () => {
     passwordConfirmation: "",
   });
   const [isSubmit, setIsSubmit] = useState(false);
+  const [error, setError] = useState();
 
   const { setSignupAlert } = useAlertContext();
 
@@ -70,7 +72,6 @@ const SignupForm = () => {
     axios
       .post("/auth/signup", enteredInfo)
       .then((res) => {
-        console.log(res);
         navigate("/");
         setFormInput({
           emailForSignup: "",
@@ -82,11 +83,21 @@ const SignupForm = () => {
           setSignupAlert(false);
         }, 2000);
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => {
+        setError(error.message);
+        console.log(error.message);
+      });
   };
 
   return (
     <Box pt={6}>
+      <Box minHeight={4}>
+        {error && (
+          <Text py={2} textAlign="center" fontSize="md" color="tomato">
+            {error}
+          </Text>
+        )}
+      </Box>
       <form onSubmit={handleSubmit}>
         <FormControl isInvalid={isSubmit && formInput.emailForSignup === ""}>
           <FormLabel htmlFor="emailForSignup" pt={4}>
