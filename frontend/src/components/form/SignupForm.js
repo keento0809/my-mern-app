@@ -73,7 +73,7 @@ const SignupForm = () => {
     axios
       .post("/auth/signup", enteredInfo)
       .then((res) => {
-        navigate("/");
+        navigate("/home");
         setFormInput({
           emailForSignup: "",
           passwordForSignup: "",

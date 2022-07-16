@@ -27,7 +27,7 @@ const Profile = () => {
           border="1px solid"
           borderColor="pink.300"
         >
-          <Link to="/">BACK</Link>
+          <Link to="/home">BACK</Link>
         </Button>
       </Box>
     </Layout>

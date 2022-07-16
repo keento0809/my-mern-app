@@ -8,16 +8,15 @@ import useAuthContext from "../../hooks/useAuthContext";
 
 const Nav = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-
-  const isUser = localStorage.getItem("isLoggedIn");
+  const { isLoggedIn } = useAuthContext();
 
   return (
     <header>
       <Container>
         <Flex justifyContent="space-between" alignItems="center">
           <Flex justifyContent="center" textAlign="center">
-            {isUser && <UserMenu />}
-            {!isUser && (
+            {isLoggedIn && <UserMenu />}
+            {!isLoggedIn && (
               <Link to="/auth">
                 <BiLogIn />
               </Link>
@@ -30,7 +29,7 @@ const Nav = () => {
             letterSpacing={-0.5}
             textAlign="center"
           >
-            <Link to="/">Shopping List</Link>
+            <Link to="/home">Shopping List</Link>
           </Text>
           <Flex justifyContent="center" textAlign="center">
             {colorMode === "light" ? (

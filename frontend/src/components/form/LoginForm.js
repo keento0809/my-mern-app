@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAlertContext from "../../hooks/useAlertContext";
 import {
   FormControl,
@@ -33,6 +33,30 @@ const LoginForm = () => {
     });
   };
 
+  const fetchPostRequest = (obj) => {
+    axios
+      .post("/auth/login", obj)
+      .then((res) => {
+        console.log(res);
+        navigate("/home");
+        setFormInput({
+          email: "",
+          password: "",
+        });
+        setLoginAlert(true);
+        setIsLoggedIn(true);
+        setCurrentUser(res.data);
+        localStorage.setItem("isLoggedIn", res.data.token);
+        setTimeout(() => {
+          setLoginAlert(false);
+        }, 2000);
+      })
+      .catch((error) => {
+        setError(error.message);
+        console.log(error.message);
+      });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmit(true);
@@ -56,28 +80,33 @@ const LoginForm = () => {
       password: formInput.password,
     };
 
-    axios
-      .post("/auth/login", enteredInfo)
-      .then((res) => {
-        console.log(res);
-        navigate("/");
-        setFormInput({
-          email: "",
-          password: "",
-        });
-        setLoginAlert(true);
-        setIsLoggedIn(true);
-        setCurrentUser(res.data);
-        localStorage.setItem("isLoggedIn", res.data.token);
-        setTimeout(() => {
-          setLoginAlert(false);
-        }, 2000);
-      })
-      .catch((error) => {
-        setError(error.message);
-        console.log(error.message);
-      });
+    // test
+    fetchPostRequest(enteredInfo);
+
+    // axios
+    //   .post("/auth/login", enteredInfo)
+    //   .then((res) => {
+    //     console.log(res);
+    //     navigate("/home");
+    //     setFormInput({
+    //       email: "",
+    //       password: "",
+    //     });
+    //     setLoginAlert(true);
+    //     setIsLoggedIn(true);
+    //     setCurrentUser(res.data);
+    //     localStorage.setItem("isLoggedIn", res.data.token);
+    //     setTimeout(() => {
+    //       setLoginAlert(false);
+    //     }, 2000);
+    //   })
+    //   .catch((error) => {
+    //     setError(error.message);
+    //     console.log(error.message);
+    //   });
   };
+
+  const handleGuestLogin = () => {};
 
   return (
     <Box pt={6}>
@@ -135,6 +164,15 @@ const LoginForm = () => {
           Login
         </Button>
       </form>
+      {/* test */}
+      <Text
+        textAlign="center"
+        mt={8}
+        cursor="pointer"
+        onClick={handleGuestLogin}
+      >
+        Login as guest user
+      </Text>
     </Box>
   );
 };
