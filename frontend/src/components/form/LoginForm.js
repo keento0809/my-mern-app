@@ -80,30 +80,7 @@ const LoginForm = () => {
       password: formInput.password,
     };
 
-    // test
     fetchPostRequest(enteredInfo);
-
-    // axios
-    //   .post("/auth/login", enteredInfo)
-    //   .then((res) => {
-    //     console.log(res);
-    //     navigate("/home");
-    //     setFormInput({
-    //       email: "",
-    //       password: "",
-    //     });
-    //     setLoginAlert(true);
-    //     setIsLoggedIn(true);
-    //     setCurrentUser(res.data);
-    //     localStorage.setItem("isLoggedIn", res.data.token);
-    //     setTimeout(() => {
-    //       setLoginAlert(false);
-    //     }, 2000);
-    //   })
-    //   .catch((error) => {
-    //     setError(error.message);
-    //     console.log(error.message);
-    //   });
   };
 
   const handleGuestLogin = () => {};
