@@ -1,9 +1,11 @@
 import React from "react";
+import useAuthContext from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
 import { heroImg } from "../data/data";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 
 const Hero = () => {
+  const { isLoggedIn } = useAuthContext();
   return (
     <Box overflow="hidden">
       <Flex
@@ -34,7 +36,7 @@ const Hero = () => {
             borderColor="pink.300"
             bgColor="pink.100"
           >
-            <Link to="/auth">Get started</Link>
+            <Link to={isLoggedIn ? "/home" : "/auth"}>Get started</Link>
           </Button>
         </Flex>
       </Flex>
