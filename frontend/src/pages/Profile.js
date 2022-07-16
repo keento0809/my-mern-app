@@ -17,7 +17,9 @@ const Profile = () => {
           Profile
         </Text>
         <Box py={4}>
-          <Text fontSize="xl">{currentUser.email}</Text>
+          <Text fontSize="lg">
+            Welcome, <strong>{currentUser.email}</strong>!
+          </Text>
         </Box>
         <Button
           mt={6}

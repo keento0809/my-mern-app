@@ -33,7 +33,7 @@ const UserMenu = () => {
         <MenuList>
           <MenuGroup>
             <MenuItem>
-              <Link to={`/profile/test`}>Profile</Link>
+              <Link to={`/profile`}>Profile</Link>
             </MenuItem>
             {/* temporary */}
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
