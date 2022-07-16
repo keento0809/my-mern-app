@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import useAuthContext from "../hooks/useAuthContext";
 
 const NotFound = () => {
-  const { currentUser } = useAuthContext();
-  console.log(currentUser.email);
+  const { isLoggedIn } = useAuthContext();
+  console.log(isLoggedIn);
 
   return (
     <Layout>
@@ -20,7 +20,7 @@ const NotFound = () => {
           border="1px solid"
           borderColor="pink.300"
         >
-          <Link to={!currentUser.email ? "/" : "/home"}>BACK</Link>
+          <Link to={!isLoggedIn ? "/" : "/home"}>BACK</Link>
         </Button>
       </Box>
     </Layout>
