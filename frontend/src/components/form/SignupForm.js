@@ -81,6 +81,7 @@ const SignupForm = () => {
         });
         setSignupAlert(true);
         setIsLoggedIn(true);
+        localStorage.setItem("isLoggedIn", "true");
         setTimeout(() => {
           setSignupAlert(false);
         }, 2000);
