@@ -60,7 +60,7 @@ const LoginForm = () => {
       .post("/auth/login", enteredInfo)
       .then((res) => {
         console.log(res);
-        navigate("/");
+        navigate("/home");
         setFormInput({
           email: "",
           password: "",

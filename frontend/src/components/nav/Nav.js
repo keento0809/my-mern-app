@@ -30,7 +30,7 @@ const Nav = () => {
             letterSpacing={-0.5}
             textAlign="center"
           >
-            <Link to="/">Shopping List</Link>
+            <Link to="/home">Shopping List</Link>
           </Text>
           <Flex justifyContent="center" textAlign="center">
             {colorMode === "light" ? (
