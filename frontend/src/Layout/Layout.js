@@ -4,7 +4,7 @@ import LoginAlert from "../components/Alert/LoginAlert";
 import SignupAlert from "../components/Alert/SignupAlert";
 import SuccessAlert from "../components/Alert/SuccessAlert";
 import WarnAlert from "../components/Alert/WarnAlert";
-import Nav from "../components/nav/Nav";
+import Nav from "../components/Nav/Nav";
 
 const Layout = ({ children }) => {
   return (

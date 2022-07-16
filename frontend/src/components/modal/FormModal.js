@@ -1,5 +1,5 @@
 import React from "react";
-import AddItemForm from "../form/AddItemForm";
+import AddItemForm from "../Form/AddItemForm";
 import {
   Button,
   Modal,
