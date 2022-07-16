@@ -22,7 +22,7 @@ const LoginForm = () => {
   const [error, setError] = useState();
 
   const { setLoginAlert } = useAlertContext();
-  const { setIsLoggedIn } = useAuthContext();
+  const { setIsLoggedIn, setCurrentUser } = useAuthContext();
 
   const navigate = useNavigate();
 
@@ -59,6 +59,7 @@ const LoginForm = () => {
     axios
       .post("/auth/login", enteredInfo)
       .then((res) => {
+        console.log(res);
         navigate("/");
         setFormInput({
           email: "",
@@ -66,6 +67,8 @@ const LoginForm = () => {
         });
         setLoginAlert(true);
         setIsLoggedIn(true);
+        setCurrentUser(res.data);
+        localStorage.setItem("isLoggedIn", true);
         setTimeout(() => {
           setLoginAlert(false);
         }, 2000);

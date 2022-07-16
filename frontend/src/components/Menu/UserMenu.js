@@ -5,11 +5,6 @@ import {
   MenuList,
   MenuItem,
   MenuGroup,
-  MenuDivider,
-  Button,
-  Avatar,
-  AvatarBadge,
-  HamburgerIcon,
   IconButton,
 } from "@chakra-ui/react";
 import { AiOutlineUser } from "react-icons/ai";
@@ -17,10 +12,12 @@ import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/useAuthContext";
 
 const UserMenu = () => {
-  const { setIsLoggedIn } = useAuthContext();
+  const { setIsLoggedIn, setCurrentUser } = useAuthContext();
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    setCurrentUser({});
+    localStorage.removeItem("isLoggedIn");
   };
 
   return (
@@ -35,7 +32,9 @@ const UserMenu = () => {
         />
         <MenuList>
           <MenuGroup>
-            <MenuItem>Profile</MenuItem>
+            <MenuItem>
+              <Link to={`/profile/test`}>Profile</Link>
+            </MenuItem>
             {/* temporary */}
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </MenuGroup>

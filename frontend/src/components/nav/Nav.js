@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Flex,
-  Text,
-  useColorMode,
-  Avatar,
-  AvatarBadge,
-} from "@chakra-ui/react";
+import { Container, Flex, Text, useColorMode } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { BsMoonStars, BsSun } from "react-icons/bs";
 import { BiLogIn } from "react-icons/bi";
@@ -15,17 +8,16 @@ import useAuthContext from "../../hooks/useAuthContext";
 
 const Nav = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const [isAvatarClicked, setIsAvatarClicked] = useState(true);
 
-  const { isLoggedIn } = useAuthContext();
+  const isUser = localStorage.getItem("isLoggedIn");
 
   return (
     <header>
       <Container>
         <Flex justifyContent="space-between" alignItems="center">
           <Flex justifyContent="center" textAlign="center">
-            {isLoggedIn && <UserMenu />}
-            {!isLoggedIn && (
+            {isUser && <UserMenu />}
+            {!isUser && (
               <Link to="/auth">
                 <BiLogIn />
               </Link>
