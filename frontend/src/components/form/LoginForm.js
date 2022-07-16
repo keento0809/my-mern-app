@@ -68,7 +68,7 @@ const LoginForm = () => {
         setLoginAlert(true);
         setIsLoggedIn(true);
         setCurrentUser(res.data);
-        localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("isLoggedIn", res.data.token);
         setTimeout(() => {
           setLoginAlert(false);
         }, 2000);
