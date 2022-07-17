@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import useAuthContext from "../../hooks/useAuthContext";
+import { guestUser } from "../../data/data";
 
 const LoginForm = () => {
   const [formInput, setFormInput] = useState({
@@ -83,7 +84,14 @@ const LoginForm = () => {
     fetchPostRequest(enteredInfo);
   };
 
-  const handleGuestLogin = () => {};
+  const handleGuestLogin = () => {
+    const guestUserInfo = guestUser;
+    if (!guestUserInfo) {
+      setError("Failed to guest login.");
+    }
+
+    fetchPostRequest(guestUserInfo);
+  };
 
   return (
     <Box pt={6}>
