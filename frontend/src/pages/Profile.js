@@ -8,10 +8,12 @@ import axios from "axios";
 const Profile = () => {
   const [error, setError] = useState();
 
-  const { currentUser, setCurrentUser } = useAuthContext();
+  const { currentUser, setCurrentUser, setIsLoggedIn } = useAuthContext();
 
   const handleLogout = () => {
     console.log("logging out");
+    setIsLoggedIn(false);
+    setCurrentUser({});
   };
 
   useEffect(() => {
@@ -35,6 +37,8 @@ const Profile = () => {
     }
   }, []);
 
+  console.log(currentUser);
+
   return (
     <Layout>
       <Box textAlign="center" pt={6}>
@@ -50,11 +54,11 @@ const Profile = () => {
           <Text fontSize="lg">
             Welcome, <strong>{currentUser.username}</strong>!
           </Text>
-          <Text fontSize="lg" pt={4}>
+          <Text fontSize="lg" pt={10}>
             Email: {currentUser.email}
           </Text>
           <Button
-            mb={4}
+            my={8}
             bgColor="inherit"
             border="1px solid"
             borderColor="pink.300"

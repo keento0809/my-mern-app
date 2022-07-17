@@ -6,6 +6,7 @@ const getUser = async (req, res) => {
   user &&
     res.status(200).json({
       _id: user.id,
+      username: user.username,
       email: user.email,
       token: token,
     });
