@@ -17,6 +17,7 @@ const login = async (req, res) => {
   if (loginUser && hashComparison) {
     res.json({
       _id: loginUser.id,
+      username: loginUser.username,
       email: loginUser.email,
       token: newToken,
     });
