@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import useAuthContext from "../../hooks/useAuthContext";
+import { guestUser } from "../../data/data";
 
 const LoginForm = () => {
   const [formInput, setFormInput] = useState({
@@ -80,33 +81,17 @@ const LoginForm = () => {
       password: formInput.password,
     };
 
-    // test
     fetchPostRequest(enteredInfo);
-
-    // axios
-    //   .post("/auth/login", enteredInfo)
-    //   .then((res) => {
-    //     console.log(res);
-    //     navigate("/home");
-    //     setFormInput({
-    //       email: "",
-    //       password: "",
-    //     });
-    //     setLoginAlert(true);
-    //     setIsLoggedIn(true);
-    //     setCurrentUser(res.data);
-    //     localStorage.setItem("isLoggedIn", res.data.token);
-    //     setTimeout(() => {
-    //       setLoginAlert(false);
-    //     }, 2000);
-    //   })
-    //   .catch((error) => {
-    //     setError(error.message);
-    //     console.log(error.message);
-    //   });
   };
 
-  const handleGuestLogin = () => {};
+  const handleGuestLogin = () => {
+    const guestUserInfo = guestUser;
+    if (!guestUserInfo) {
+      setError("Failed to guest login.");
+    }
+
+    fetchPostRequest(guestUserInfo);
+  };
 
   return (
     <Box pt={6}>

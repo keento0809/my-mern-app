@@ -15,7 +15,6 @@ const Profile = () => {
 
   useEffect(() => {
     const currentToken = localStorage.getItem("isLoggedIn");
-    console.log(currentToken);
     if (currentToken) {
       const config = {
         headers: {

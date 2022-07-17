@@ -34,6 +34,29 @@ const SignupForm = () => {
     });
   };
 
+  const fetchPostRequest = (obj) => {
+    axios
+      .post("/auth/signup", obj)
+      .then((res) => {
+        navigate("/home");
+        setFormInput({
+          emailForSignup: "",
+          passwordForSignup: "",
+          passwordConfirmation: "",
+        });
+        setSignupAlert(true);
+        setIsLoggedIn(true);
+        localStorage.setItem("isLoggedIn", res.data.token);
+        setTimeout(() => {
+          setSignupAlert(false);
+        }, 2000);
+      })
+      .catch((error) => {
+        setError(error.message);
+        console.log(error.message);
+      });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -70,26 +93,27 @@ const SignupForm = () => {
       password: formInput.passwordForSignup,
     };
 
-    axios
-      .post("/auth/signup", enteredInfo)
-      .then((res) => {
-        navigate("/home");
-        setFormInput({
-          emailForSignup: "",
-          passwordForSignup: "",
-          passwordConfirmation: "",
-        });
-        setSignupAlert(true);
-        setIsLoggedIn(true);
-        localStorage.setItem("isLoggedIn", "true");
-        setTimeout(() => {
-          setSignupAlert(false);
-        }, 2000);
-      })
-      .catch((error) => {
-        setError(error.message);
-        console.log(error.message);
-      });
+    fetchPostRequest(enteredInfo);
+    // axios
+    //   .post("/auth/signup", enteredInfo)
+    //   .then((res) => {
+    //     navigate("/home");
+    //     setFormInput({
+    //       emailForSignup: "",
+    //       passwordForSignup: "",
+    //       passwordConfirmation: "",
+    //     });
+    //     setSignupAlert(true);
+    //     setIsLoggedIn(true);
+    //     localStorage.setItem("isLoggedIn", "true");
+    //     setTimeout(() => {
+    //       setSignupAlert(false);
+    //     }, 2000);
+    //   })
+    //   .catch((error) => {
+    //     setError(error.message);
+    //     console.log(error.message);
+    //   });
   };
 
   return (
