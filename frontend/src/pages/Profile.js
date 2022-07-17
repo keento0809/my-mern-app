@@ -10,8 +10,9 @@ const Profile = () => {
 
   const { currentUser, setCurrentUser } = useAuthContext();
 
-  const path = window.location.pathname;
-  const currentPath = path.slice(9);
+  const handleLogout = () => {
+    console.log("logging out");
+  };
 
   useEffect(() => {
     const currentToken = localStorage.getItem("isLoggedIn");
@@ -47,8 +48,20 @@ const Profile = () => {
         </Box>
         <Box py={4}>
           <Text fontSize="lg">
-            Welcome, <strong>{currentUser.email}</strong>!
+            Welcome, <strong>{currentUser.username}</strong>!
           </Text>
+          <Text fontSize="lg" pt={4}>
+            Email: {currentUser.email}
+          </Text>
+          <Button
+            mb={4}
+            bgColor="inherit"
+            border="1px solid"
+            borderColor="pink.300"
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
         </Box>
         <Button
           mt={6}

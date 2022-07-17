@@ -15,6 +15,7 @@ import axios from "axios";
 
 const SignupForm = () => {
   const [formInput, setFormInput] = useState({
+    username: "",
     emailForSignup: "",
     passwordForSignup: "",
     passwordConfirmation: "",
@@ -40,6 +41,7 @@ const SignupForm = () => {
       .then((res) => {
         navigate("/home");
         setFormInput({
+          username: "",
           emailForSignup: "",
           passwordForSignup: "",
           passwordConfirmation: "",
@@ -63,6 +65,7 @@ const SignupForm = () => {
     setIsSubmit(true);
 
     if (
+      formInput.username === "" ||
       formInput.emailForSignup === "" ||
       formInput.passwordForSignup === "" ||
       formInput.passwordConfirmation === ""
@@ -89,31 +92,12 @@ const SignupForm = () => {
     }
 
     const enteredInfo = {
+      username: formInput.username,
       email: formInput.emailForSignup,
       password: formInput.passwordForSignup,
     };
 
     fetchPostRequest(enteredInfo);
-    // axios
-    //   .post("/auth/signup", enteredInfo)
-    //   .then((res) => {
-    //     navigate("/home");
-    //     setFormInput({
-    //       emailForSignup: "",
-    //       passwordForSignup: "",
-    //       passwordConfirmation: "",
-    //     });
-    //     setSignupAlert(true);
-    //     setIsLoggedIn(true);
-    //     localStorage.setItem("isLoggedIn", "true");
-    //     setTimeout(() => {
-    //       setSignupAlert(false);
-    //     }, 2000);
-    //   })
-    //   .catch((error) => {
-    //     setError(error.message);
-    //     console.log(error.message);
-    //   });
   };
 
   return (
@@ -126,6 +110,25 @@ const SignupForm = () => {
         )}
       </Box>
       <form onSubmit={handleSubmit}>
+        <FormControl isInvalid={isSubmit && formInput.username === ""}>
+          <FormLabel htmlFor="username" pt={4}>
+            Username
+          </FormLabel>
+          <Input
+            name="username"
+            px={4}
+            py={1}
+            focusBorderColor="pink.100"
+            value={formInput.username}
+            onChange={handleChange}
+            id="username"
+            type="text"
+            placeholder="Enter Username"
+          />
+          {isSubmit && (
+            <FormErrorMessage>Username is required.</FormErrorMessage>
+          )}
+        </FormControl>
         <FormControl isInvalid={isSubmit && formInput.emailForSignup === ""}>
           <FormLabel htmlFor="emailForSignup" pt={4}>
             Email

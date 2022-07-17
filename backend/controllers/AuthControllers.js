@@ -26,7 +26,7 @@ const login = async (req, res) => {
 };
 
 const signup = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, email, password } = req.body;
 
   // validate errors
   // utilize validationResult
@@ -56,6 +56,7 @@ const signup = async (req, res) => {
 
   // Add new user to DB
   const newUser = await User.create({
+    username,
     email,
     password: hashed,
   });
@@ -63,6 +64,7 @@ const signup = async (req, res) => {
   if (newUser) {
     res.status(200).json({
       _id: newUser.id,
+      username: newUser.username,
       email: newUser.email,
       token: newToken,
     });
