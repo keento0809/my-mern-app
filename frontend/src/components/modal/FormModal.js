@@ -21,7 +21,7 @@ const FormModal = () => {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   return (
-    <Box pt={8}>
+    <Box pt={8} width="full">
       <Button
         onClick={onOpen}
         leftIcon={<AiOutlinePlus />}
