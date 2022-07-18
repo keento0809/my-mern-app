@@ -106,7 +106,10 @@ const ShoppingList = () => {
             <p>Loading...</p>
           ))} */}
         {!isReady && tempList && tempList.length === 0 && <p>Loading...</p>}
-        {isReady && tempList && tempList.length === 0 && <p>No Items added</p>}
+        {isReady &&
+          tempList &&
+          tempList.length === 0 &&
+          chosenCategory === "" && <p>No Items added</p>}
         {!isLoading &&
           tempList &&
           tempList.length === 0 &&

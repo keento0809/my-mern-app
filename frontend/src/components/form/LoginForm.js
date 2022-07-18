@@ -38,7 +38,6 @@ const LoginForm = () => {
     axios
       .post("/auth/login", obj)
       .then((res) => {
-        console.log(res.data);
         navigate("/home");
         setFormInput({
           email: "",
