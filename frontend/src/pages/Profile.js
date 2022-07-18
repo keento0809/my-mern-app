@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import useAuthContext from "../hooks/useAuthContext";
 import Layout from "../Layout/Layout";
 import { Link } from "react-router-dom";
-import { Box, Text, Button } from "@chakra-ui/react";
+import { Box, Text, Button, useColorMode } from "@chakra-ui/react";
 import axios from "axios";
 
 const Profile = () => {
   const [error, setError] = useState();
 
   const { currentUser, setCurrentUser, setIsLoggedIn } = useAuthContext();
+
+  const { colorMode } = useColorMode();
 
   const handleLogout = () => {
     console.log("logging out");
@@ -48,15 +50,23 @@ const Profile = () => {
             {error && error}
           </Text>
         </Box>
-        <Box py={4}>
+        <Box
+          py={8}
+          boxShadow={
+            colorMode === "light"
+              ? "2px 4px 4px #d4d6de"
+              : "2px 4px 4px 6px #161b25"
+          }
+          borderRadius="12px"
+        >
           <Text fontSize="lg">
             Welcome, <strong>{currentUser.username}</strong>!
           </Text>
-          <Text fontSize="lg" pt={10}>
+          <Text fontSize="lg" pt={6}>
             Email: {currentUser.email}
           </Text>
           <Button
-            my={8}
+            mt={16}
             bgColor="inherit"
             border="1px solid"
             borderColor="pink.300"
@@ -66,7 +76,7 @@ const Profile = () => {
           </Button>
         </Box>
         <Button
-          mt={6}
+          mt={12}
           bgColor="inherit"
           border="1px solid"
           borderColor="pink.300"

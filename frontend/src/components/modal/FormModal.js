@@ -10,11 +10,13 @@ import {
   ModalCloseButton,
   useDisclosure,
   Box,
+  useColorMode,
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 
 const FormModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { colorMode } = useColorMode();
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -24,7 +26,7 @@ const FormModal = () => {
         onClick={onOpen}
         leftIcon={<AiOutlinePlus />}
         width="full"
-        bgColor="inherit"
+        bgColor={colorMode === "light" ? "pink.100" : "inherit"}
         border="1px solid"
         borderColor="pink.300"
       >
