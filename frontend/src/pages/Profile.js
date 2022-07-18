@@ -37,8 +37,6 @@ const Profile = () => {
     }
   }, []);
 
-  console.log(currentUser);
-
   return (
     <Layout>
       <Box textAlign="center" pt={6}>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { categories } from "../../data/data";
 import Item from "../Item/Item";
 import useItemsContext from "../../hooks/useItemsContext";
+import useAuthContext from "../../hooks/useAuthContext";
 import axios from "axios";
 import { Select, Box } from "@chakra-ui/react";
 
@@ -11,13 +12,36 @@ const ShoppingList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
-
   const { items, dispatch } = useItemsContext();
+  const [isReady, setIsReady] = useState(false);
+
+  const { currentUser, setCurrentUser } = useAuthContext();
+
+  const fetchingUser = () => {
+    const currentToken = localStorage.getItem("isLoggedIn");
+    if (currentToken) {
+      const config = {
+        headers: {
+          authToken: currentToken,
+        },
+      };
+      axios
+        .get("/user", config)
+        .then((res) => {
+          setCurrentUser(res.data);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  };
 
   const fetchItems = () => {
     setIsLoading(true);
     axios
+      // original
       .get("/items")
+      // .get(`/items/${currentUser["_id"]}`)
       .then((res) => {
         dispatch({ type: "SET_ITEMS", payload: res.data });
       })
@@ -26,7 +50,6 @@ const ShoppingList = () => {
   };
 
   function handleSetCategory(e) {
-    console.log(e.target.value);
     setChosenCategory(e.target.value);
     if (items.length > 0 && e.target.value === "") {
       setTempList(items);
@@ -40,12 +63,23 @@ const ShoppingList = () => {
   }
 
   useEffect(() => {
-    fetchItems();
+    // fetchItems();
+    fetchingUser();
   }, []);
+
+  useEffect(() => {
+    fetchItems();
+  }, [currentUser]);
 
   useEffect(() => {
     setTempList(items);
   }, [items.length, isUpdate]);
+
+  useEffect(() => {
+    tempList && tempList.length === 0 && setIsReady(true);
+  }, [tempList]);
+
+  console.log(tempList, isLoading);
 
   return (
     <>
@@ -69,10 +103,12 @@ const ShoppingList = () => {
       </Box>
       <ul style={{ paddingLeft: "0" }}>
         {/* original */}
-        {isLoading ||
+        {/* {isLoading ||
           (tempList && tempList.length === 0 && chosenCategory === "" && (
             <p>Loading...</p>
-          ))}
+          ))} */}
+        {!isReady && tempList && tempList.length === 0 && <p>Loading...</p>}
+        {isReady && tempList && tempList.length === 0 && <p>No Items added</p>}
         {!isLoading &&
           tempList &&
           tempList.length === 0 &&

@@ -1,6 +1,7 @@
 const express = require("express");
 const {
   getAllItem,
+  getUserItem,
   getOneItem,
   postItem,
   updateItem,
@@ -10,6 +11,7 @@ const {
 const router = express.Router();
 
 router.get("/", getAllItem);
+router.get("/:userId", getUserItem);
 router.get("/:id", getOneItem);
 router.post("/", postItem);
 router.patch("/:id", updateItem);

@@ -124,13 +124,6 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
           : categories === "Other"
           ? "grey.300"
           : "orange.300"
-        // : category === "Vegetable"
-        // ? "green.200"
-        // : category === "Meat"
-        // ? "pink.200"
-        // : categories === "Other"
-        // ? "blue.200"
-        // : "orange.200"
       }
       borderColor={
         category === "Fruits"
