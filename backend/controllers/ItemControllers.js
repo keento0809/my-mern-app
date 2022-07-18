@@ -23,6 +23,18 @@ const getOneItem = async (req, res) => {
   }
 };
 
+const getUserItem = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const userItems = await Item.find({ _id: id }).sort({
+      _id: -1,
+    });
+    res.status(200).json(userItems.length > 0 ? userItems : "");
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 const postItem = async (req, res) => {
   if (!req.body.itemName || !req.body.amount) {
     res.status(400);
@@ -91,6 +103,7 @@ const deleteItem = async (req, res) => {
 
 module.exports = {
   getAllItem,
+  getUserItem,
   getOneItem,
   postItem,
   updateItem,
