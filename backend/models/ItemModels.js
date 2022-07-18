@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const itemSchema = mongoose.Schema(
   {
+    userId: {
+      type: String,
+      required: true,
+    },
     itemName: {
       type: String,
       required: true,

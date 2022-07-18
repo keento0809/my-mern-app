@@ -40,8 +40,8 @@ const ShoppingList = () => {
     setIsLoading(true);
     axios
       // original
-      .get("/items")
-      // .get(`/items/${currentUser["_id"]}`)
+      // .get("/items")
+      .get(`/items/${currentUser["_id"]}`)
       .then((res) => {
         dispatch({ type: "SET_ITEMS", payload: res.data });
       })
@@ -78,8 +78,6 @@ const ShoppingList = () => {
   useEffect(() => {
     tempList && tempList.length === 0 && setIsReady(true);
   }, [tempList]);
-
-  console.log(tempList, isLoading);
 
   return (
     <>
