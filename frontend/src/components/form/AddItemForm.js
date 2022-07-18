@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { categories } from "../../data/data";
 import useItemsContext from "../../hooks/useItemsContext";
 import useAlertContext from "../../hooks/useAlertContext";
+import useAuthContext from "../../hooks/useAuthContext";
 import axios from "axios";
 import {
   Button,
@@ -25,6 +26,7 @@ const AddItemForm = ({ onClose }) => {
 
   const { dispatch } = useItemsContext();
   const { setAlert } = useAlertContext();
+  const { currentUser } = useAuthContext();
 
   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -56,7 +58,10 @@ const AddItemForm = ({ onClose }) => {
     };
 
     axios
-      .post("/items", enteredInfo)
+      // original
+      // .post("/items", enteredInfo)
+      // test
+      .post(`/items/${currentUser._id}`, enteredInfo)
       .then((res) => {
         dispatch({ type: "ADD_NEW_ITEM", payload: res.data });
         // test

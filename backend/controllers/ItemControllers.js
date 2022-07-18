@@ -24,12 +24,32 @@ const getOneItem = async (req, res) => {
 };
 
 const getUserItem = async (req, res) => {
-  const { id } = req.params;
+  const { userId } = req.params;
   try {
-    const userItems = await Item.find({ _id: id }).sort({
+    const userItems = await Item.find({ userId: userId }).sort({
       _id: -1,
     });
     res.status(200).json(userItems.length > 0 ? userItems : "");
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const postUserItem = async (req, res) => {
+  const { userId } = req.params;
+  if (!req.body.itemName || !req.body.amount) {
+    res.status(400);
+    throw Error("Invalid request");
+  }
+  try {
+    const newItem = await Item.create({
+      userId: userId,
+      itemName: req.body.itemName,
+      amount: req.body.amount,
+      category: req.body.category,
+      description: req.body.description ? req.body.description : "",
+    });
+    res.status(200).json(newItem);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -106,6 +126,7 @@ module.exports = {
   getUserItem,
   getOneItem,
   postItem,
+  postUserItem,
   updateItem,
   deleteItem,
   reset,

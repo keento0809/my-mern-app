@@ -4,6 +4,7 @@ const {
   getUserItem,
   getOneItem,
   postItem,
+  postUserItem,
   updateItem,
   deleteItem,
   reset,
@@ -14,6 +15,7 @@ router.get("/", getAllItem);
 router.get("/:userId", getUserItem);
 router.get("/:id", getOneItem);
 router.post("/", postItem);
+router.post("/:userId", postUserItem);
 router.patch("/:id", updateItem);
 // test
 router.delete("/", reset);
