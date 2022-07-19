@@ -94,11 +94,11 @@ const Nav = () => {
                     <FiLogOut />
                   </span>
                 )}
-                {!isLoggedIn && (
+                {/* {!isLoggedIn && (
                   <Link to="/auth">
                     <BiLogIn />
                   </Link>
-                )}
+                )} */}
               </Box>
               <Flex justifyContent="center" textAlign="center">
                 {colorMode === "light" ? (
