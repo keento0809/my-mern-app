@@ -21,6 +21,12 @@ const Nav = () => {
 
   const { isLoggedIn, setCurrentUser, setIsLoggedIn } = useAuthContext();
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setCurrentUser({});
+    localStorage.removeItem("isLoggedIn");
+  };
+
   return (
     <header>
       <Container maxWidth={isLargerThan1024 && "1024px"} width="100%">
@@ -82,23 +88,10 @@ const Nav = () => {
               )}
               <Box>
                 {isLoggedIn && (
-                  // <Flex justifyContent="space-between" textAlign="center">
-                  //   <Link to="/profile">
-                  //     <AiOutlineUser />
-                  //   </Link>
-                  //   <span>
-                  //     <FiLogOut />
-                  //   </span>
-                  // </Flex>
-                  <span>
+                  <span onClick={handleLogout}>
                     <FiLogOut />
                   </span>
                 )}
-                {/* {!isLoggedIn && (
-                  <Link to="/auth">
-                    <BiLogIn />
-                  </Link>
-                )} */}
               </Box>
               <Flex justifyContent="center" textAlign="center">
                 {colorMode === "light" ? (
