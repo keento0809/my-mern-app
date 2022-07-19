@@ -14,7 +14,8 @@ const Layout = ({ children }) => {
       <Nav />
       <Container
         maxWidth={!isLargerThan1024 ? "500px" : ""}
-        padding={isLargerThan1024 && "0 56px"}
+        pt="66px"
+        px={isLargerThan1024 && "56px"}
       >
         {children}
       </Container>

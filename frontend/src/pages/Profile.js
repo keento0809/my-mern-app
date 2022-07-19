@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAuthContext from "../hooks/useAuthContext";
 import useAlertContext from "../hooks/useAlertContext";
+import useItemsContext from "../hooks/useItemsContext";
 import Layout from "../Layout/Layout";
 import { Link } from "react-router-dom";
 import { Box, Text, Button, useColorMode } from "@chakra-ui/react";
@@ -9,6 +10,7 @@ import axios from "axios";
 const Profile = () => {
   const [error, setError] = useState();
 
+  const { items } = useItemsContext();
   const { currentUser, setCurrentUser, setIsLoggedIn } = useAuthContext();
   const { setLogoutAlert } = useAlertContext();
 
@@ -64,12 +66,17 @@ const Profile = () => {
               : "2px 4px 4px 6px #161b25"
           }
           borderRadius="12px"
+          maxWidth="400px"
+          margin="0 auto"
         >
           <Text fontSize="lg">
             Welcome, <strong>{currentUser.username}</strong>!
           </Text>
           <Text fontSize="lg" pt={6}>
             Email: {currentUser.email}
+          </Text>
+          <Text fontSize="lg" pt={3}>
+            Items: <strong>{items.length}</strong> items on the list.
           </Text>
           <Button
             mt={16}
