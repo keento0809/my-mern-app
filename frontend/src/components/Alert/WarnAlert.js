@@ -1,9 +1,11 @@
 import React from "react";
 import useAlertContext from "../../hooks/useAlertContext";
-import { Alert, AlertIcon } from "@chakra-ui/react";
+import { Alert, AlertIcon, useMediaQuery } from "@chakra-ui/react";
 
 const WarnAlert = () => {
   const { warnAlert } = useAlertContext();
+  const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
+
   return (
     <>
       {warnAlert && (
