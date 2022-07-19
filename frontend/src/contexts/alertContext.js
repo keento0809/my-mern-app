@@ -6,6 +6,7 @@ export const AlertProvider = ({ children }) => {
   const [alert, setAlert] = useState(false);
   const [warnAlert, setWarnAlert] = useState(false);
   const [loginAlert, setLoginAlert] = useState(false);
+  const [logoutAlert, setLogoutAlert] = useState(false);
   const [signupAlert, setSignupAlert] = useState(false);
 
   return (
@@ -14,10 +15,12 @@ export const AlertProvider = ({ children }) => {
         alert,
         warnAlert,
         loginAlert,
+        logoutAlert,
         signupAlert,
         setAlert,
         setWarnAlert,
         setLoginAlert,
+        setLogoutAlert,
         setSignupAlert,
       }}
     >

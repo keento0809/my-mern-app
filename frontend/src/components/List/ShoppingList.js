@@ -4,7 +4,7 @@ import Item from "../Item/Item";
 import useItemsContext from "../../hooks/useItemsContext";
 import useAuthContext from "../../hooks/useAuthContext";
 import axios from "axios";
-import { Select, Box } from "@chakra-ui/react";
+import { Select, Box, Text } from "@chakra-ui/react";
 
 const ShoppingList = () => {
   const [chosenCategory, setChosenCategory] = useState("");
@@ -80,9 +80,9 @@ const ShoppingList = () => {
   }, [tempList]);
 
   return (
-    <>
+    <Box flex={1}>
       <Box className="" py={8}>
-        <span>Filtered by: </span>
+        <Text pb={2}>Filtered by: </Text>
         <Select
           focusBorderColor="pink.100"
           onChange={handleSetCategory}
@@ -134,7 +134,7 @@ const ShoppingList = () => {
             );
           })}
       </ul>
-    </>
+    </Box>
   );
 };
 
