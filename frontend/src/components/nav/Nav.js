@@ -34,7 +34,14 @@ const Nav = () => {
   };
 
   return (
-    <header>
+    <Box
+      width="100%"
+      position="fixed"
+      zIndex={10}
+      top="0"
+      left="0"
+      backgroundColor={colorMode === "dark" ? "#1A202C" : "#fff"}
+    >
       <Container
         maxWidth={isLargerThan1024 && "1024px"}
         width="100%"
@@ -119,7 +126,7 @@ const Nav = () => {
           </Flex>
         </Box>
       </Container>
-    </header>
+    </Box>
   );
 };
 
