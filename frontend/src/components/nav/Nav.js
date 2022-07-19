@@ -14,16 +14,32 @@ import { AiOutlineUser } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import UserMenu from "../Menu/UserMenu";
 import useAuthContext from "../../hooks/useAuthContext";
+import useAlertContext from "../../hooks/useAlertContext";
 
 const Nav = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
 
   const { isLoggedIn, setCurrentUser, setIsLoggedIn } = useAuthContext();
+  const { setLogoutAlert } = useAlertContext();
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setCurrentUser({});
+    localStorage.removeItem("isLoggedIn");
+    setLogoutAlert(true);
+    setTimeout(() => {
+      setLogoutAlert(false);
+    }, 2000);
+  };
 
   return (
     <header>
-      <Container maxWidth={isLargerThan1024 && "1024px"} width="100%">
+      <Container
+        maxWidth={isLargerThan1024 && "1024px"}
+        width="100%"
+        padding={isLargerThan1024 && "0 56px"}
+      >
         <Box display={isLargerThan1024 && "none"}>
           <Flex justifyContent="space-between" alignItems="center">
             <Flex justifyContent="center" textAlign="center">
@@ -57,7 +73,7 @@ const Nav = () => {
             </Flex>
           </Flex>
         </Box>
-        <Box display={!isLargerThan1024 && "none"} padding="0px 40px">
+        <Box display={!isLargerThan1024 && "none"}>
           <Flex justifyContent="space-between" alignItems="center">
             <Text
               py={4}
@@ -82,23 +98,10 @@ const Nav = () => {
               )}
               <Box>
                 {isLoggedIn && (
-                  // <Flex justifyContent="space-between" textAlign="center">
-                  //   <Link to="/profile">
-                  //     <AiOutlineUser />
-                  //   </Link>
-                  //   <span>
-                  //     <FiLogOut />
-                  //   </span>
-                  // </Flex>
-                  <span>
+                  <span onClick={handleLogout}>
                     <FiLogOut />
                   </span>
                 )}
-                {/* {!isLoggedIn && (
-                  <Link to="/auth">
-                    <BiLogIn />
-                  </Link>
-                )} */}
               </Box>
               <Flex justifyContent="center" textAlign="center">
                 {colorMode === "light" ? (

@@ -2,13 +2,13 @@ import React from "react";
 import useAlertContext from "../../hooks/useAlertContext";
 import { Alert, AlertIcon, useMediaQuery } from "@chakra-ui/react";
 
-const WarnAlert = () => {
-  const { warnAlert } = useAlertContext();
+const LogoutAlert = () => {
+  const { logoutAlert } = useAlertContext();
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
 
   return (
     <>
-      {warnAlert && (
+      {logoutAlert && (
         <Alert
           maxWidth={isLargerThan768 ? "400px" : ""}
           status="warning"
@@ -20,11 +20,11 @@ const WarnAlert = () => {
           zIndex={10}
         >
           <AlertIcon />
-          Item deleted from List.
+          Successfully Logged out!
         </Alert>
       )}
     </>
   );
 };
 
-export default WarnAlert;
+export default LogoutAlert;

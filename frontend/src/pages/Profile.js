@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useAuthContext from "../hooks/useAuthContext";
+import useAlertContext from "../hooks/useAlertContext";
 import Layout from "../Layout/Layout";
 import { Link } from "react-router-dom";
 import { Box, Text, Button, useColorMode } from "@chakra-ui/react";
@@ -9,6 +10,7 @@ const Profile = () => {
   const [error, setError] = useState();
 
   const { currentUser, setCurrentUser, setIsLoggedIn } = useAuthContext();
+  const { setLogoutAlert } = useAlertContext();
 
   const { colorMode } = useColorMode();
 
@@ -16,6 +18,10 @@ const Profile = () => {
     console.log("logging out");
     setIsLoggedIn(false);
     setCurrentUser({});
+    setLogoutAlert(true);
+    setTimeout(() => {
+      setLogoutAlert(false);
+    }, 2000);
   };
 
   useEffect(() => {
