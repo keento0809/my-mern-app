@@ -3,6 +3,7 @@ import { categories } from "../../data/data";
 import Item from "../Item/Item";
 import useItemsContext from "../../hooks/useItemsContext";
 import useAuthContext from "../../hooks/useAuthContext";
+import styles from "./ShoppingList.module.css";
 import axios from "axios";
 import { Select, Box, Text, useMediaQuery } from "@chakra-ui/react";
 
@@ -16,6 +17,8 @@ const ShoppingList = () => {
   const [isReady, setIsReady] = useState(false);
 
   const { currentUser, setCurrentUser } = useAuthContext();
+
+  const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
 
   const fetchingUser = () => {
     const currentToken = localStorage.getItem("isLoggedIn");
@@ -100,7 +103,7 @@ const ShoppingList = () => {
         </Select>
       </Box>
       <Box overflow="scroll">
-        <ul style={{ paddingLeft: "0" }}>
+        <ul className={styles.listUl}>
           {/* original */}
           {/* {isLoading ||
           (tempList && tempList.length === 0 && chosenCategory === "" && (
