@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
       <Container
         maxWidth={!isLargerThan1024 ? "500px" : ""}
         pt="66px"
-        px={isLargerThan1024 && "56px"}
+        px={isLargerThan1024 ? "56px" : "16px"}
       >
         {children}
       </Container>
