@@ -20,12 +20,25 @@ const FormModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode } = useColorMode();
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
+  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
   return (
-    <Box pt={8} width="full" flex={1} pr={isLargerThan1024 && 10}>
+    <Box
+      pt={8}
+      width="full"
+      flex={1}
+      pr={
+        isLargerThan1024 && !isLargerThan1280
+          ? 10
+          : isLargerThan1024 && isLargerThan1280
+          ? 12
+          : ""
+      }
+      maxWidth={isLargerThan1024 && "436px"}
+    >
       <Box display={isLargerThan1024 && "none"}>
         <Button
           onClick={onOpen}

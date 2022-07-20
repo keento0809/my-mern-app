@@ -19,6 +19,7 @@ import useAlertContext from "../../hooks/useAlertContext";
 const Nav = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
+  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
   const { isLoggedIn, setCurrentUser, setIsLoggedIn } = useAuthContext();
   const { setLogoutAlert } = useAlertContext();
@@ -43,7 +44,7 @@ const Nav = () => {
       backgroundColor={colorMode === "dark" ? "#1A202C" : "#fff"}
     >
       <Container
-        maxWidth={isLargerThan1024 && "1024px"}
+        maxWidth={isLargerThan1280 ? "1280px" : "1024px"}
         width="100%"
         padding={isLargerThan1024 && "0 56px"}
       >
