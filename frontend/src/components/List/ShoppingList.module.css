@@ -1,0 +1,9 @@
+.listUl {
+  padding-left: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .listUl {
+    max-height: 570px;
+  }
+}
