@@ -13,6 +13,7 @@ import {
   FormControl,
   Box,
   FormErrorMessage,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 
@@ -27,6 +28,8 @@ const AddItemForm = ({ onClose }) => {
   const { dispatch } = useItemsContext();
   const { setAlert } = useAlertContext();
   const { currentUser } = useAuthContext();
+
+  const [isLargerThan1024] = useMediaQuery("(min-width:1024px)");
 
   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -77,7 +80,7 @@ const AddItemForm = ({ onClose }) => {
     }, 2000);
   };
   return (
-    <Box pt={6}>
+    <Box pt={6} maxWidth={isLargerThan1024 && "436px"}>
       <form
         onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column" }}

@@ -9,11 +9,18 @@ import Nav from "../components/Nav/Nav";
 
 const Layout = ({ children }) => {
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
+  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
   return (
     <>
       <Nav />
       <Container
-        maxWidth={!isLargerThan1024 ? "500px" : ""}
+        maxWidth={
+          !isLargerThan1024
+            ? "468px"
+            : isLargerThan1024 && !isLargerThan1280
+            ? "1024px"
+            : "1280px"
+        }
         pt="66px"
         px={isLargerThan1024 ? "56px" : "16px"}
       >

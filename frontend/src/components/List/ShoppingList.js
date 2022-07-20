@@ -19,6 +19,7 @@ const ShoppingList = () => {
   const { currentUser, setCurrentUser } = useAuthContext();
 
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
+  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
   const fetchingUser = () => {
     const currentToken = localStorage.getItem("isLoggedIn");
@@ -83,7 +84,17 @@ const ShoppingList = () => {
   }, [tempList]);
 
   return (
-    <Box flex={1}>
+    <Box
+      flex={1}
+      maxWidth={
+        isLargerThan1024 && !isLargerThan1280
+          ? "436px"
+          : isLargerThan1024 && isLargerThan1280
+          ? ""
+          : ""
+      }
+      width={isLargerThan1280 && "100%"}
+    >
       <Box className="" py={8}>
         <Text pb={2}>Filtered by: </Text>
         <Select
@@ -92,6 +103,7 @@ const ShoppingList = () => {
           name=""
           id="category"
           placeholder="Select"
+          maxWidth={isLargerThan1280 && "350px"}
         >
           {categories.map((category, index) => {
             return (
