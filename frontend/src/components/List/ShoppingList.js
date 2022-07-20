@@ -4,7 +4,7 @@ import Item from "../Item/Item";
 import useItemsContext from "../../hooks/useItemsContext";
 import useAuthContext from "../../hooks/useAuthContext";
 import axios from "axios";
-import { Select, Box, Text } from "@chakra-ui/react";
+import { Select, Box, Text, useMediaQuery } from "@chakra-ui/react";
 
 const ShoppingList = () => {
   const [chosenCategory, setChosenCategory] = useState("");
@@ -99,41 +99,43 @@ const ShoppingList = () => {
           })}
         </Select>
       </Box>
-      <ul style={{ paddingLeft: "0" }}>
-        {/* original */}
-        {/* {isLoading ||
+      <Box overflow="scroll">
+        <ul style={{ paddingLeft: "0" }}>
+          {/* original */}
+          {/* {isLoading ||
           (tempList && tempList.length === 0 && chosenCategory === "" && (
             <p>Loading...</p>
           ))} */}
-        {!isReady && tempList && tempList.length === 0 && <p>Loading...</p>}
-        {isReady &&
-          tempList &&
-          tempList.length === 0 &&
-          chosenCategory === "" && <p>No Items added</p>}
-        {!isLoading &&
-          tempList &&
-          tempList.length === 0 &&
-          chosenCategory !== "" && <p>No Item Found</p>}
-        {!isLoading &&
-          tempList &&
-          tempList.map((item, index) => {
-            return (
-              <li
-                key={index}
-                style={{ listStyle: "none", paddingBottom: "1rem" }}
-              >
-                <Item
-                  id={item._id}
-                  itemName={item.itemName}
-                  amount={item.amount}
-                  category={item.category}
-                  description={item.description}
-                  setIsUpdate={setIsUpdate}
-                />
-              </li>
-            );
-          })}
-      </ul>
+          {!isReady && tempList && tempList.length === 0 && <p>Loading...</p>}
+          {isReady &&
+            tempList &&
+            tempList.length === 0 &&
+            chosenCategory === "" && <p>No Items added</p>}
+          {!isLoading &&
+            tempList &&
+            tempList.length === 0 &&
+            chosenCategory !== "" && <p>No Item Found</p>}
+          {!isLoading &&
+            tempList &&
+            tempList.map((item, index) => {
+              return (
+                <li
+                  key={index}
+                  style={{ listStyle: "none", paddingBottom: "1rem" }}
+                >
+                  <Item
+                    id={item._id}
+                    itemName={item.itemName}
+                    amount={item.amount}
+                    category={item.category}
+                    description={item.description}
+                    setIsUpdate={setIsUpdate}
+                  />
+                </li>
+              );
+            })}
+        </ul>
+      </Box>
     </Box>
   );
 };
