@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { categories } from "../../data/data";
-import Item from "../Item/Item";
+import Item from "../item/Item";
 import useItemsContext from "../../hooks/useItemsContext";
 import useAuthContext from "../../hooks/useAuthContext";
 import styles from "../list/ShoppingList.module.css";
