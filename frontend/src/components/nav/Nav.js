@@ -12,7 +12,7 @@ import { BsMoonStars, BsSun } from "react-icons/bs";
 import { BiLogIn } from "react-icons/bi";
 import { AiOutlineUser } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
-import UserMenu from "../Menu/UserMenu";
+import UserMenu from "../menu/UserMenu";
 import useAuthContext from "../../hooks/useAuthContext";
 import useAlertContext from "../../hooks/useAlertContext";
 

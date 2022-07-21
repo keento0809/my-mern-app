@@ -5,7 +5,7 @@ import LogoutAlert from "../components/Alert/LogoutAlert";
 import SignupAlert from "../components/Alert/SignupAlert";
 import SuccessAlert from "../components/Alert/SuccessAlert";
 import WarnAlert from "../components/Alert/WarnAlert";
-import Nav from "../components/Nav/Nav";
+import Nav from "../components/nav/Nav";
 
 const Layout = ({ children }) => {
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
