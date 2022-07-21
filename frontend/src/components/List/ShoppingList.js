@@ -11,7 +11,6 @@ const ShoppingList = () => {
   const [chosenCategory, setChosenCategory] = useState("");
   const [tempList, setTempList] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const { items, dispatch } = useItemsContext();
   const [isReady, setIsReady] = useState(false);
@@ -43,8 +42,6 @@ const ShoppingList = () => {
   const fetchItems = () => {
     setIsLoading(true);
     axios
-      // original
-      // .get("/items")
       .get(`/items/${currentUser["_id"]}`)
       .then((res) => {
         dispatch({ type: "SET_ITEMS", payload: res.data });
@@ -67,7 +64,6 @@ const ShoppingList = () => {
   }
 
   useEffect(() => {
-    // fetchItems();
     fetchingUser();
   }, []);
 
