@@ -116,11 +116,6 @@ const ShoppingList = () => {
       </Box>
       <Box overflow="scroll">
         <ul className={styles.listUl}>
-          {/* original */}
-          {/* {isLoading ||
-          (tempList && tempList.length === 0 && chosenCategory === "" && (
-            <p>Loading...</p>
-          ))} */}
           {!isReady && tempList && tempList.length === 0 && <p>Loading...</p>}
           {isReady &&
             tempList &&
