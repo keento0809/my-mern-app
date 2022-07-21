@@ -1,0 +1,23 @@
+.listUl {
+  padding-left: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .listUl {
+    max-height: 570px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .listUl {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .listUl > li {
+    flex-basis: 350px;
+  }
+}
