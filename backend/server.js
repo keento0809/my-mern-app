@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const ItemRoutes = require("./routers/ItemRouter");
 const AuthRoutes = require("./routers/AuthRouter");
 const UserRoutes = require("./routers/UserRouter");
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8080;
 
 // use express
 const app = express();

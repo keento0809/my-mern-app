@@ -3,11 +3,11 @@ import { categories } from "../../data/data";
 import Item from "../item/Item";
 import useItemsContext from "../../hooks/useItemsContext";
 import useAuthContext from "../../hooks/useAuthContext";
-import styles from "./List.module.css";
+import styles from "./Work.module.css";
 import axios from "axios";
 import { Select, Box, Text, useMediaQuery } from "@chakra-ui/react";
 
-const ShoppingList = () => {
+const Work = () => {
   const [chosenCategory, setChosenCategory] = useState("");
   const [tempList, setTempList] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -19,36 +19,6 @@ const ShoppingList = () => {
 
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
-
-  // const fetchingUser = () => {
-  //   const currentToken = localStorage.getItem("isLoggedIn");
-  //   if (currentToken) {
-  //     const config = {
-  //       headers: {
-  //         authToken: currentToken,
-  //       },
-  //     };
-  //     axios
-  //       .get("/user", config)
-  //       .then((res) => {
-  //         setCurrentUser(res.data);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error.message);
-  //       });
-  //   }
-  // };
-
-  // const fetchItems = () => {
-  //   setIsLoading(true);
-  //   axios
-  //     .get(`/items/${currentUser["_id"]}`)
-  //     .then((res) => {
-  //       dispatch({ type: "SET_ITEMS", payload: res.data });
-  //     })
-  //     .catch((error) => console.log(error.message));
-  //   setIsLoading(false);
-  // };
 
   function handleSetCategory(e) {
     setChosenCategory(e.target.value);
@@ -170,4 +140,4 @@ const ShoppingList = () => {
   );
 };
 
-export default ShoppingList;
+export default Work;

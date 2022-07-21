@@ -3,6 +3,7 @@ import Layout from "../Layout/Layout";
 import FormModal from "../components/modal/FormModal";
 import { Box, useMediaQuery } from "@chakra-ui/react";
 // import ShoppingList from "../components/list/shoppinglist";
+import Work from "../components/work/Work";
 
 const Home = () => {
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
@@ -15,6 +16,7 @@ const Home = () => {
       >
         <FormModal />
         {/* <ShoppingList /> */}
+        <Work />
       </Box>
     </Layout>
   );
