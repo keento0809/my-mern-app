@@ -63,7 +63,6 @@ const AddItemForm = ({ onClose }) => {
     axios
       // original
       // .post("/items", enteredInfo)
-      // test
       .post(`/items/${currentUser._id}`, enteredInfo)
       .then((res) => {
         dispatch({ type: "ADD_NEW_ITEM", payload: res.data });

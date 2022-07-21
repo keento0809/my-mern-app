@@ -73,7 +73,6 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
     axios
       .delete(`/items/${id}`)
       .then((res) => {
-        console.log(res);
         dispatch({ type: "DELETE_ITEM", payload: id });
         setWarnAlert(true);
         setTimeout(() => {
