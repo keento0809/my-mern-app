@@ -1,5 +1,5 @@
 import React from "react";
-import ShoppingList from "../components/List/ShoppingList";
+import ShoppingList from "../components/list/ShoppingList";
 import Layout from "../Layout/Layout";
 import FormModal from "../components/modal/FormModal";
 import { Box, useMediaQuery } from "@chakra-ui/react";
