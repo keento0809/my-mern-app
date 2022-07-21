@@ -7,7 +7,7 @@ import styles from "./ShoppingList.module.css";
 import axios from "axios";
 import { Select, Box, Text, useMediaQuery } from "@chakra-ui/react";
 
-const ShoppingList = () => {
+const Shoplist = () => {
   const [chosenCategory, setChosenCategory] = useState("");
   const [tempList, setTempList] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -170,4 +170,4 @@ const ShoppingList = () => {
   );
 };
 
-export default ShoppingList;
+export default Shoplist;
