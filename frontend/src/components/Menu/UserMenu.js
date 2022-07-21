@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/useAuthContext";
 import useAlertContext from "../../hooks/useAlertContext";
 
-const Usermenu = () => {
+const UserMenu = () => {
   const { setIsLoggedIn, setCurrentUser } = useAuthContext();
   const { setLogoutAlert } = useAlertContext();
 
@@ -50,4 +50,4 @@ const Usermenu = () => {
   );
 };
 
-export default Usermenu;
+export default UserMenu;
