@@ -14,7 +14,7 @@ const Home = () => {
         justifyContent={isLargerThan1280 ? "flex-start" : "space-between"}
       >
         <FormModal />
-        <Shoplist />
+        {/* <Shoplist /> */}
       </Box>
     </Layout>
   );
