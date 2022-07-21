@@ -1,7 +1,7 @@
 import React from "react";
 import ShoppingList from "../components/List/ShoppingList";
 import Layout from "../Layout/Layout";
-import FormModal from "../components/Modal/FormModal";
+import FormModal from "../components/modal/FormModal";
 import { Box, useMediaQuery } from "@chakra-ui/react";
 
 const Home = () => {
