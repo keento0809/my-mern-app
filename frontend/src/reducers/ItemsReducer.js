@@ -29,7 +29,6 @@ const ItemsReducer = (state, action) => {
       const updatedItems = state.items.filter(
         (item) => item._id !== action.payload
       );
-      console.log(updatedItems, action.payload);
       return {
         items: updatedItems,
       };
