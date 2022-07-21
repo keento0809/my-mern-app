@@ -20,7 +20,51 @@ const Shoppinglist = () => {
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
-  const fetchingUser = () => {
+  // const fetchingUser = () => {
+  //   const currentToken = localStorage.getItem("isLoggedIn");
+  //   if (currentToken) {
+  //     const config = {
+  //       headers: {
+  //         authToken: currentToken,
+  //       },
+  //     };
+  //     axios
+  //       .get("/user", config)
+  //       .then((res) => {
+  //         setCurrentUser(res.data);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error.message);
+  //       });
+  //   }
+  // };
+
+  // const fetchItems = () => {
+  //   setIsLoading(true);
+  //   axios
+  //     .get(`/items/${currentUser["_id"]}`)
+  //     .then((res) => {
+  //       dispatch({ type: "SET_ITEMS", payload: res.data });
+  //     })
+  //     .catch((error) => console.log(error.message));
+  //   setIsLoading(false);
+  // };
+
+  function handleSetCategory(e) {
+    setChosenCategory(e.target.value);
+    if (items.length > 0 && e.target.value === "") {
+      setTempList(items);
+    } else {
+      const selectedCategory = e.target.value;
+      const sortedItems = items.filter(
+        (item) => item.category === selectedCategory
+      );
+      setTempList(sortedItems);
+    }
+  }
+
+  useEffect(() => {
+    // fetchingUser();
     const currentToken = localStorage.getItem("isLoggedIn");
     if (currentToken) {
       const config = {
@@ -37,9 +81,10 @@ const Shoppinglist = () => {
           console.log(error.message);
         });
     }
-  };
+  }, [setCurrentUser]);
 
-  const fetchItems = () => {
+  useEffect(() => {
+    // fetchItems();
     setIsLoading(true);
     axios
       .get(`/items/${currentUser["_id"]}`)
@@ -48,32 +93,11 @@ const Shoppinglist = () => {
       })
       .catch((error) => console.log(error.message));
     setIsLoading(false);
-  };
-
-  function handleSetCategory(e) {
-    setChosenCategory(e.target.value);
-    if (items.length > 0 && e.target.value === "") {
-      setTempList(items);
-    } else {
-      const selectedCategory = e.target.value;
-      const sortedItems = items.filter(
-        (item) => item.category === selectedCategory
-      );
-      setTempList(sortedItems);
-    }
-  }
-
-  useEffect(() => {
-    fetchingUser();
-  }, []);
-
-  useEffect(() => {
-    fetchItems();
-  }, [currentUser]);
+  }, [currentUser, dispatch]);
 
   useEffect(() => {
     setTempList(items);
-  }, [items.length, isUpdate]);
+  }, [items, isUpdate]);
 
   useEffect(() => {
     tempList && tempList.length === 0 && setIsReady(true);
