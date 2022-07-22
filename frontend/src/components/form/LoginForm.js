@@ -36,7 +36,7 @@ const LoginForm = () => {
 
   const fetchPostRequest = (obj) => {
     axios
-      .post("https://shoppinglistmernapp.herokuapp.com/auth/login", obj)
+      .post("/auth/login", obj)
       .then((res) => {
         navigate("/home");
         setFormInput({
@@ -50,6 +50,7 @@ const LoginForm = () => {
         setTimeout(() => {
           setLoginAlert(false);
         }, 2000);
+        res.json({ msg: "ok, it works" });
       })
       .catch((error) => {
         setError(error.message);
