@@ -21,6 +21,7 @@ const Hero = () => {
           alignItems="flex-start"
           zIndex="10"
           px="40px"
+          maxWidth="414px"
         >
           <Box pb={8}>
             <Text fontSize="3xl" fontWeight="bold" color="black">

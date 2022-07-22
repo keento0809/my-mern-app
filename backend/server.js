@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const ItemRoutes = require("./routers/ItemRouter");
 const AuthRoutes = require("./routers/AuthRouter");
 const UserRoutes = require("./routers/UserRouter");
-const port = process.env.PORT || 8080;
+const port = process.env.PORT;
 
 // use express
 const app = express();
@@ -14,6 +14,11 @@ app.use(express.json());
 app.use("/items", ItemRoutes);
 app.use("/auth", AuthRoutes);
 app.use("/user", UserRoutes);
+
+// test
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
 
 // connect to MongoDB
 connectDB();

@@ -1,5 +1,5 @@
 {
-  "proxy": "http://localhost:8080/",
+  "proxy": "https://shoppinglistmernapp.herokuapp.com/",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
