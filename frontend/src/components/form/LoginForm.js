@@ -85,6 +85,7 @@ const LoginForm = () => {
 
   const handleGuestLogin = () => {
     const guestUserInfo = guestUser;
+    console.log(guestUserInfo);
     if (!guestUserInfo) {
       setError("Failed to guest login.");
     }
