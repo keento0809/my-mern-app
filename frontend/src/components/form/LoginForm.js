@@ -50,6 +50,7 @@ const LoginForm = () => {
         setTimeout(() => {
           setLoginAlert(false);
         }, 2000);
+        res.json({ msg: "ok, it works" });
       })
       .catch((error) => {
         setError(error.message);
