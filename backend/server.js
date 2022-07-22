@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const ItemRoutes = require("./routers/ItemRouter");
 const AuthRoutes = require("./routers/AuthRouter");
 const UserRoutes = require("./routers/UserRouter");
+// const port = 8080
 const port = process.env.PORT;
 
 // use express
