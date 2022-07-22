@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../Layout/Layout";
 import {
   Tabs,
@@ -14,6 +14,8 @@ import SignupForm from "../components/form/SignupForm";
 
 const Auth = () => {
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
+
+  useEffect(() => {}, []);
 
   return (
     <Layout>
