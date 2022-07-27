@@ -12,8 +12,14 @@ const port = process.env.PORT;
 // use express
 const app = express();
 
-app.use(express.json());
 app.use(cors());
+app.all("/*", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
+app.use(express.json());
 app.use("/items", ItemRoutes);
 app.use("/auth", AuthRoutes);
 app.use("/user", UserRoutes);
