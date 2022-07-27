@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 const connectDB = require("./config/db");
 const mongoose = require("mongoose");
 const ItemRoutes = require("./routers/ItemRouter");
@@ -11,6 +12,7 @@ const port = process.env.PORT;
 // use express
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use("/items", ItemRoutes);
 app.use("/auth", AuthRoutes);
