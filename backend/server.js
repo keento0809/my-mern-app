@@ -12,7 +12,14 @@ const port = process.env.PORT;
 // use express
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://shoppinglistmernapp.herokuapp.com/",
+      "https://shopping-list-mern-app.vercel.app/",
+    ],
+  })
+);
 app.options("*", cors());
 app.use(express.json());
 app.use("/items", ItemRoutes);
