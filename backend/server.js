@@ -12,7 +12,11 @@ const port = process.env.PORT;
 // use express
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://shoppinglistmernapp.herokuapp.com/",
+  })
+);
 app.use(express.json());
 app.use("/items", ItemRoutes);
 app.use("/auth", AuthRoutes);
