@@ -34,7 +34,6 @@ const Work = () => {
   }
 
   useEffect(() => {
-    // fetchingUser();
     const currentToken = localStorage.getItem("isLoggedIn");
     if (currentToken) {
       const config = {
@@ -54,11 +53,11 @@ const Work = () => {
   }, [setCurrentUser]);
 
   useEffect(() => {
-    // fetchItems();
     setIsLoading(true);
     axios
       .get(`/items/${currentUser["_id"]}`)
       .then((res) => {
+        console.log(res.data);
         dispatch({ type: "SET_ITEMS", payload: res.data });
       })
       .catch((error) => console.log(error.message));
