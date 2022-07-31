@@ -55,9 +55,7 @@ const UserMenu = () => {
             <MenuItem>
               <Link to={`/profile`}>Profile</Link>
             </MenuItem>
-            <MenuItem>
-              <span onClick={handleResetList}>Reset</span>
-            </MenuItem>
+            <MenuItem onClick={handleResetList}>Reset</MenuItem>
             {/* temporary */}
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </MenuGroup>
