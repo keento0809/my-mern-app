@@ -33,6 +33,11 @@ const ItemsReducer = (state, action) => {
         items: updatedItems,
       };
     }
+    case "RESET_ITEM": {
+      return {
+        items: [],
+      };
+    }
     default: {
       return state;
     }

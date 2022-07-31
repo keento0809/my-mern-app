@@ -2,7 +2,6 @@ import React from "react";
 import Layout from "../Layout/Layout";
 import FormModal from "../components/modal/FormModal";
 import { Box, useMediaQuery } from "@chakra-ui/react";
-// import ShoppingList from "../components/list/shoppinglist";
 import Work from "../components/work/Work";
 
 const Home = () => {
@@ -15,7 +14,6 @@ const Home = () => {
         justifyContent={isLargerThan1280 ? "flex-start" : "space-between"}
       >
         <FormModal />
-        {/* <ShoppingList /> */}
         <Work />
       </Box>
     </Layout>

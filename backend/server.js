@@ -9,18 +9,13 @@ const UserRoutes = require("./routers/UserRouter");
 // const port = 8080;
 const port = process.env.PORT;
 
+// connect to MongoDB
+connectDB();
+
 // use express
 const app = express();
 
-app.use(
-  cors({
-    origin: [
-      "https://shoppinglistmernapp.herokuapp.com/",
-      "https://shopping-list-mern-app.vercel.app/",
-    ],
-  })
-);
-app.options("*", cors());
+app.use(cors());
 app.use(express.json());
 app.use("/items", ItemRoutes);
 app.use("/auth", AuthRoutes);
@@ -30,9 +25,6 @@ app.use("/user", UserRoutes);
 app.get("/", (req, res) => {
   res.send("Hello");
 });
-
-// connect to MongoDB
-connectDB();
 
 app.listen(port, () => {
   console.log(`Server listening on ${port}`);
