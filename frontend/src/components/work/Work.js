@@ -42,7 +42,7 @@ const Work = () => {
         },
       };
       axios
-        .get("/user", config)
+        .get("https://shoppinglistmernapp.herokuapp.com/user", config)
         .then((res) => {
           console.log(res.data);
           setCurrentUser(res.data);

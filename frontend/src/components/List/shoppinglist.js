@@ -73,7 +73,7 @@ const ShoppingList = () => {
         },
       };
       axios
-        .get("/user", config)
+        .get("https://shoppinglistmernapp.herokuapp.com/user", config)
         .then((res) => {
           setCurrentUser(res.data);
         })
