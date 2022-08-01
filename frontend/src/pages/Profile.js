@@ -9,6 +9,7 @@ import axios from "axios";
 
 const Profile = () => {
   const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { items } = useItemsContext();
   const { currentUser, setCurrentUser, setIsLoggedIn } = useAuthContext();
@@ -29,6 +30,7 @@ const Profile = () => {
   useEffect(() => {
     const currentToken = localStorage.getItem("isLoggedIn");
     if (currentToken) {
+      setIsLoading(true);
       const config = {
         headers: {
           authToken: currentToken,
@@ -42,6 +44,7 @@ const Profile = () => {
         .catch((error) => {
           setError(error.message);
         });
+      setIsLoading(false);
     } else {
       setError("Failed to fetch user data.");
     }
@@ -66,18 +69,26 @@ const Profile = () => {
               : "2px 4px 4px 6px #161b25"
           }
           borderRadius="12px"
+          minHeight="285px"
           maxWidth="400px"
           margin="0 auto"
         >
-          <Text fontSize="lg">
-            Welcome, <strong>{currentUser.username}</strong>!
-          </Text>
-          <Text fontSize="lg" pt={6}>
-            Email: {currentUser.email}
-          </Text>
-          <Text fontSize="lg" pt={3}>
-            Items: <strong>{items.length}</strong> items on the list.
-          </Text>
+          {isLoading && <Text fontSize="lg">Loading...</Text>}
+          {!isLoading && (
+            <Text fontSize="lg">
+              Welcome, <strong>{currentUser.username}</strong>!
+            </Text>
+          )}
+          {!isLoading && (
+            <Text fontSize="lg" pt={6}>
+              Email: {currentUser.email}
+            </Text>
+          )}
+          {!isLoading && (
+            <Text fontSize="lg" pt={3}>
+              Items: <strong>{items.length}</strong> items on the list.
+            </Text>
+          )}
           <Button
             mt={16}
             bgColor="inherit"

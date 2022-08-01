@@ -63,7 +63,10 @@ const AddItemForm = ({ onClose }) => {
     axios
       // original
       // .post("/items", enteredInfo)
-      .post(`/items/${currentUser._id}`, enteredInfo)
+      .post(
+        `https://shoppinglistmernapp.herokuapp.com/items/${currentUser._id}`,
+        enteredInfo
+      )
       .then((res) => {
         dispatch({ type: "ADD_NEW_ITEM", payload: res.data });
         // test
