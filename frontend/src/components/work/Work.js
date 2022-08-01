@@ -44,6 +44,7 @@ const Work = () => {
       axios
         .get("/user", config)
         .then((res) => {
+          console.log(res.data);
           setCurrentUser(res.data);
         })
         .catch((error) => {
