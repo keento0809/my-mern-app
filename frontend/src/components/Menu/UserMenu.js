@@ -22,7 +22,7 @@ const UserMenu = () => {
 
   const handleResetList = () => {
     axios
-      .delete("/items")
+      .delete("https://shoppinglistmernapp.herokuapp.com/items")
       .then((res) => {
         console.log(res);
         dispatch({ type: "RESET_USER" });
@@ -56,7 +56,6 @@ const UserMenu = () => {
               <Link to={`/profile`}>Profile</Link>
             </MenuItem>
             <MenuItem onClick={handleResetList}>Reset</MenuItem>
-            {/* temporary */}
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </MenuGroup>
         </MenuList>
