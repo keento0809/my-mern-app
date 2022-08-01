@@ -37,7 +37,7 @@ const SignupForm = () => {
 
   const fetchPostRequest = (obj) => {
     axios
-      .post("/auth/signup", obj)
+      .post("https://shoppinglistmernapp.herokuapp.com/auth/signup", obj)
       .then((res) => {
         navigate("/home");
         setFormInput({

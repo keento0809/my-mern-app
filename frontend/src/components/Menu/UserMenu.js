@@ -22,7 +22,7 @@ const UserMenu = () => {
 
   const handleResetList = () => {
     axios
-      .delete("/items")
+      .delete("https://shoppinglistmernapp.herokuapp.com/items")
       .then((res) => {
         console.log(res);
         dispatch({ type: "RESET_USER" });

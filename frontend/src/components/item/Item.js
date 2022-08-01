@@ -58,7 +58,10 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
       return;
     }
     axios
-      .patch(`/items/${id}`, enteredInfo)
+      .patch(
+        `https://shoppinglistmernapp.herokuapp.com/items/${id}`,
+        enteredInfo
+      )
       .then((res) => {
         dispatch({ type: "UPDATE_ITEM", payload: enteredInfo });
         setIsUpdate(true);
@@ -71,7 +74,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
 
   const handleDeleteItem = () => {
     axios
-      .delete(`/items/${id}`)
+      .delete(`https://shoppinglistmernapp.herokuapp.com/items/${id}`)
       .then((res) => {
         dispatch({ type: "DELETE_ITEM", payload: id });
         setWarnAlert(true);
