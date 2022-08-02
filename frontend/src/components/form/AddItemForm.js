@@ -69,8 +69,12 @@ const AddItemForm = ({ onClose }) => {
       )
       .then((res) => {
         dispatch({ type: "ADD_NEW_ITEM", payload: res.data });
-        // test
-        // setChosenCategory("Select");
+        setItemInput({
+          itemName: "",
+          itemAmount: "",
+          itemCategory: "",
+          itemDescription: "",
+        });
       })
       .catch((error) => console.log(error.message));
 
