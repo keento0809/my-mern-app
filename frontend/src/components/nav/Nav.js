@@ -12,7 +12,6 @@ import { BsMoonStars, BsSun } from "react-icons/bs";
 import { BiLogIn } from "react-icons/bi";
 import { AiOutlineUser } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
-// import UserMenu from "../menu/usermenu";
 import Side from "../side/Side";
 import useAuthContext from "../../hooks/useAuthContext";
 import useAlertContext from "../../hooks/useAlertContext";
@@ -29,7 +28,9 @@ const Nav = () => {
     setIsLoggedIn(false);
     setCurrentUser({});
     localStorage.removeItem("isLoggedIn");
-    setLogoutAlert(true);
+    setTimeout(() => {
+      setLogoutAlert(true);
+    }, 200);
     setTimeout(() => {
       setLogoutAlert(false);
     }, 2000);
@@ -108,7 +109,7 @@ const Nav = () => {
               <Box>
                 {isLoggedIn && (
                   <span onClick={handleLogout}>
-                    <FiLogOut />
+                    <FiLogOut cursor="pointer" />
                   </span>
                 )}
               </Box>

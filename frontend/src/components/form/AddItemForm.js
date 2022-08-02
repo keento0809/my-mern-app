@@ -61,21 +61,23 @@ const AddItemForm = ({ onClose }) => {
     };
 
     axios
-      // original
-      // .post("/items", enteredInfo)
       .post(
         `https://shoppinglistmernapp.herokuapp.com/items/${currentUser._id}`,
         enteredInfo
       )
       .then((res) => {
         dispatch({ type: "ADD_NEW_ITEM", payload: res.data });
-        // test
-        // setChosenCategory("Select");
+        setItemInput({
+          itemName: "",
+          itemAmount: "",
+          itemCategory: "",
+          itemDescription: "",
+        });
       })
       .catch((error) => console.log(error.message));
-
-    setAlert(true);
-    // test
+    setTimeout(() => {
+      setAlert(true);
+    }, 200);
     onClose();
     setTimeout(() => {
       setAlert(false);
