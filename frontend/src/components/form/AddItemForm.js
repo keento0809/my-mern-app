@@ -61,8 +61,6 @@ const AddItemForm = ({ onClose }) => {
     };
 
     axios
-      // original
-      // .post("/items", enteredInfo)
       .post(
         `https://shoppinglistmernapp.herokuapp.com/items/${currentUser._id}`,
         enteredInfo
@@ -77,9 +75,9 @@ const AddItemForm = ({ onClose }) => {
         });
       })
       .catch((error) => console.log(error.message));
-
-    setAlert(true);
-    // test
+    setTimeout(() => {
+      setAlert(true);
+    }, 200);
     onClose();
     setTimeout(() => {
       setAlert(false);

@@ -28,7 +28,9 @@ const Nav = () => {
     setIsLoggedIn(false);
     setCurrentUser({});
     localStorage.removeItem("isLoggedIn");
-    setLogoutAlert(true);
+    setTimeout(() => {
+      setLogoutAlert(true);
+    }, 200);
     setTimeout(() => {
       setLogoutAlert(false);
     }, 2000);
