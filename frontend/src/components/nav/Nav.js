@@ -108,8 +108,8 @@ const Nav = () => {
               )}
               <Box>
                 {isLoggedIn && (
-                  <span onClick={handleLogout} cursor="pointer">
-                    <FiLogOut />
+                  <span onClick={handleLogout}>
+                    <FiLogOut cursor="pointer" />
                   </span>
                 )}
               </Box>
