@@ -8,9 +8,9 @@ const ItemsReducer = (state, action) => {
       };
     }
     case "ADD_NEW_ITEM": {
-      let newItems = [...state.items, action.payload];
+      const newItems = [...state.items, action.payload];
       return {
-        items: [action.payload, ...state.items],
+        items: newItems,
       };
     }
     case "UPDATE_ITEM": {
@@ -31,11 +31,6 @@ const ItemsReducer = (state, action) => {
       );
       return {
         items: updatedItems,
-      };
-    }
-    case "RESET_ITEM": {
-      return {
-        items: [],
       };
     }
     default: {
