@@ -67,6 +67,7 @@ const AddItemForm = ({ onClose }) => {
       )
       .then((res) => {
         dispatch({ type: "ADD_NEW_ITEM", payload: res.data });
+        setIsSubmit(false);
         setItemInput({
           itemName: "",
           itemAmount: "",
