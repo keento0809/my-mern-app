@@ -34,7 +34,7 @@ const Work = () => {
 
   function getItemsFromDB() {
     axios
-      .get(`/items/${currUserId}`)
+      .get(`https://shoppinglistmernapp.herokuapp.com/items/${currUserId}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: "SET_ITEMS", payload: res.data });
