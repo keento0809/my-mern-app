@@ -13,12 +13,11 @@ const Work = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const { items, dispatch } = useItemsContext();
-  const [isReady, setIsReady] = useState(false);
-
-  const { currentUser, setCurrentUser } = useAuthContext();
 
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
+
+  const currUserId = localStorage.getItem("currId");
 
   function handleSetCategory(e) {
     setChosenCategory(e.target.value);
@@ -33,47 +32,20 @@ const Work = () => {
     }
   }
 
-  useEffect(() => {
-    const currentToken = localStorage.getItem("isLoggedIn");
-    if (currentToken) {
-      const config = {
-        headers: {
-          authToken: currentToken,
-        },
-      };
-      axios
-        .get("https://shoppinglistmernapp.herokuapp.com/user", config)
-        .then((res) => {
-          console.log(res.data);
-          setCurrentUser(res.data);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-    }
-  }, [setCurrentUser]);
-
-  useEffect(() => {
-    setIsLoading(true);
+  function getItemsFromDB() {
     axios
-      .get(
-        `https://shoppinglistmernapp.herokuapp.com/items/${currentUser["_id"]}`
-      )
+      .get(`/items/${currUserId}`)
       .then((res) => {
         console.log(res.data);
         dispatch({ type: "SET_ITEMS", payload: res.data });
+        setTempList(res.data);
       })
       .catch((error) => console.log(error.message));
-    setIsLoading(false);
-  }, [currentUser, dispatch]);
+  }
 
   useEffect(() => {
-    setTempList(items);
-  }, [items, isUpdate]);
-
-  useEffect(() => {
-    tempList && tempList.length === 0 && setIsReady(true);
-  }, [tempList]);
+    getItemsFromDB();
+  }, [items.length]);
 
   return (
     <Box
@@ -108,11 +80,8 @@ const Work = () => {
       </Box>
       <Box overflow="scroll">
         <ul className={styles.listUl}>
-          {!isReady && tempList && tempList.length === 0 && <p>Loading...</p>}
-          {isReady &&
-            tempList &&
-            tempList.length === 0 &&
-            chosenCategory === "" && <p>No Items added</p>}
+          {tempList === undefined && <p>Loading...</p>}
+          {tempList === "" && chosenCategory === "" && <p>No Item added</p>}
           {!isLoading &&
             tempList &&
             tempList.length === 0 &&

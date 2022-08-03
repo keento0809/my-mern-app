@@ -37,8 +37,11 @@ const SignupForm = () => {
 
   const fetchPostRequest = (obj) => {
     axios
-      .post("https://shoppinglistmernapp.herokuapp.com/auth/signup", obj)
+      .post("/auth/signup", obj)
       .then((res) => {
+        console.log(res.data);
+        localStorage.setItem("isLoggedIn", res.data.token);
+        localStorage.setItem("currId", res.data._id);
         navigate("/home");
         setFormInput({
           username: "",
@@ -48,7 +51,6 @@ const SignupForm = () => {
         });
         setSignupAlert(true);
         setIsLoggedIn(true);
-        localStorage.setItem("isLoggedIn", res.data.token);
         setTimeout(() => {
           setSignupAlert(false);
         }, 2000);
