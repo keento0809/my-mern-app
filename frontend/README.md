@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# ShoppingList-Mern-App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A application of shopping list jotting down items to buy, built by MERN stack tools.
 
-## Available Scripts
+## Demo link:
 
-In the project directory, you can run:
+Access this project at [ShoppingList-Mern-App](https://shopping-list-mern-app.vercel.app/)!
 
-### `npm start`
+## Table of Content:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [About The App](#about-the-app)
+- [Screenshots](#screenshots)
+- [Technologies](#technologies)
+- [Setup](#setup)
+- [Approach](#approach)
+- [Status](#status)
+- [Credits](#credits)
+- [License](#license)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## About The App
 
-### `npm test`
+[ShoppingList-Mern-App](https://shopping-list-mern-app.vercel.app/) is my personal project focusing on connecting React application to the backend side (the server and database) to make this application MERN stack (MERN stands for MongoDB, Express, React.js, and Node.js). Instead of using cloud services like firebase, I've built the server and database from scratch. In terms of the connection between server and database, I introduced Mongoose, a library for MongoDB, making it easier and faster. Also, this application has a simple CRUD operation, adding, editing, and deleting items from the list powered by userReducer hook.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Users can create accounts to use the contents, viewing shopping list, adding items to the list, editing and deleting items from the list (guest login is also available for checking what users can do on this application). Also, users are able to toggle screen mode both light mode and dark mode clicking the icon on nav bar.
 
-### `npm run build`
+data of users and items are stored dynamically once new user is logged in or signed up, or users manipulate items on the shopping.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Screenshots
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![ShoppingList-Mern-App](https://user-images.githubusercontent.com/65790344/183144650-c7279ba3-6c89-4507-8da2-52e95b4d4ad3.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Technologies
 
-### `npm run eject`
+- `React` - version 18.1.0
+- `Express` - version 4.18.1
+- `Mongoose` - version 6.4.1
+- `Chakra UI` - version 2.2.1
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Setup
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Download or clone the repository
+- Run `npm install`
+- Run `npm run dev` to start running the app
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Approach
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Made this application MERN-stack utilizing React.js, Express.js, Node.js, and MongoDB
+- Introducing user authentication from scratch with hashed password taking advantage of bcrypt, a javascript library to create a hashed password, and token powered by JWT, another library for generating session token.
+- Styled beautifully with Chakra-UI, the component library for React application
+- Users can sort items on the shopping list by the category.
+- Having the basic CRUD operation implemented with back-end side (MongoDB as the database and Express.js and Node.js as the server to send requests from the client side).
 
-## Learn More
+## Status
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[ShoppingList-Mern-App](https://shopping-list-mern-app.vercel.app/) is still in progress to improve (fixing the design of Hero page a little).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Credits
 
-### Code Splitting
+- [Kento Honda](https://github.com/keento0809)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## License
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+©︎KENTO HONDA 2022. All Rights Reserved.
