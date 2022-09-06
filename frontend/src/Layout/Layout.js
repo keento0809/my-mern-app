@@ -6,12 +6,16 @@ import SignupAlert from "../components/Alert/SignupAlert";
 import SuccessAlert from "../components/Alert/SuccessAlert";
 import WarnAlert from "../components/Alert/WarnAlert";
 import Nav from "../components/nav/Nav";
+import LoadingModal from "../components/modal/LoadingModal";
+import useAuthContext from "../hooks/useAuthContext";
 
 const Layout = ({ children }) => {
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
+  const { isLoading } = useAuthContext();
   return (
     <>
+      {isLoading && <LoadingModal />}
       <Nav />
       <Container
         maxWidth={

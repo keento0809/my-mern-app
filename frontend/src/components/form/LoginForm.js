@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import useAuthContext from "../../hooks/useAuthContext";
 import { guestUser } from "../../data/data";
+import LoadingModal from "../modal/LoadingModal";
 
 const LoginForm = () => {
   const [formInput, setFormInput] = useState({
@@ -23,7 +24,7 @@ const LoginForm = () => {
   const [error, setError] = useState();
 
   const { setLoginAlert } = useAlertContext();
-  const { setIsLoggedIn, setCurrentUser } = useAuthContext();
+  const { setIsLoggedIn, setCurrentUser, setIsLoading } = useAuthContext();
 
   const navigate = useNavigate();
 
@@ -48,6 +49,7 @@ const LoginForm = () => {
         setLoginAlert(true);
         setIsLoggedIn(true);
         setCurrentUser(res.data);
+        setIsLoading(false);
         setTimeout(() => {
           setLoginAlert(false);
         }, 2000);
@@ -61,6 +63,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     setIsSubmit(true);
 
     if (formInput.email === "" || formInput.password === "") return;
@@ -68,11 +71,7 @@ const LoginForm = () => {
     const regexEmail = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;
     const regex = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
 
-    // validation
-    if (
-      !formInput.email.match(regexEmail) === ""
-      // !formInput.password.match(regex)
-    ) {
+    if (!formInput.email.match(regexEmail) === "") {
       alert("Invalid Credential.");
       return;
     }
@@ -83,11 +82,13 @@ const LoginForm = () => {
     };
 
     fetchPostRequest(enteredInfo);
+    setIsLoading(false);
   };
 
   const handleGuestLogin = () => {
+    setIsLoading(true);
     const guestUserInfo = guestUser;
-    console.log(guestUserInfo);
+    console.log("ゲストログインでっせ");
     if (!guestUserInfo) {
       setError("Failed to guest login.");
     }

@@ -10,11 +10,19 @@ const initialState = localStorage.getItem("isLoggedIn")
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(initialState);
+  const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, currentUser, setIsLoggedIn, setCurrentUser }}
+      value={{
+        isLoggedIn,
+        currentUser,
+        isLoading,
+        setIsLoggedIn,
+        setCurrentUser,
+        setIsLoading,
+      }}
     >
       {children}
     </AuthContext.Provider>
