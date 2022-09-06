@@ -36,7 +36,6 @@ const Work = () => {
     axios
       .get(`https://shoppinglistmernapp.herokuapp.com/items/${currUserId}`)
       .then((res) => {
-        console.log(res.data);
         dispatch({ type: "SET_ITEMS", payload: res.data });
         setTempList(res.data);
       })

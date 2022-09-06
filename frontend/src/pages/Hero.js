@@ -3,11 +3,13 @@ import useAuthContext from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
 import { heroImg } from "../data/data";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import LoadingModal from "../components/modal/LoadingModal";
 
 const Hero = () => {
-  const { isLoggedIn } = useAuthContext();
+  const { isLoggedIn, isLoading } = useAuthContext();
   return (
     <Box overflow="hidden">
+      {isLoading && <LoadingModal />}
       <Flex
         bgImage={heroImg}
         minHeight="100vh"
