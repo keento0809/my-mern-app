@@ -156,7 +156,7 @@ const AddItemForm = ({ onClose }) => {
         </FormControl>
         <FormControl>
           <FormLabel htmlFor="price" pt={4}>
-            Description
+            Note
           </FormLabel>
           <Textarea
             name="itemDescription"

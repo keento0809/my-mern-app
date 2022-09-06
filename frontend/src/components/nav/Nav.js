@@ -6,6 +6,7 @@ import {
   Box,
   useColorMode,
   useMediaQuery,
+  Tooltip,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { BsMoonStars, BsSun } from "react-icons/bs";
@@ -55,7 +56,11 @@ const Nav = () => {
               {isLoggedIn && <Side />}
               {!isLoggedIn && (
                 <Link to="/auth">
-                  <BiLogIn />
+                  <Tooltip label="Login">
+                    <span>
+                      <BiLogIn />
+                    </span>
+                  </Tooltip>
                 </Link>
               )}
             </Flex>
@@ -101,27 +106,43 @@ const Nav = () => {
               {isLoggedIn && (
                 <Flex justifyContent="space-between" textAlign="center">
                   <Link to="/profile">
-                    <AiOutlineUser />
+                    <Tooltip hasArrow label="Profile">
+                      <span>
+                        <AiOutlineUser />
+                      </span>
+                    </Tooltip>
                   </Link>
                 </Flex>
               )}
               <Box>
                 {isLoggedIn && (
                   <span onClick={handleLogout}>
-                    <FiLogOut cursor="pointer" />
+                    <Tooltip hasArrow label="Logout">
+                      <span>
+                        <FiLogOut cursor="pointer" />
+                      </span>
+                    </Tooltip>
                   </span>
                 )}
               </Box>
               <Flex justifyContent="center" textAlign="center">
                 {colorMode === "light" ? (
-                  <BsMoonStars onClick={toggleColorMode} cursor="pointer" />
+                  <Tooltip hasArrow label="Dark">
+                    <span>
+                      <BsMoonStars onClick={toggleColorMode} cursor="pointer" />
+                    </span>
+                  </Tooltip>
                 ) : (
-                  <BsSun
-                    onClick={toggleColorMode}
-                    cursor="pointer"
-                    width="24px"
-                    height="24px"
-                  />
+                  <Tooltip hasArrow label="Light">
+                    <span>
+                      <BsSun
+                        onClick={toggleColorMode}
+                        cursor="pointer"
+                        width="24px"
+                        height="24px"
+                      />
+                    </span>
+                  </Tooltip>
                 )}
               </Flex>
             </Flex>
