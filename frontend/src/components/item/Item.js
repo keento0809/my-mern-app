@@ -175,7 +175,6 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
               : "orange.300"
           }
         >
-          Name:{" "}
           {isEditing && val === "NAME" ? (
             <Input
               ml={2}
@@ -184,7 +183,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
               placeholder={itemName}
             />
           ) : (
-            itemName
+            <Box fontSize="20px">{itemName}</Box>
           )}
         </Flex>
         <Button
