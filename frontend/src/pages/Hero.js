@@ -26,10 +26,22 @@ const Hero = () => {
           maxWidth="414px"
         >
           <Box pb={8}>
-            <Text fontSize="3xl" fontWeight="bold" color="black">
+            <Text
+              fontSize="3xl"
+              fontWeight="bold"
+              color="black"
+              textShadow="3px 3px 4px #b6adad"
+              // lineHeight=""
+            >
               My Shopping List
             </Text>
-            <Text fontSize="lg" color="black">
+            <Text
+              fontSize="lg"
+              color="black"
+              fontWeight={500}
+              lineHeight="20px"
+              textShadow="3px 3px 4px #b6adad"
+            >
               Memorize items not to miss anything when going shopping
             </Text>
           </Box>
@@ -38,6 +50,7 @@ const Hero = () => {
             border="1px solid"
             borderColor="pink.300"
             bgColor="pink.100"
+            _hover={{ bg: "#f8a0a0" }}
           >
             <Link to={isLoggedIn ? "/home" : "/auth"}>Get started</Link>
           </Button>
