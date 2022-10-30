@@ -110,7 +110,7 @@ const ShoppingList = () => {
       flex={1}
       maxWidth={
         isLargerThan1024 && !isLargerThan1280
-          ? "436px"
+          ? "350px"
           : isLargerThan1024 && isLargerThan1280
           ? ""
           : ""
@@ -118,14 +118,16 @@ const ShoppingList = () => {
       width={isLargerThan1280 && "100%"}
     >
       <Box className="" py={8}>
-        <Text pb={2}>Filtered by: </Text>
+        <Text pb={2} fontSize={isLargerThan1024 && "md"}>
+          Filtered by:{" "}
+        </Text>
         <Select
           focusBorderColor="pink.100"
           onChange={handleSetCategory}
           name=""
           id="category"
           placeholder="Select"
-          maxWidth={isLargerThan1280 && "350px"}
+          maxWidth={isLargerThan1280 && "300px"}
         >
           {categories.map((category, index) => {
             return (

@@ -85,21 +85,21 @@ const AddItemForm = ({ onClose }) => {
     }, 2000);
   };
   return (
-    <Box pt={6} maxWidth={isLargerThan1024 && "436px"}>
+    <Box pt={6} maxWidth={isLargerThan1024 && "380px"}>
       <form
         onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column" }}
       >
         <FormControl isInvalid={isSubmit && itemInput.itemName === ""}>
-          <FormLabel htmlFor="itemName">ItemName</FormLabel>
+          <FormLabel htmlFor="itemName" fontSize={isLargerThan1024 && "sm"}>
+            ItemName
+          </FormLabel>
           <Input
             name="itemName"
             px={4}
             py={1}
             focusBorderColor="pink.100"
             value={itemInput.itemName}
-            // original
-            // onChange={handleCheckValue}
             onChange={handleChange}
             id="itemName"
             type="text"
@@ -110,7 +110,11 @@ const AddItemForm = ({ onClose }) => {
           )}
         </FormControl>
         <FormControl isInvalid={isSubmit && itemInput.itemAmount === ""}>
-          <FormLabel htmlFor="amount" pt={4}>
+          <FormLabel
+            htmlFor="amount"
+            pt={4}
+            fontSize={isLargerThan1024 && "sm"}
+          >
             Amount
           </FormLabel>
           <Input
@@ -129,7 +133,11 @@ const AddItemForm = ({ onClose }) => {
           {isSubmit && <FormErrorMessage>Amount is required.</FormErrorMessage>}
         </FormControl>
         <FormControl isInvalid={isSubmit && itemInput.itemCategory === ""}>
-          <FormLabel htmlFor="category" pt={4}>
+          <FormLabel
+            htmlFor="category"
+            pt={4}
+            fontSize={isLargerThan1024 && "sm"}
+          >
             Category
           </FormLabel>
           <Select
@@ -155,7 +163,7 @@ const AddItemForm = ({ onClose }) => {
           )}
         </FormControl>
         <FormControl>
-          <FormLabel htmlFor="price" pt={4}>
+          <FormLabel htmlFor="price" pt={4} fontSize={isLargerThan1024 && "sm"}>
             Note
           </FormLabel>
           <Textarea
@@ -178,6 +186,7 @@ const AddItemForm = ({ onClose }) => {
           type="submit"
           leftIcon={<AiOutlinePlus />}
           backgroundColor="pink.100"
+          _hover={{ bg: "#f8a0a0" }}
           variant="solid"
         >
           Add
