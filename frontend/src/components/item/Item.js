@@ -57,11 +57,12 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
       alert("Invalid update! Value must not be blank.");
       return;
     }
+    dispatch({ type: "UPDATE_ITEM", payload: enteredInfo });
     axios
       .patch(`/items/${id}`, enteredInfo)
       .then((res) => {
         console.log(res.data);
-        dispatch({ type: "UPDATE_ITEM", payload: enteredInfo });
+        // dispatch({ type: "UPDATE_ITEM", payload: enteredInfo });
         setIsUpdate(true);
         setIsUpdateBtn(false);
         setIsEditing(false);
