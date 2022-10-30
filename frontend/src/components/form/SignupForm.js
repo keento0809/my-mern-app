@@ -39,7 +39,6 @@ const SignupForm = () => {
     axios
       .post("/auth/signup", obj)
       .then((res) => {
-        console.log(res.data);
         localStorage.setItem("isLoggedIn", res.data.token);
         localStorage.setItem("currId", res.data._id);
         navigate("/home");

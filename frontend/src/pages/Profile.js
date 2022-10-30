@@ -18,7 +18,6 @@ const Profile = () => {
   const { colorMode } = useColorMode();
 
   const handleLogout = () => {
-    console.log("logging out");
     setIsLoggedIn(false);
     setCurrentUser({});
     setLogoutAlert(true);

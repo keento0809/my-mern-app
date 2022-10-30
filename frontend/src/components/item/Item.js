@@ -17,29 +17,23 @@ import { AiOutlineEdit } from "react-icons/ai";
 const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
   const { dispatch } = useItemsContext();
   const { warnAlert, setWarnAlert } = useAlertContext();
-
   const [isEditing, setIsEditing] = useState(false);
   const [isUpdateBtn, setIsUpdateBtn] = useState(false);
   const [chosenCategory, setChosenCategory] = useState("");
   const [val, setVal] = useState("");
-
   const { colorMode, toggleColorMode } = useColorMode();
-
   // declare useRef
   const itemNameInputRef = useRef();
   const amountInputRef = useRef();
   const descriptionInputRef = useRef();
-
   function handleSetCategory(e) {
     setChosenCategory(e.target.value);
   }
-
   const handleOpenEditMode = (val) => {
     setVal(val);
     setIsUpdateBtn(!isUpdateBtn);
     setIsEditing(!isEditing);
   };
-
   const handleUpdateItem = () => {
     const enteredInfo = {
       _id: id,
@@ -61,8 +55,6 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
     axios
       .patch(`/items/${id}`, enteredInfo)
       .then((res) => {
-        console.log(res.data);
-        // dispatch({ type: "UPDATE_ITEM", payload: enteredInfo });
         setIsUpdate(true);
         setIsUpdateBtn(false);
         setIsEditing(false);
@@ -70,7 +62,6 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
       .catch((error) => console.log(error));
     setVal("");
   };
-
   const handleDeleteItem = () => {
     axios
       .delete(`/items/${id}`)

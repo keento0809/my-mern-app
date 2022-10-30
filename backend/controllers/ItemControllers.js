@@ -78,7 +78,6 @@ const updateItem = async (req, res) => {
       return res.status(400).json({ error: "No item found" });
     }
     const item = await Item.findByIdAndUpdate({ _id: id }, { ...req.body });
-    console.log(item, "と、req.bodyは、", req.body);
     if (!item) {
       return res.status(400).json({ error: "No item found" });
     }

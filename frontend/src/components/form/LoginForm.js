@@ -88,7 +88,6 @@ const LoginForm = () => {
   const handleGuestLogin = () => {
     setIsLoading(true);
     const guestUserInfo = guestUser;
-    console.log("ゲストログインでっせ");
     if (!guestUserInfo) {
       setError("Failed to guest login.");
     }
