@@ -73,7 +73,7 @@ const ShoppingList = () => {
         },
       };
       axios
-        .get("https://shoppinglistmernapp.herokuapp.com/user", config)
+        .get("/user", config)
         .then((res) => {
           setCurrentUser(res.data);
         })
@@ -87,9 +87,7 @@ const ShoppingList = () => {
     // fetchItems();
     setIsLoading(true);
     axios
-      .get(
-        `https://shoppinglistmernapp.herokuapp.com/items/${currentUser["_id"]}`
-      )
+      .get(`/items/${currentUser["_id"]}`)
       .then((res) => {
         dispatch({ type: "SET_ITEMS", payload: res.data });
       })
