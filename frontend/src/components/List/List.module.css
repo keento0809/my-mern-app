@@ -18,6 +18,6 @@
   }
 
   .listUl > li {
-    flex-basis: 350px;
+    flex-basis: 300px;
   }
 }

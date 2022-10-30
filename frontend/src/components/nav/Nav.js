@@ -66,7 +66,7 @@ const Nav = () => {
             </Flex>
             <Text
               py={4}
-              fontSize="1.4rem"
+              fontSize="1.3rem"
               fontWeight="bold"
               letterSpacing={-0.5}
               textAlign="center"
@@ -91,7 +91,7 @@ const Nav = () => {
           <Flex justifyContent="space-between" alignItems="center">
             <Text
               py={4}
-              fontSize="1.4rem"
+              fontSize="1.2rem"
               fontWeight="bold"
               letterSpacing={-0.5}
               textAlign="center"

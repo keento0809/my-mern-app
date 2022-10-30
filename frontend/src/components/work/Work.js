@@ -51,7 +51,7 @@ const Work = () => {
       flex={1}
       maxWidth={
         isLargerThan1024 && !isLargerThan1280
-          ? "436px"
+          ? "350px"
           : isLargerThan1024 && isLargerThan1280
           ? ""
           : ""
@@ -66,7 +66,7 @@ const Work = () => {
           name=""
           id="category"
           placeholder="Select"
-          maxWidth={isLargerThan1280 && "350px"}
+          maxWidth={isLargerThan1280 && "364px"}
         >
           {categories.map((category, index) => {
             return (

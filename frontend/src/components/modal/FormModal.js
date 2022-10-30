@@ -37,7 +37,7 @@ const FormModal = () => {
           ? 12
           : ""
       }
-      maxWidth={isLargerThan1024 && "436px"}
+      maxWidth={isLargerThan1024 && "350px"}
     >
       <Box display={isLargerThan1024 && "none"}>
         <Button
@@ -47,6 +47,7 @@ const FormModal = () => {
           bgColor={colorMode === "light" ? "pink.100" : "inherit"}
           border="1px solid"
           borderColor="pink.300"
+          _hover={{ bg: "#f8a0a0" }}
         >
           Add Item
         </Button>
@@ -67,7 +68,7 @@ const FormModal = () => {
         </Modal>
       </Box>
       <Box display={!isLargerThan1024 && "none"}>
-        <Text fontSize="xl">Add New Shopping Item</Text>
+        <Text fontSize={isLargerThan1024 && "md"}>Add New Shopping Item</Text>
         <AddItemForm onClose={onClose} />
       </Box>
     </Box>
