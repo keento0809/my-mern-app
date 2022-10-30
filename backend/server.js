@@ -6,9 +6,10 @@ const mongoose = require("mongoose");
 const ItemRoutes = require("./routers/ItemRouter");
 const AuthRoutes = require("./routers/AuthRouter");
 const UserRoutes = require("./routers/UserRouter");
-// const port = 8080;
-const port = process.env.PORT;
-
+const port =
+  process.env.NODE_ENV === "development"
+    ? process.env.PORT_LOCAL
+    : process.env.PORT;
 // connect to MongoDB
 connectDB();
 

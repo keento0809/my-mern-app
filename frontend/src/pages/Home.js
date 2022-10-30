@@ -21,7 +21,7 @@ const Home = () => {
         },
       };
       axios
-        .get("https://shoppinglistmernapp.herokuapp.com/user", config)
+        .get("/user", config)
         .then((res) => {
           setCurrentUser(res.data);
         })

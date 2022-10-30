@@ -61,10 +61,7 @@ const AddItemForm = ({ onClose }) => {
     };
 
     axios
-      .post(
-        `https://shoppinglistmernapp.herokuapp.com/items/${currentUser._id}`,
-        enteredInfo
-      )
+      .post(`/items/${currentUser._id}`, enteredInfo)
       .then((res) => {
         dispatch({ type: "ADD_NEW_ITEM", payload: res.data });
         setIsSubmit(false);
@@ -122,8 +119,6 @@ const AddItemForm = ({ onClose }) => {
             px={4}
             py={1}
             focusBorderColor="pink.100"
-            // original
-            // onChange={handleCheckValueAmount}
             value={itemInput.itemAmount}
             onChange={handleChange}
             id="amount"
