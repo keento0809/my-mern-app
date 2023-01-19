@@ -1,7 +1,6 @@
 const { default: mongoose } = require("mongoose");
 const Item = require("../models/ItemModels");
 
-// GET all requests
 const getAllItem = async (req, res) => {
   try {
     const allItems = await Item.find({}).sort({ _id: -1 });

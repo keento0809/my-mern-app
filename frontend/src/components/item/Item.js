@@ -21,8 +21,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
   const [isUpdateBtn, setIsUpdateBtn] = useState(false);
   const [chosenCategory, setChosenCategory] = useState("");
   const [val, setVal] = useState("");
-  const { colorMode, toggleColorMode } = useColorMode();
-  // declare useRef
+  const { colorMode } = useColorMode();
   const itemNameInputRef = useRef();
   const amountInputRef = useRef();
   const descriptionInputRef = useRef();

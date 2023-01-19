@@ -151,7 +151,6 @@ const LoginForm = () => {
           Login
         </Button>
       </form>
-      {/* test */}
       <Text
         textAlign="center"
         mt={8}

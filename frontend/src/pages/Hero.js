@@ -11,12 +11,12 @@ const Hero = () => {
     <Box overflow="hidden">
       {isLoading && <LoadingModal />}
       <Flex
-        bgImage={heroImg}
-        minHeight="100vh"
+        minHeight="100svh"
         bgSize="cover"
         bgPosition="center center"
         justifyContent="center"
         alignItems="center"
+        bgImage={heroImg}
       >
         <Flex
           flexDirection="column"
@@ -31,7 +31,6 @@ const Hero = () => {
               fontWeight="bold"
               color="black"
               textShadow="3px 3px 4px #b6adad"
-              // lineHeight=""
             >
               My Shopping List
             </Text>
