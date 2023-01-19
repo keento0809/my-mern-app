@@ -41,7 +41,6 @@ const Side = () => {
             <MenuItem>
               <Link to={`/profile`}>Profile</Link>
             </MenuItem>
-            {/* temporary */}
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </MenuGroup>
         </MenuList>

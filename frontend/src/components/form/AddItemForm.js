@@ -137,8 +137,6 @@ const AddItemForm = ({ onClose }) => {
           </FormLabel>
           <Select
             focusBorderColor="pink.100"
-            // original
-            // onChange={handleSetCategory}
             onChange={handleChange}
             name="itemCategory"
             value={itemInput.itemCategory}
@@ -166,8 +164,6 @@ const AddItemForm = ({ onClose }) => {
             px={4}
             py={1}
             focusBorderColor="pink.100"
-            // original
-            // ref={descriptionInputRef}
             onChange={handleChange}
             value={itemInput.itemDescription}
             id="description"

@@ -6,8 +6,6 @@ import useAuthContext from "../hooks/useAuthContext";
 
 const NotFound = () => {
   const { isLoggedIn } = useAuthContext();
-  console.log(isLoggedIn);
-
   return (
     <Layout>
       <Box textAlign="center" pt={10}>

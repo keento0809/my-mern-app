@@ -24,7 +24,6 @@ const UserMenu = () => {
     axios
       .delete("/items")
       .then((res) => {
-        console.log(res);
         dispatch({ type: "RESET_USER" });
       })
       .catch((error) => console.log(error));

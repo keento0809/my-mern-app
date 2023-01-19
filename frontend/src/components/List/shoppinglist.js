@@ -14,41 +14,9 @@ const ShoppingList = () => {
   const [isUpdate, setIsUpdate] = useState(false);
   const { items, dispatch } = useItemsContext();
   const [isReady, setIsReady] = useState(false);
-
   const { currentUser, setCurrentUser } = useAuthContext();
-
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
-
-  // const fetchingUser = () => {
-  //   const currentToken = localStorage.getItem("isLoggedIn");
-  //   if (currentToken) {
-  //     const config = {
-  //       headers: {
-  //         authToken: currentToken,
-  //       },
-  //     };
-  //     axios
-  //       .get("/user", config)
-  //       .then((res) => {
-  //         setCurrentUser(res.data);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error.message);
-  //       });
-  //   }
-  // };
-
-  // const fetchItems = () => {
-  //   setIsLoading(true);
-  //   axios
-  //     .get(`/items/${currentUser["_id"]}`)
-  //     .then((res) => {
-  //       dispatch({ type: "SET_ITEMS", payload: res.data });
-  //     })
-  //     .catch((error) => console.log(error.message));
-  //   setIsLoading(false);
-  // };
 
   function handleSetCategory(e) {
     setChosenCategory(e.target.value);
@@ -62,9 +30,7 @@ const ShoppingList = () => {
       setTempList(sortedItems);
     }
   }
-
   useEffect(() => {
-    // fetchingUser();
     const currentToken = localStorage.getItem("isLoggedIn");
     if (currentToken) {
       const config = {
@@ -82,9 +48,7 @@ const ShoppingList = () => {
         });
     }
   }, [setCurrentUser]);
-
   useEffect(() => {
-    // fetchItems();
     setIsLoading(true);
     axios
       .get(`/items/${currentUser["_id"]}`)
@@ -94,15 +58,12 @@ const ShoppingList = () => {
       .catch((error) => console.log(error.message));
     setIsLoading(false);
   }, [currentUser, dispatch]);
-
   useEffect(() => {
     setTempList(items);
   }, [items, isUpdate]);
-
   useEffect(() => {
     tempList && tempList.length === 0 && setIsReady(true);
   }, [tempList]);
-
   return (
     <Box
       flex={1}

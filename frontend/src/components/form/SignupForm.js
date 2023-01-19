@@ -39,7 +39,6 @@ const SignupForm = () => {
     axios
       .post("/auth/signup", obj)
       .then((res) => {
-        console.log(res.data);
         localStorage.setItem("isLoggedIn", res.data.token);
         localStorage.setItem("currId", res.data._id);
         navigate("/home");
@@ -78,12 +77,7 @@ const SignupForm = () => {
     const regex = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
 
     // validation
-    if (
-      // formInput.emailForSignup === "" ||
-      !formInput.emailForSignup.match(regexEmail)
-      // !formInput.passwordForSignup.match(regex) ||
-      // !formInput.passwordConfirmation.match(regex)
-    ) {
+    if (!formInput.emailForSignup.match(regexEmail)) {
       alert("Invalid input.");
       return;
     }

@@ -17,7 +17,6 @@ router.get("/:id", getOneItem);
 router.post("/", postItem);
 router.post("/:userId", postUserItem);
 router.patch("/:id", updateItem);
-// test
 router.delete("/", reset);
 router.delete("/:id", deleteItem);
 

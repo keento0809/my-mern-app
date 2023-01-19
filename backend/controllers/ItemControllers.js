@@ -1,7 +1,6 @@
 const { default: mongoose } = require("mongoose");
 const Item = require("../models/ItemModels");
 
-// GET all requests
 const getAllItem = async (req, res) => {
   try {
     const allItems = await Item.find({}).sort({ _id: -1 });
@@ -78,7 +77,6 @@ const updateItem = async (req, res) => {
       return res.status(400).json({ error: "No item found" });
     }
     const item = await Item.findByIdAndUpdate({ _id: id }, { ...req.body });
-    console.log(item, "と、req.bodyは、", req.body);
     if (!item) {
       return res.status(400).json({ error: "No item found" });
     }
