@@ -9,7 +9,6 @@ const port =
   process.env.NODE_ENV === "development"
     ? process.env.PORT_LOCAL
     : process.env.PORT;
-console.log(port);
 connectDB();
 
 const app = express();
