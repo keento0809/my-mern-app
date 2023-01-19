@@ -13,7 +13,6 @@ import {
 import axios from "axios";
 import useAuthContext from "../../hooks/useAuthContext";
 import { guestUser } from "../../data/data";
-import LoadingModal from "../modal/LoadingModal";
 
 const LoginForm = () => {
   const [formInput, setFormInput] = useState({
@@ -22,10 +21,8 @@ const LoginForm = () => {
   });
   const [isSubmit, setIsSubmit] = useState(false);
   const [error, setError] = useState();
-
   const { setLoginAlert } = useAlertContext();
   const { setIsLoggedIn, setCurrentUser, setIsLoading } = useAuthContext();
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {
