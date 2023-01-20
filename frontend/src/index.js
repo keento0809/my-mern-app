@@ -4,10 +4,7 @@ import "./index.css";
 import App from "./App";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import theme from "./theme/theme";
-import axios from "axios";
-
-axios.defaults.baseURL = "https://mern-shopping-list-app.herokuapp.com/";
-axios.defaults.headers.post["Content-Type"] = "application/json";
+import "./services/axiosConfig";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
