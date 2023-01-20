@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import useAuthContext from "../hooks/useAuthContext";
 import useAlertContext from "../hooks/useAlertContext";
 import useItemsContext from "../hooks/useItemsContext";
-import Layout from "../Layout/Layout";
 import { Link } from "react-router-dom";
 import { Box, Text, Button, useColorMode } from "@chakra-ui/react";
 import axios from "axios";
@@ -50,7 +49,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <Layout>
+    <>
       <Box textAlign="center" pt={6}>
         <Text fontSize="2xl" fontWeight="bold" textAlign="center">
           Profile
@@ -107,7 +106,7 @@ const Profile = () => {
           <Link to="/home">BACK</Link>
         </Button>
       </Box>
-    </Layout>
+    </>
   );
 };
 

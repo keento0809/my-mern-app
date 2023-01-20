@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Layout from "../Layout/Layout";
 import FormModal from "../components/modal/FormModal";
 import { Box, useMediaQuery } from "@chakra-ui/react";
 import Work from "../components/work/Work";
@@ -9,7 +8,6 @@ import useAuthContext from "../hooks/useAuthContext";
 const Home = () => {
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
-
   const { setCurrentUser } = useAuthContext();
 
   useEffect(() => {
@@ -32,7 +30,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Layout>
+    <>
       <Box
         display={isLargerThan1024 ? "flex" : ""}
         justifyContent={isLargerThan1280 ? "flex-start" : "space-between"}
@@ -40,7 +38,7 @@ const Home = () => {
         <FormModal />
         <Work />
       </Box>
-    </Layout>
+    </>
   );
 };
 

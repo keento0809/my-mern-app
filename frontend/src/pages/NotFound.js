@@ -1,13 +1,12 @@
 import React from "react";
 import { Text, Button, Box } from "@chakra-ui/react";
-import Layout from "../Layout/Layout";
 import { Link } from "react-router-dom";
 import useAuthContext from "../hooks/useAuthContext";
 
 const NotFound = () => {
   const { isLoggedIn } = useAuthContext();
   return (
-    <Layout>
+    <>
       <Box textAlign="center" pt={10}>
         <Text fontSize="xl" textAlign="center">
           Page Not Found
@@ -21,7 +20,7 @@ const NotFound = () => {
           <Link to={!isLoggedIn ? "/" : "/home"}>BACK</Link>
         </Button>
       </Box>
-    </Layout>
+    </>
   );
 };
 

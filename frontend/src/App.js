@@ -3,6 +3,7 @@ import { ItemsProvider } from "./contexts/ItemsContext";
 import { AlertProvider } from "./contexts/alertContext";
 import { AuthProvider } from "./contexts/authContext";
 import Main from "./pages/Main";
+import Layout from "./Layout/Layout";
 
 function App() {
   return (
@@ -10,9 +11,9 @@ function App() {
       <AlertProvider>
         <ItemsProvider>
           <AuthProvider>
-            <div className="App">
+            <Layout className="App">
               <Main />
-            </div>
+            </Layout>
           </AuthProvider>
         </ItemsProvider>
       </AlertProvider>

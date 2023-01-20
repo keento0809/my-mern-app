@@ -50,7 +50,6 @@ const LoginForm = () => {
         setTimeout(() => {
           setLoginAlert(false);
         }, 2000);
-        res.json({ msg: "ok, it works" });
       })
       .catch((error) => {
         setError(error.message);
@@ -62,21 +61,15 @@ const LoginForm = () => {
     e.preventDefault();
     setIsLoading(true);
     setIsSubmit(true);
-
-    if (formInput.email === "" || formInput.password === "") return;
+    const { email, password } = formInput;
+    if (email === "" || password === "") return;
 
     const regexEmail = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;
-    const regex = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
-
-    if (!formInput.email.match(regexEmail) === "") {
+    if (!email.match(regexEmail) === "") {
       alert("Invalid Credential.");
       return;
     }
-
-    const enteredInfo = {
-      email: formInput.email,
-      password: formInput.password,
-    };
+    const enteredInfo = { email, password };
 
     fetchPostRequest(enteredInfo);
     setIsLoading(false);
@@ -88,7 +81,6 @@ const LoginForm = () => {
     if (!guestUserInfo) {
       setError("Failed to guest login.");
     }
-
     fetchPostRequest(guestUserInfo);
   };
 
