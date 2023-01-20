@@ -9,12 +9,11 @@ const port =
   process.env.NODE_ENV === "development"
     ? process.env.PORT_LOCAL
     : process.env.PORT;
-console.log(port);
 connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: true }));
 app.use(express.json());
 app.use("/items", ItemRoutes);
 app.use("/auth", AuthRoutes);
