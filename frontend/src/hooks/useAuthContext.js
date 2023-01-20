@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../contexts/authContext";
 
 const useAuthContext = () => {
@@ -8,7 +8,6 @@ const useAuthContext = () => {
     alert("Invalid context");
     return;
   }
-
   return context;
 };
 

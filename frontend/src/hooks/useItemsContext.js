@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { itemsContext } from "../contexts/ItemsContext";
 
 const useItemsContext = () => {
@@ -8,7 +8,6 @@ const useItemsContext = () => {
     alert("Invalid context.");
     return;
   }
-
   return context;
 };
 

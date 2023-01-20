@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { AlertContext } from "../contexts/alertContext";
 
 const useAlertContext = () => {
@@ -8,7 +8,6 @@ const useAlertContext = () => {
     alert("Invalid context");
     return;
   }
-
   return context;
 };
 
