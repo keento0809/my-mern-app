@@ -1,10 +1,10 @@
 import { Container, useMediaQuery } from "@chakra-ui/react";
 import React from "react";
-import LoginAlert from "../components/Alert/LoginAlert";
 import LogoutAlert from "../components/Alert/LogoutAlert";
 import SignupAlert from "../components/Alert/SignupAlert";
 import SuccessAlert from "../components/Alert/SuccessAlert";
 import WarnAlert from "../components/Alert/WarnAlert";
+import GlobalAlert from "../components/Alert/GlobalAlert";
 import Nav from "../components/nav/Nav";
 import LoadingModal from "../components/modal/LoadingModal";
 import useAuthContext from "../hooks/useAuthContext";
@@ -30,11 +30,11 @@ const Layout = ({ children }) => {
       >
         {children}
       </Container>
-      <SuccessAlert />
-      <WarnAlert />
-      <LoginAlert />
-      <LogoutAlert />
-      <SignupAlert />
+      <GlobalAlert />
+      {/* <SuccessAlert /> */}
+      {/* <WarnAlert /> */}
+      {/* <LogoutAlert /> */}
+      {/* <SignupAlert /> */}
     </>
   );
 };

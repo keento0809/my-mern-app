@@ -2,24 +2,35 @@ import React, { createContext, useState } from "react";
 
 export const AlertContext = createContext();
 
+export const initialAlertInfoState = {
+  isAlert: false,
+  text: "",
+  status: "",
+};
+
 export const AlertProvider = ({ children }) => {
   const [alert, setAlert] = useState(false);
   const [warnAlert, setWarnAlert] = useState(false);
-  const [loginAlert, setLoginAlert] = useState(false);
   const [logoutAlert, setLogoutAlert] = useState(false);
   const [signupAlert, setSignupAlert] = useState(false);
+
+  const [alertInfo, setAlertInfo] = useState({
+    isAlert: false,
+    text: "",
+    status: "",
+  });
 
   return (
     <AlertContext.Provider
       value={{
+        alertInfo,
         alert,
         warnAlert,
-        loginAlert,
         logoutAlert,
         signupAlert,
+        setAlertInfo,
         setAlert,
         setWarnAlert,
-        setLoginAlert,
         setLogoutAlert,
         setSignupAlert,
       }}

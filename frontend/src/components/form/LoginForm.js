@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import useAuthContext from "../../hooks/useAuthContext";
 import { guestUser } from "../../data/data";
+import { initialAlertInfoState } from "../../contexts/alertContext";
 
 const LoginForm = () => {
   const [formInput, setFormInput] = useState({
@@ -21,7 +22,7 @@ const LoginForm = () => {
   });
   const [isSubmit, setIsSubmit] = useState(false);
   const [error, setError] = useState();
-  const { setLoginAlert } = useAlertContext();
+  const { alertInfo, setAlertInfo } = useAlertContext();
   const { setIsLoggedIn, setCurrentUser, setIsLoading } = useAuthContext();
   const navigate = useNavigate();
 
@@ -43,13 +44,17 @@ const LoginForm = () => {
           email: "",
           password: "",
         });
-        setLoginAlert(true);
+        setAlertInfo({
+          isAlert: true,
+          status: "success",
+          text: "Successfully Logged in!",
+        });
         setIsLoggedIn(true);
         setCurrentUser(res.data);
         setIsLoading(false);
         setTimeout(() => {
-          setLoginAlert(false);
-        }, 2000);
+          setAlertInfo(initialAlertInfoState);
+        }, 1500);
       })
       .catch((error) => {
         setError(error.message);

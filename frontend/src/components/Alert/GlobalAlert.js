@@ -1,17 +1,17 @@
-import React from "react";
 import useAlertContext from "../../hooks/useAlertContext";
 import { Alert, AlertIcon, useMediaQuery } from "@chakra-ui/react";
 
-const LoginAlert = () => {
-  const { loginAlert } = useAlertContext();
+const GlobalAlert = () => {
+  const { alertInfo } = useAlertContext();
+  const { text, status, isAlert } = alertInfo;
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
 
   return (
     <>
-      {loginAlert && (
+      {isAlert && (
         <Alert
           maxWidth={isLargerThan768 ? "400px" : ""}
-          status="success"
+          status={status}
           variant="left-accent"
           position="fixed"
           bottom={9}
@@ -20,11 +20,11 @@ const LoginAlert = () => {
           zIndex={10}
         >
           <AlertIcon />
-          Successfully Logged in!
+          {text}
         </Alert>
       )}
     </>
   );
 };
 
-export default LoginAlert;
+export default GlobalAlert;
