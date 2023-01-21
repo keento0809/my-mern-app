@@ -6,6 +6,7 @@ import {
   TabPanel,
   Text,
   useMediaQuery,
+  Box,
 } from "@chakra-ui/react";
 import LoginForm from "../components/form/LoginForm";
 import SignupForm from "../components/form/SignupForm";
@@ -14,13 +15,7 @@ const Auth = () => {
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   return (
     <>
-      <Tabs
-        isFitted
-        variant="enclosed"
-        pt={isLargerThan1024 ? 10 : 6}
-        maxWidth="382px"
-        mx="auto"
-      >
+      <Tabs isFitted variant="enclosed" pt={28} maxWidth="382px" mx="auto">
         <TabList mb="1em">
           <Tab>Login</Tab>
           <Tab>Signup</Tab>
