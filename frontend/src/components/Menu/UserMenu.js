@@ -13,10 +13,11 @@ import useAuthContext from "../../hooks/useAuthContext";
 import useAlertContext from "../../hooks/useAlertContext";
 import axios from "axios";
 import useItemsContext from "../../hooks/useItemsContext";
+import { initialAlertInfoState } from "../../contexts/alertContext";
 
 const UserMenu = () => {
   const { setIsLoggedIn, setCurrentUser } = useAuthContext();
-  const { setLogoutAlert } = useAlertContext();
+  const { setLogoutAlert, setAlertInfo } = useAlertContext();
 
   const { dispatch } = useItemsContext();
 
@@ -33,9 +34,13 @@ const UserMenu = () => {
     setIsLoggedIn(false);
     setCurrentUser({});
     localStorage.removeItem("isLoggedIn");
-    setLogoutAlert(true);
+    setAlertInfo({
+      isAlert: true,
+      status: "warning",
+      text: "Successfully Logged out!",
+    });
     setTimeout(() => {
-      setLogoutAlert(false);
+      setAlertInfo(initialAlertInfoState);
     }, 2000);
   };
 
