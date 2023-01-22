@@ -9,13 +9,15 @@ import axios from "axios";
 const Profile = () => {
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const { items } = useItemsContext();
+  const { items, dispatch } = useItemsContext();
   const { currentUser, setCurrentUser, setIsLoggedIn } = useAuthContext();
   const { setLogoutAlert } = useAlertContext();
   const { colorMode } = useColorMode();
   const currentToken = localStorage.getItem("isLoggedIn");
+  const currUserId = localStorage.getItem("currId");
 
   useEffect(() => {
+    console.log("currToken: ", currentToken);
     if (currentToken) {
       setIsLoading(true);
       const config = {
@@ -31,6 +33,12 @@ const Profile = () => {
         .catch((error) => {
           setError(error.message);
         });
+      axios
+        .get(`/items/${currUserId}`)
+        .then((res) => {
+          dispatch({ type: "SET_ITEMS", payload: res.data });
+        })
+        .catch((error) => console.log(error.message));
       setIsLoading(false);
     } else {
       setError("Failed to fetch user data.");
@@ -109,3 +117,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
+// [...todos,newTodo]
