@@ -49,6 +49,7 @@ const Work = () => {
   return (
     <Box
       flex={1}
+      pt={isLargerThan1024 ? 16 : 10}
       maxWidth={
         isLargerThan1024 && !isLargerThan1280
           ? "350px"
@@ -58,7 +59,7 @@ const Work = () => {
       }
       width={isLargerThan1280 && "100%"}
     >
-      <Box className="" py={8}>
+      <Box className="" pb={8}>
         <Text pb={2}>Filtered by: </Text>
         <Select
           focusBorderColor="pink.100"

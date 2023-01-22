@@ -5,13 +5,14 @@ import useItemsContext from "../hooks/useItemsContext";
 import { Link } from "react-router-dom";
 import { Box, Text, Button, useColorMode } from "@chakra-ui/react";
 import axios from "axios";
+import { initialAlertInfoState } from "../contexts/alertContext";
 
 const Profile = () => {
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const { items, dispatch } = useItemsContext();
   const { currentUser, setCurrentUser, setIsLoggedIn } = useAuthContext();
-  const { setLogoutAlert } = useAlertContext();
+  const { setAlertInfo } = useAlertContext();
   const { colorMode } = useColorMode();
   const currentToken = localStorage.getItem("isLoggedIn");
   const currUserId = localStorage.getItem("currId");
@@ -51,9 +52,15 @@ const Profile = () => {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setCurrentUser({});
-    setLogoutAlert(true);
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("currId");
+    setAlertInfo({
+      isAlert: true,
+      status: "success",
+      text: "Successfully Logged out!",
+    });
     setTimeout(() => {
-      setLogoutAlert(false);
+      setAlertInfo(initialAlertInfoState);
     }, 2000);
   };
 

@@ -17,8 +17,7 @@ import { initialAlertInfoState } from "../../contexts/alertContext";
 
 const UserMenu = () => {
   const { setIsLoggedIn, setCurrentUser } = useAuthContext();
-  const { setLogoutAlert, setAlertInfo } = useAlertContext();
-
+  const { setAlertInfo } = useAlertContext();
   const { dispatch } = useItemsContext();
 
   const handleResetList = () => {
@@ -34,9 +33,10 @@ const UserMenu = () => {
     setIsLoggedIn(false);
     setCurrentUser({});
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("currId");
     setAlertInfo({
       isAlert: true,
-      status: "warning",
+      status: "success",
       text: "Successfully Logged out!",
     });
     setTimeout(() => {

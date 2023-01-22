@@ -16,23 +16,27 @@ import { FiLogOut } from "react-icons/fi";
 import Side from "../side/Side";
 import useAuthContext from "../../hooks/useAuthContext";
 import useAlertContext from "../../hooks/useAlertContext";
+import { initialAlertInfoState } from "../../contexts/alertContext";
 
 const Nav = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
-
   const { isLoggedIn, setCurrentUser, setIsLoggedIn } = useAuthContext();
-  const { setLogoutAlert } = useAlertContext();
+  const { setAlertInfo } = useAlertContext();
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     setCurrentUser({});
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("currId");
-    setLogoutAlert(true);
+    setAlertInfo({
+      isAlert: true,
+      status: "success",
+      text: "Successfully Logged out!",
+    });
     setTimeout(() => {
-      setLogoutAlert(false);
+      setAlertInfo(initialAlertInfoState);
     }, 2000);
   };
 

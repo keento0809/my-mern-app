@@ -11,18 +11,24 @@ import { AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/useAuthContext";
 import useAlertContext from "../../hooks/useAlertContext";
+import { initialAlertInfoState } from "../../contexts/alertContext";
 
 const Side = () => {
   const { setIsLoggedIn, setCurrentUser } = useAuthContext();
-  const { setLogoutAlert } = useAlertContext();
+  const { setAlertInfo } = useAlertContext();
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     setCurrentUser({});
     localStorage.removeItem("isLoggedIn");
-    setLogoutAlert(true);
+    localStorage.removeItem("currId");
+    setAlertInfo({
+      isAlert: true,
+      status: "success",
+      text: "Successfully Logged out!",
+    });
     setTimeout(() => {
-      setLogoutAlert(false);
+      setAlertInfo(initialAlertInfoState);
     }, 2000);
   };
 
