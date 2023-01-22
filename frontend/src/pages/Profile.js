@@ -16,30 +16,33 @@ const Profile = () => {
   const currentToken = localStorage.getItem("isLoggedIn");
   const currUserId = localStorage.getItem("currId");
 
+  const fetchCurrentUserData = async () => {
+    setIsLoading(true);
+    const config = {
+      headers: {
+        authToken: currentToken,
+      },
+    };
+    await axios
+      .get("/user", config)
+      .then((res) => {
+        setCurrentUser(res.data);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+    await axios
+      .get(`/items/${currUserId}`)
+      .then((res) => {
+        dispatch({ type: "SET_ITEMS", payload: res.data });
+      })
+      .catch((error) => console.log(error.message));
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    console.log("currToken: ", currentToken);
     if (currentToken) {
-      setIsLoading(true);
-      const config = {
-        headers: {
-          authToken: currentToken,
-        },
-      };
-      axios
-        .get("/user", config)
-        .then((res) => {
-          setCurrentUser(res.data);
-        })
-        .catch((error) => {
-          setError(error.message);
-        });
-      axios
-        .get(`/items/${currUserId}`)
-        .then((res) => {
-          dispatch({ type: "SET_ITEMS", payload: res.data });
-        })
-        .catch((error) => console.log(error.message));
-      setIsLoading(false);
+      fetchCurrentUserData();
     } else {
       setError("Failed to fetch user data.");
     }
@@ -83,16 +86,18 @@ const Profile = () => {
               Welcome, <strong>{currentUser.username}</strong>!
             </Text>
           )}
-          {!isLoading && (
-            <Text fontSize="lg" pt={6}>
-              Email: {currentUser.email}
-            </Text>
-          )}
-          {!isLoading && (
-            <Text fontSize="lg" pt={3}>
-              Items: <strong>{items.length}</strong> items on the list.
-            </Text>
-          )}
+          <Box minHeight="90px">
+            {!isLoading && (
+              <Text fontSize="lg" pt={6}>
+                Email: {currentUser.email}
+              </Text>
+            )}
+            {!isLoading && (
+              <Text fontSize="lg" pt={3}>
+                Items: <strong>{items.length}</strong> items on the list.
+              </Text>
+            )}
+          </Box>
           <Button
             mt={16}
             bgColor="inherit"
