@@ -27,7 +27,7 @@ const FormModal = () => {
 
   return (
     <Box
-      pt={8}
+      pt={isLargerThan1024 ? 16 : 28}
       width="full"
       flex={1}
       pr={
