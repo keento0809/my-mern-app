@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import useItemsContext from "../../hooks/useItemsContext";
 import useAlertContext from "../../hooks/useAlertContext";
