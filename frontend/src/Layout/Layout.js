@@ -1,9 +1,5 @@
 import { Container, useMediaQuery } from "@chakra-ui/react";
 import React from "react";
-import LogoutAlert from "../components/Alert/LogoutAlert";
-import SignupAlert from "../components/Alert/SignupAlert";
-import SuccessAlert from "../components/Alert/SuccessAlert";
-import WarnAlert from "../components/Alert/WarnAlert";
 import GlobalAlert from "../components/Alert/GlobalAlert";
 import Nav from "../components/nav/Nav";
 import LoadingModal from "../components/modal/LoadingModal";
@@ -30,10 +26,6 @@ const Layout = ({ children }) => {
         {children}
       </Container>
       <GlobalAlert />
-      {/* <SuccessAlert /> */}
-      {/* <WarnAlert /> */}
-      {/* <LogoutAlert /> */}
-      {/* <SignupAlert /> */}
     </>
   );
 };

@@ -12,6 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { initialAlertInfoState } from "../../contexts/alertContext";
 
 const SignupForm = () => {
   const [formInput, setFormInput] = useState({
@@ -23,7 +24,7 @@ const SignupForm = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const [error, setError] = useState();
 
-  const { setSignupAlert } = useAlertContext();
+  const { setAlertInfo } = useAlertContext();
   const { setIsLoggedIn } = useAuthContext();
 
   const navigate = useNavigate();
@@ -48,10 +49,14 @@ const SignupForm = () => {
           passwordForSignup: "",
           passwordConfirmation: "",
         });
-        setSignupAlert(true);
+        setAlertInfo({
+          isAlert: true,
+          status: "success",
+          text: "Successfully Signed up!",
+        });
         setIsLoggedIn(true);
         setTimeout(() => {
-          setSignupAlert(false);
+          setAlertInfo(initialAlertInfoState);
         }, 2000);
       })
       .catch((error) => {
