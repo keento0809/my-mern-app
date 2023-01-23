@@ -20,8 +20,8 @@ const Side = () => {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setCurrentUser({});
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("currId");
+    sessionStorage.removeItem("isLoggedIn");
+    sessionStorage.removeItem("currId");
     setAlertInfo({
       isAlert: true,
       status: "success",

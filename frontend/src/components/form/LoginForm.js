@@ -37,8 +37,8 @@ const LoginForm = () => {
     axios
       .post("/auth/login", obj)
       .then((res) => {
-        localStorage.setItem("isLoggedIn", res.data.token);
-        localStorage.setItem("currId", res.data._id);
+        sessionStorage.setItem("isLoggedIn", res.data.token);
+        sessionStorage.setItem("currId", res.data._id);
         navigate("/home");
         setFormInput({
           email: "",

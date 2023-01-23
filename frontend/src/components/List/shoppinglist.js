@@ -31,7 +31,7 @@ const ShoppingList = () => {
     }
   }
   useEffect(() => {
-    const currentToken = localStorage.getItem("isLoggedIn");
+    const currentToken = sessionStorage.getItem("isLoggedIn");
     if (currentToken) {
       const config = {
         headers: {
