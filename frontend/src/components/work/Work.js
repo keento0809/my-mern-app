@@ -17,7 +17,7 @@ const Work = () => {
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
-  const currUserId = localStorage.getItem("currId");
+  const currUserId = sessionStorage.getItem("currId");
 
   function handleSetCategory(e) {
     setChosenCategory(e.target.value);

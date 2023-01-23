@@ -3,8 +3,8 @@ import { createContext, useState } from "react";
 
 export const AuthContext = createContext();
 
-const initialState = localStorage.getItem("isLoggedIn")
-  ? localStorage.getItem("isLoggedIn")
+const initialState = sessionStorage.getItem("isLoggedIn")
+  ? sessionStorage.getItem("isLoggedIn")
   : "";
 
 export const AuthProvider = ({ children }) => {

@@ -14,8 +14,8 @@ const Profile = () => {
   const { currentUser, setCurrentUser, setIsLoggedIn } = useAuthContext();
   const { setAlertInfo } = useAlertContext();
   const { colorMode } = useColorMode();
-  const currentToken = localStorage.getItem("isLoggedIn");
-  const currUserId = localStorage.getItem("currId");
+  const currentToken = sessionStorage.getItem("isLoggedIn");
+  const currUserId = sessionStorage.getItem("currId");
 
   const fetchCurrentUserData = async () => {
     setIsLoading(true);
@@ -52,8 +52,8 @@ const Profile = () => {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setCurrentUser({});
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("currId");
+    sessionStorage.removeItem("isLoggedIn");
+    sessionStorage.removeItem("currId");
     setAlertInfo({
       isAlert: true,
       status: "success",
