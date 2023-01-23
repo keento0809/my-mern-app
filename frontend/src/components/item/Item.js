@@ -13,10 +13,11 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { AiOutlineEdit } from "react-icons/ai";
+import { initialAlertInfoState } from "../../contexts/alertContext";
 
 const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
   const { dispatch } = useItemsContext();
-  const { warnAlert, setWarnAlert } = useAlertContext();
+  const { setAlertInfo } = useAlertContext();
   const [isEditing, setIsEditing] = useState(false);
   const [isUpdateBtn, setIsUpdateBtn] = useState(false);
   const [chosenCategory, setChosenCategory] = useState("");
@@ -66,9 +67,13 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
       .delete(`/items/${id}`)
       .then((res) => {
         dispatch({ type: "DELETE_ITEM", payload: id });
-        setWarnAlert(true);
+        setAlertInfo({
+          isAlert: true,
+          status: "success",
+          text: "Item successfully deleted from the list.",
+        });
         setTimeout(() => {
-          setWarnAlert(false);
+          setAlertInfo(initialAlertInfoState);
         }, 1500);
       })
       .catch((error) => console.log(error));

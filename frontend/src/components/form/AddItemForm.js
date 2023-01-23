@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { categories } from "../../data/data";
 import useItemsContext from "../../hooks/useItemsContext";
 import useAlertContext from "../../hooks/useAlertContext";
@@ -16,6 +16,7 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
+import { initialAlertInfoState } from "../../contexts/alertContext";
 
 const AddItemForm = ({ onClose }) => {
   const [itemInput, setItemInput] = useState({
@@ -26,7 +27,7 @@ const AddItemForm = ({ onClose }) => {
   });
 
   const { dispatch } = useItemsContext();
-  const { setAlert } = useAlertContext();
+  const { setAlertInfo } = useAlertContext();
   const { currentUser } = useAuthContext();
 
   const [isLargerThan1024] = useMediaQuery("(min-width:1024px)");
@@ -74,11 +75,15 @@ const AddItemForm = ({ onClose }) => {
       })
       .catch((error) => console.log(error.message));
     setTimeout(() => {
-      setAlert(true);
+      setAlertInfo({
+        isAlert: true,
+        status: "success",
+        text: "Item successfully added to List!",
+      });
     }, 200);
     onClose();
     setTimeout(() => {
-      setAlert(false);
+      setAlertInfo(initialAlertInfoState);
     }, 2000);
   };
   return (
