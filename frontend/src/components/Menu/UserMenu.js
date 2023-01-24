@@ -23,7 +23,7 @@ const UserMenu = () => {
   const handleResetList = () => {
     axios
       .delete("/items")
-      .then((res) => {
+      .then(() => {
         dispatch({ type: "RESET_USER" });
       })
       .catch((error) => console.log(error));
