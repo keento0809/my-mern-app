@@ -22,7 +22,7 @@ const LoginForm = () => {
   });
   const [isSubmit, setIsSubmit] = useState(false);
   const [error, setError] = useState();
-  const { alertInfo, setAlertInfo } = useAlertContext();
+  const { setAlertInfo } = useAlertContext();
   const { setIsLoggedIn, setCurrentUser, setIsLoading } = useAuthContext();
   const navigate = useNavigate();
 

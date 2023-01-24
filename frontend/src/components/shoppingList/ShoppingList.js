@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { categories } from "../../data/data";
 import Item from "../item/Item";
 import useItemsContext from "../../hooks/useItemsContext";
 import styles from "./ShoppingList.module.css";
-import axios from "axios";
 import { Select, Box, Text, useMediaQuery } from "@chakra-ui/react";
+import { fetchShoppingItems } from "../../helpers/api/fetchShoppingItems";
 
-const Work = () => {
+const ShoppingList = () => {
   const [chosenCategory, setChosenCategory] = useState("");
   const [tempList, setTempList] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-  const [isUpdate, setIsUpdate] = useState(false);
   const { items, dispatch } = useItemsContext();
-
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
-
-  const currUserId = sessionStorage.getItem("currId");
 
   function handleSetCategory(e) {
     setChosenCategory(e.target.value);
@@ -31,15 +26,14 @@ const Work = () => {
     }
   }
 
-  function getItemsFromDB() {
-    axios
-      .get(`/items/${currUserId}`)
+  const getItemsFromDB = async () => {
+    await fetchShoppingItems()
       .then((res) => {
         dispatch({ type: "SET_ITEMS", payload: res.data });
         setTempList(res.data);
       })
       .catch((error) => console.log(error.message));
-  }
+  };
 
   useEffect(() => {
     getItemsFromDB();
@@ -79,35 +73,31 @@ const Work = () => {
       </Box>
       <Box overflow="scroll">
         <ul className={styles.listUl}>
-          {tempList === undefined && <p>Loading...</p>}
+          {!tempList && <p>Loading...</p>}
           {tempList === "" && chosenCategory === "" && <p>No Item added</p>}
-          {!isLoading &&
-            tempList &&
-            tempList.length === 0 &&
-            chosenCategory !== "" && <p>No Item Found</p>}
-          {!isLoading &&
-            tempList &&
-            tempList.map((item, index) => {
-              return (
-                <li
-                  key={index}
-                  style={{ listStyle: "none", paddingBottom: "1rem" }}
-                >
-                  <Item
-                    id={item._id}
-                    itemName={item.itemName}
-                    amount={item.amount}
-                    category={item.category}
-                    description={item.description}
-                    setIsUpdate={setIsUpdate}
-                  />
-                </li>
-              );
-            })}
+          {tempList && tempList.length === 0 && chosenCategory !== "" && (
+            <p>No Item Found</p>
+          )}
+          {tempList?.map((item, index) => {
+            return (
+              <li
+                key={index}
+                style={{ listStyle: "none", paddingBottom: "1rem" }}
+              >
+                <Item
+                  id={item._id}
+                  itemName={item.itemName}
+                  amount={item.amount}
+                  category={item.category}
+                  description={item.description}
+                />
+              </li>
+            );
+          })}
         </ul>
       </Box>
     </Box>
   );
 };
 
-export default Work;
+export default ShoppingList;

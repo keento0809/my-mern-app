@@ -15,7 +15,7 @@ import {
 import { AiOutlineEdit } from "react-icons/ai";
 import { initialAlertInfoState } from "../../contexts/alertContext";
 
-const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
+const Item = ({ id, itemName, amount, category, description }) => {
   const { dispatch } = useItemsContext();
   const { setAlertInfo } = useAlertContext();
   const [isEditing, setIsEditing] = useState(false);
@@ -55,7 +55,6 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
     axios
       .patch(`/items/${id}`, enteredInfo)
       .then(() => {
-        setIsUpdate(true);
         setIsUpdateBtn(false);
         setIsEditing(false);
       })

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useAuthContext from "../hooks/useAuthContext";
 import useAlertContext from "../hooks/useAlertContext";
 import useItemsContext from "../hooks/useItemsContext";
 import { Link } from "react-router-dom";
 import { Box, Text, Button, useColorMode } from "@chakra-ui/react";
-import axios from "axios";
 import { initialAlertInfoState } from "../contexts/alertContext";
+import { fetchCurrentUser } from "../helpers/api/fetchCurrentUser";
+import { fetchShoppingItems } from "../helpers/api/fetchShoppingItems";
 
 const Profile = () => {
   const [error, setError] = useState();
@@ -15,25 +16,14 @@ const Profile = () => {
   const { setAlertInfo } = useAlertContext();
   const { colorMode } = useColorMode();
   const currentToken = sessionStorage.getItem("isLoggedIn");
-  const currUserId = sessionStorage.getItem("currId");
 
-  const fetchCurrentUserData = async () => {
-    setIsLoading(true);
-    const config = {
-      headers: {
-        authToken: currentToken,
-      },
-    };
-    await axios
-      .get("/user", config)
+  const handleCheckCurrentUser = async () => {
+    await fetchCurrentUser()
       .then((res) => {
         setCurrentUser(res.data);
       })
-      .catch((error) => {
-        setError(error.message);
-      });
-    await axios
-      .get(`/items/${currUserId}`)
+      .catch((err) => console.log(err));
+    await fetchShoppingItems()
       .then((res) => {
         dispatch({ type: "SET_ITEMS", payload: res.data });
       })
@@ -42,11 +32,9 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (currentToken) {
-      fetchCurrentUserData();
-    } else {
-      setError("Failed to fetch user data.");
-    }
+    currentToken
+      ? handleCheckCurrentUser()
+      : setError("Failed to fetch user data.");
   }, []);
 
   const handleLogout = () => {

@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import FormModal from "../components/modal/FormModal";
 import { Box, useMediaQuery } from "@chakra-ui/react";
 import ShoppingList from "../components/shoppingList/ShoppingList";
 import useAuthContext from "../hooks/useAuthContext";
-import { fetchCurrentUser } from "../helpers/fetchCurrentUser";
+import { fetchCurrentUser } from "../helpers/api/fetchCurrentUser";
 
 const Home = () => {
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
