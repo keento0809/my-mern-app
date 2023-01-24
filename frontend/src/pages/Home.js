@@ -1,32 +1,25 @@
 import React, { useEffect } from "react";
 import FormModal from "../components/modal/FormModal";
 import { Box, useMediaQuery } from "@chakra-ui/react";
-import Work from "../components/work/Work";
-import axios from "axios";
+import ShoppingList from "../components/shoppingList/ShoppingList";
 import useAuthContext from "../hooks/useAuthContext";
+import { fetchCurrentUser } from "../helpers/fetchCurrentUser";
 
 const Home = () => {
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
   const { setCurrentUser } = useAuthContext();
 
+  const handleCheckCurrentUser = async () => {
+    await fetchCurrentUser()
+      .then((res) => {
+        setCurrentUser(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
-    const currentToken = sessionStorage.getItem("isLoggedIn");
-    if (currentToken) {
-      const config = {
-        headers: {
-          authToken: currentToken,
-        },
-      };
-      axios
-        .get("/user", config)
-        .then((res) => {
-          setCurrentUser(res.data);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-    }
+    handleCheckCurrentUser();
   }, []);
 
   return (
@@ -36,7 +29,7 @@ const Home = () => {
         justifyContent={isLargerThan1280 ? "flex-start" : "space-between"}
       >
         <FormModal />
-        <Work />
+        <ShoppingList />
       </Box>
     </>
   );

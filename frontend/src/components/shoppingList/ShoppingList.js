@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { categories } from "../../data/data";
 import Item from "../item/Item";
 import useItemsContext from "../../hooks/useItemsContext";
-import useAuthContext from "../../hooks/useAuthContext";
-import styles from "./Work.module.css";
+import styles from "./ShoppingList.module.css";
 import axios from "axios";
 import { Select, Box, Text, useMediaQuery } from "@chakra-ui/react";
 

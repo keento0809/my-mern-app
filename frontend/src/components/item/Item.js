@@ -54,7 +54,7 @@ const Item = ({ id, itemName, amount, category, description, setIsUpdate }) => {
     dispatch({ type: "UPDATE_ITEM", payload: enteredInfo });
     axios
       .patch(`/items/${id}`, enteredInfo)
-      .then((res) => {
+      .then(() => {
         setIsUpdate(true);
         setIsUpdateBtn(false);
         setIsEditing(false);
