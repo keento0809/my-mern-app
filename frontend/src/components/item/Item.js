@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import axios from "axios";
 import useItemsContext from "../../hooks/useItemsContext";
 import useAlertContext from "../../hooks/useAlertContext";
 import { categories } from "../../data/data";
@@ -14,6 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { initialAlertInfoState } from "../../contexts/alertContext";
+import { deleteOneItem } from "../../helpers/api/deleteOneItem";
+import { updateItem } from "../../helpers/api/updateItem";
 
 const Item = ({ id, itemName, amount, category, description }) => {
   const { dispatch } = useItemsContext();
@@ -26,15 +27,18 @@ const Item = ({ id, itemName, amount, category, description }) => {
   const itemNameInputRef = useRef();
   const amountInputRef = useRef();
   const descriptionInputRef = useRef();
-  function handleSetCategory(e) {
+
+  const handleSetCategory = (e) => {
     setChosenCategory(e.target.value);
-  }
+  };
+
   const handleOpenEditMode = (val) => {
     setVal(val);
     setIsUpdateBtn(!isUpdateBtn);
     setIsEditing(!isEditing);
   };
-  const handleUpdateItem = () => {
+
+  const handleUpdateItem = async () => {
     const enteredInfo = {
       _id: id,
       itemName: val === "NAME" ? itemNameInputRef.current.value : itemName,
@@ -52,8 +56,7 @@ const Item = ({ id, itemName, amount, category, description }) => {
       return;
     }
     dispatch({ type: "UPDATE_ITEM", payload: enteredInfo });
-    axios
-      .patch(`/items/${id}`, enteredInfo)
+    await updateItem(id, enteredInfo)
       .then(() => {
         setIsUpdateBtn(false);
         setIsEditing(false);
@@ -61,9 +64,9 @@ const Item = ({ id, itemName, amount, category, description }) => {
       .catch((error) => console.log(error));
     setVal("");
   };
-  const handleDeleteItem = () => {
-    axios
-      .delete(`/items/${id}`)
+
+  const handleDeleteItem = async () => {
+    await deleteOneItem(id)
       .then(() => {
         dispatch({ type: "DELETE_ITEM", payload: id });
         setAlertInfo({

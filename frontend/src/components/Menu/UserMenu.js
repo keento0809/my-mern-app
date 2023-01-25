@@ -11,21 +11,18 @@ import { AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/useAuthContext";
 import useAlertContext from "../../hooks/useAlertContext";
-import axios from "axios";
 import useItemsContext from "../../hooks/useItemsContext";
 import { initialAlertInfoState } from "../../contexts/alertContext";
+import { deleteItems } from "../../helpers/api/deleteItems";
 
 const UserMenu = () => {
   const { setIsLoggedIn, setCurrentUser } = useAuthContext();
   const { setAlertInfo } = useAlertContext();
   const { dispatch } = useItemsContext();
 
-  const handleResetList = () => {
-    axios
-      .delete("/items")
-      .then(() => {
-        dispatch({ type: "RESET_USER" });
-      })
+  const handleResetList = async () => {
+    await deleteItems()
+      .then(() => dispatch({ type: "RESET_USER" }))
       .catch((error) => console.log(error));
   };
 

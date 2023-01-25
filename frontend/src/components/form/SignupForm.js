@@ -11,7 +11,6 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { initialAlertInfoState } from "../../contexts/alertContext";
 import { postAuthentication } from "../../helpers/api/postAuthentication";
 
