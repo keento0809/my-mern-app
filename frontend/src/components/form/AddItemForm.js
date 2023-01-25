@@ -3,7 +3,6 @@ import { categories } from "../../data/data";
 import useItemsContext from "../../hooks/useItemsContext";
 import useAlertContext from "../../hooks/useAlertContext";
 import useAuthContext from "../../hooks/useAuthContext";
-import axios from "axios";
 import {
   Button,
   Input,
@@ -17,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { initialAlertInfoState } from "../../contexts/alertContext";
+import { addNewItem } from "../../helpers/api/addNewItem";
 
 const AddItemForm = ({ onClose }) => {
   const [itemInput, setItemInput] = useState({
@@ -41,7 +41,7 @@ const AddItemForm = ({ onClose }) => {
     });
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmit(true);
 
@@ -61,8 +61,7 @@ const AddItemForm = ({ onClose }) => {
       description: itemInput.itemDescription ? itemInput.itemDescription : "",
     };
 
-    axios
-      .post(`/items/${currentUser._id}`, enteredInfo)
+    await addNewItem(currentUser._id, enteredInfo)
       .then((res) => {
         dispatch({ type: "ADD_NEW_ITEM", payload: res.data });
         setIsSubmit(false);
@@ -74,13 +73,11 @@ const AddItemForm = ({ onClose }) => {
         });
       })
       .catch((error) => console.log(error.message));
-    setTimeout(() => {
-      setAlertInfo({
-        isAlert: true,
-        status: "success",
-        text: "Item successfully added to List!",
-      });
-    }, 200);
+    setAlertInfo({
+      isAlert: true,
+      status: "success",
+      text: "Item successfully added to List!",
+    });
     onClose();
     setTimeout(() => {
       setAlertInfo(initialAlertInfoState);
