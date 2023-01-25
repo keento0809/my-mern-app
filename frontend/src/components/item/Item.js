@@ -15,6 +15,11 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { initialAlertInfoState } from "../../contexts/alertContext";
 import { deleteOneItem } from "../../helpers/api/deleteOneItem";
 import { updateItem } from "../../helpers/api/updateItem";
+import {
+  setBgColor,
+  setBorderColor,
+  setColor,
+} from "../../helpers/style/setColor";
 
 const Item = ({ id, itemName, amount, category, description }) => {
   const { dispatch } = useItemsContext();
@@ -102,46 +107,8 @@ const Item = ({ id, itemName, amount, category, description }) => {
     <Box
       p={6}
       border={`1px solid`}
-      bgColor={
-        colorMode === "dark"
-          ? "inherit"
-          : category === "Fruits"
-          ? "red.300"
-          : category === "Fish"
-          ? "cyan.300"
-          : category === "Vegetable"
-          ? "green.300"
-          : category === "Meat"
-          ? "pink.300"
-          : category === "Dairy"
-          ? "yellow.300"
-          : category === "FrozenFood"
-          ? "blue.300"
-          : category === "Bread"
-          ? "yellow.300"
-          : categories === "Other"
-          ? "grey.300"
-          : "orange.300"
-      }
-      borderColor={
-        category === "Fruits"
-          ? "red.300"
-          : category === "Fish"
-          ? "cyan.300"
-          : category === "Vegetable"
-          ? "green.300"
-          : category === "Meat"
-          ? "pink.300"
-          : category === "Dairy"
-          ? "yellow.300"
-          : category === "FrozenFood"
-          ? "blue.300"
-          : category === "Bread"
-          ? "yellow.300"
-          : categories === "Other"
-          ? "grey.300"
-          : "orange.300"
-      }
+      bgColor={() => setBgColor(colorMode, category)}
+      borderColor={() => setBorderColor(category)}
       borderRadius={8}
     >
       <Flex justifyContent="space-between" alignItems="center">
@@ -149,27 +116,7 @@ const Item = ({ id, itemName, amount, category, description }) => {
           flexDirection="row"
           alignItems="center"
           fontWeight="bold"
-          color={
-            colorMode === "light"
-              ? "black"
-              : category === "Fruits"
-              ? "red.300"
-              : category === "Fish"
-              ? "cyan.300"
-              : category === "Vegetable"
-              ? "green.300"
-              : category === "Meat"
-              ? "pink.300"
-              : category === "Dairy"
-              ? "yellow.300"
-              : category === "FrozenFood"
-              ? "blue.300"
-              : category === "Bread"
-              ? "yellow.300"
-              : categories === "Other"
-              ? "grey.300"
-              : "orange.300"
-          }
+          color={() => setColor(colorMode, category)}
         >
           {isEditing && val === "NAME" ? (
             <Input
@@ -266,27 +213,7 @@ const Item = ({ id, itemName, amount, category, description }) => {
         mt={4}
         bgColor="inherit"
         border={`1px solid #333`}
-        borderColor={
-          colorMode === "dark"
-            ? category === "Fruits"
-              ? "red.300"
-              : category === "Fish"
-              ? "cyan.300"
-              : category === "Vegetable"
-              ? "green.300"
-              : category === "Meat"
-              ? "pink.300"
-              : category === "Dairy"
-              ? "yellow.300"
-              : category === "FrozenFood"
-              ? "blue.300"
-              : category === "Bread"
-              ? "yellow.300"
-              : categories === "Other"
-              ? "grey.300"
-              : "orange.300"
-            : "black"
-        }
+        borderColor={() => setBorderColor(category)}
         size="xs"
         fontSize="xs"
       >

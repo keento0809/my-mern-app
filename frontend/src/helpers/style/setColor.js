@@ -1,0 +1,63 @@
+export const setColor = (colorMode, category) => {
+  return colorMode === "light"
+    ? "black"
+    : category === "Fruits"
+    ? "red.300"
+    : category === "Fish"
+    ? "cyan.300"
+    : category === "Vegetable"
+    ? "green.300"
+    : category === "Meat"
+    ? "pink.300"
+    : category === "Dairy"
+    ? "yellow.300"
+    : category === "FrozenFood"
+    ? "blue.300"
+    : category === "Bread"
+    ? "yellow.300"
+    : category === "Other"
+    ? "grey.300"
+    : "orange.300";
+};
+
+export const setBgColor = (colorMode, category) => {
+  return colorMode === "dark"
+    ? "inherit"
+    : category === "Fruits"
+    ? "red.300"
+    : category === "Fish"
+    ? "cyan.300"
+    : category === "Vegetable"
+    ? "green.300"
+    : category === "Meat"
+    ? "pink.300"
+    : category === "Dairy"
+    ? "yellow.300"
+    : category === "FrozenFood"
+    ? "blue.300"
+    : category === "Bread"
+    ? "yellow.300"
+    : category === "Other"
+    ? "grey.300"
+    : "orange.300";
+};
+
+export const setBorderColor = (category) => {
+  return category === "Fruits"
+    ? "red.300"
+    : category === "Fish"
+    ? "cyan.300"
+    : category === "Vegetable"
+    ? "green.300"
+    : category === "Meat"
+    ? "pink.300"
+    : category === "Dairy"
+    ? "yellow.300"
+    : category === "FrozenFood"
+    ? "blue.300"
+    : category === "Bread"
+    ? "yellow.300"
+    : category === "Other"
+    ? "grey.300"
+    : "orange.300";
+};
