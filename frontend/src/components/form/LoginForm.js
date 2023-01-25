@@ -10,10 +10,10 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
-import axios from "axios";
 import useAuthContext from "../../hooks/useAuthContext";
 import { guestUser } from "../../data/data";
 import { initialAlertInfoState } from "../../contexts/alertContext";
+import { postAuthentication } from "../../helpers/api/postAuthentication";
 
 const LoginForm = () => {
   const [formInput, setFormInput] = useState({
@@ -33,17 +33,11 @@ const LoginForm = () => {
     });
   };
 
-  const fetchPostRequest = (obj) => {
-    axios
-      .post("/auth/login", obj)
+  const fetchPostRequestForLogin = async (obj) => {
+    await postAuthentication(obj, "login")
       .then((res) => {
-        sessionStorage.setItem("isLoggedIn", res.data.token);
-        sessionStorage.setItem("currId", res.data._id);
         navigate("/home");
-        setFormInput({
-          email: "",
-          password: "",
-        });
+        setFormInput({ email: "", password: "" });
         setAlertInfo({
           isAlert: true,
           status: "success",
@@ -76,7 +70,7 @@ const LoginForm = () => {
     }
     const enteredInfo = { email, password };
 
-    fetchPostRequest(enteredInfo);
+    fetchPostRequestForLogin(enteredInfo);
     setIsLoading(false);
   };
 
@@ -86,7 +80,7 @@ const LoginForm = () => {
     if (!guestUserInfo) {
       setError("Failed to guest login.");
     }
-    fetchPostRequest(guestUserInfo);
+    fetchPostRequestForLogin(guestUserInfo);
   };
 
   return (

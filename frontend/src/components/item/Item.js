@@ -64,7 +64,7 @@ const Item = ({ id, itemName, amount, category, description }) => {
   const handleDeleteItem = () => {
     axios
       .delete(`/items/${id}`)
-      .then((res) => {
+      .then(() => {
         dispatch({ type: "DELETE_ITEM", payload: id });
         setAlertInfo({
           isAlert: true,

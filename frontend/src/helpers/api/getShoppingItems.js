@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fetchShoppingItems = async () => {
+export const getShoppingItems = async () => {
   const currUserId = sessionStorage.getItem("currId");
   if (currUserId) {
     try {

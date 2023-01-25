@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fetchCurrentUser = async () => {
+export const getCurrentUser = async () => {
   const currentToken = sessionStorage.getItem("isLoggedIn");
   if (currentToken) {
     const config = {

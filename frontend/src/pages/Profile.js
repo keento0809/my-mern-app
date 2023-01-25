@@ -5,8 +5,8 @@ import useItemsContext from "../hooks/useItemsContext";
 import { Link } from "react-router-dom";
 import { Box, Text, Button, useColorMode } from "@chakra-ui/react";
 import { initialAlertInfoState } from "../contexts/alertContext";
-import { fetchCurrentUser } from "../helpers/api/fetchCurrentUser";
-import { fetchShoppingItems } from "../helpers/api/fetchShoppingItems";
+import { getCurrentUser } from "../helpers/api/getCurrentUser";
+import { getShoppingItems } from "../helpers/api/getShoppingItems";
 
 const Profile = () => {
   const [error, setError] = useState();
@@ -18,12 +18,12 @@ const Profile = () => {
   const currentToken = sessionStorage.getItem("isLoggedIn");
 
   const handleCheckCurrentUser = async () => {
-    await fetchCurrentUser()
+    await getCurrentUser()
       .then((res) => {
         setCurrentUser(res.data);
       })
       .catch((err) => console.log(err));
-    await fetchShoppingItems()
+    await getShoppingItems()
       .then((res) => {
         dispatch({ type: "SET_ITEMS", payload: res.data });
       })
