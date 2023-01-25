@@ -4,11 +4,11 @@ import Item from "../item/Item";
 import useItemsContext from "../../hooks/useItemsContext";
 import styles from "./ShoppingList.module.css";
 import { Select, Box, Text, useMediaQuery } from "@chakra-ui/react";
-import { fetchShoppingItems } from "../../helpers/api/fetchShoppingItems";
+import { getShoppingItems } from "../../helpers/api/getShoppingItems";
 
 const ShoppingList = () => {
   const [chosenCategory, setChosenCategory] = useState("");
-  const [tempList, setTempList] = useState();
+  const [currentShoppingList, setCurrentShoppingList] = useState();
   const { items, dispatch } = useItemsContext();
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
@@ -16,21 +16,21 @@ const ShoppingList = () => {
   function handleSetCategory(e) {
     setChosenCategory(e.target.value);
     if (items.length > 0 && e.target.value === "") {
-      setTempList(items);
+      setCurrentShoppingList(items);
     } else {
       const selectedCategory = e.target.value;
       const sortedItems = items.filter(
         (item) => item.category === selectedCategory
       );
-      setTempList(sortedItems);
+      setCurrentShoppingList(sortedItems);
     }
   }
 
   const getItemsFromDB = async () => {
-    await fetchShoppingItems()
+    await getShoppingItems()
       .then((res) => {
         dispatch({ type: "SET_ITEMS", payload: res.data });
-        setTempList(res.data);
+        setCurrentShoppingList(res.data);
       })
       .catch((error) => console.log(error.message));
   };
@@ -38,6 +38,7 @@ const ShoppingList = () => {
   useEffect(() => {
     getItemsFromDB();
   }, [items.length]);
+  console.log("render", items);
 
   return (
     <Box
@@ -73,27 +74,30 @@ const ShoppingList = () => {
       </Box>
       <Box overflow="scroll">
         <ul className={styles.listUl}>
-          {!tempList && <p>Loading...</p>}
-          {tempList === "" && chosenCategory === "" && <p>No Item added</p>}
-          {tempList && tempList.length === 0 && chosenCategory !== "" && (
-            <p>No Item Found</p>
+          {currentShoppingList === undefined && <p>Loading...</p>}
+          {currentShoppingList === "" && chosenCategory === "" && (
+            <p>No Item added</p>
           )}
-          {tempList?.map((item, index) => {
-            return (
-              <li
-                key={index}
-                style={{ listStyle: "none", paddingBottom: "1rem" }}
-              >
-                <Item
-                  id={item._id}
-                  itemName={item.itemName}
-                  amount={item.amount}
-                  category={item.category}
-                  description={item.description}
-                />
-              </li>
-            );
-          })}
+          {currentShoppingList &&
+            currentShoppingList.length === 0 &&
+            chosenCategory !== "" && <p>No Item Found</p>}
+          {currentShoppingList &&
+            currentShoppingList.map((item, index) => {
+              return (
+                <li
+                  key={index}
+                  style={{ listStyle: "none", paddingBottom: "1rem" }}
+                >
+                  <Item
+                    id={item._id}
+                    itemName={item.itemName}
+                    amount={item.amount}
+                    category={item.category}
+                    description={item.description}
+                  />
+                </li>
+              );
+            })}
         </ul>
       </Box>
     </Box>

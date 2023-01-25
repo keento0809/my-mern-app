@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { initialAlertInfoState } from "../../contexts/alertContext";
+import { postAuthentication } from "../../helpers/api/postAuthentication";
 
 const SignupForm = () => {
   const [formInput, setFormInput] = useState({
@@ -25,7 +26,7 @@ const SignupForm = () => {
   const [error, setError] = useState();
 
   const { setAlertInfo } = useAlertContext();
-  const { setIsLoggedIn } = useAuthContext();
+  const { setIsLoggedIn, setCurrentUser } = useAuthContext();
 
   const navigate = useNavigate();
 
@@ -36,12 +37,9 @@ const SignupForm = () => {
     });
   };
 
-  const fetchPostRequest = (obj) => {
-    axios
-      .post("/auth/signup", obj)
+  const fetchPostRequestForSignup = async (obj) => {
+    await postAuthentication(obj, "signup")
       .then((res) => {
-        sessionStorage.setItem("isLoggedIn", res.data.token);
-        sessionStorage.setItem("currId", res.data._id);
         navigate("/home");
         setFormInput({
           username: "",
@@ -55,11 +53,12 @@ const SignupForm = () => {
           text: "Successfully Signed up!",
         });
         setIsLoggedIn(true);
+        setCurrentUser(res.data);
         setTimeout(() => {
           setAlertInfo(initialAlertInfoState);
-        }, 2000);
+        }, 1500);
       })
-      .catch((error) => {
+      .catch((err) => {
         setError(error.message);
         console.log(error.message);
       });
@@ -98,7 +97,7 @@ const SignupForm = () => {
       password: formInput.passwordForSignup,
     };
 
-    fetchPostRequest(enteredInfo);
+    fetchPostRequestForSignup(enteredInfo);
   };
 
   return (
