@@ -27,7 +27,7 @@ const Item = ({ id, itemName, amount, category, description }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isUpdateBtn, setIsUpdateBtn] = useState(false);
   const [chosenCategory, setChosenCategory] = useState("");
-  const [val, setVal] = useState("");
+  const [editCategory, setEditCategory] = useState("");
   const { colorMode } = useColorMode();
   const itemNameInputRef = useRef();
   const amountInputRef = useRef();
@@ -37,8 +37,8 @@ const Item = ({ id, itemName, amount, category, description }) => {
     setChosenCategory(e.target.value);
   };
 
-  const handleOpenEditMode = (val) => {
-    setVal(val);
+  const handleOpenEditMode = (editCategory) => {
+    setEditCategory(editCategory);
     setIsUpdateBtn(!isUpdateBtn);
     setIsEditing(!isEditing);
   };
@@ -46,11 +46,14 @@ const Item = ({ id, itemName, amount, category, description }) => {
   const handleUpdateItem = async () => {
     const enteredInfo = {
       _id: id,
-      itemName: val === "NAME" ? itemNameInputRef.current.value : itemName,
-      amount: val === "AMOUNT" ? amountInputRef.current.value : amount,
-      category: val === "CATEGORY" ? chosenCategory : category,
+      itemName:
+        editCategory === "NAME" ? itemNameInputRef.current.value : itemName,
+      amount: editCategory === "AMOUNT" ? amountInputRef.current.value : amount,
+      category: editCategory === "CATEGORY" ? chosenCategory : category,
       description:
-        val === "NOTE" ? descriptionInputRef.current.value : description,
+        editCategory === "NOTE"
+          ? descriptionInputRef.current.value
+          : description,
     };
     if (
       enteredInfo.itemName === "" ||
@@ -60,14 +63,22 @@ const Item = ({ id, itemName, amount, category, description }) => {
       alert("Invalid update! Value must not be blank.");
       return;
     }
-    dispatch({ type: "UPDATE_ITEM", payload: enteredInfo });
     await updateItem(id, enteredInfo)
       .then(() => {
         setIsUpdateBtn(false);
         setIsEditing(false);
       })
       .catch((error) => console.log(error));
-    setVal("");
+    dispatch({ type: "UPDATE_ITEM", payload: enteredInfo });
+    setAlertInfo({
+      isAlert: true,
+      status: "success",
+      text: "Item successfully updated.",
+    });
+    setTimeout(() => {
+      setAlertInfo(initialAlertInfoState);
+    }, 1500);
+    setEditCategory("");
   };
 
   const handleDeleteItem = async () => {
@@ -118,7 +129,7 @@ const Item = ({ id, itemName, amount, category, description }) => {
           fontWeight="bold"
           color={() => setColor(colorMode, category)}
         >
-          {isEditing && val === "NAME" ? (
+          {isEditing && editCategory === "NAME" ? (
             <Input
               ml={2}
               ref={itemNameInputRef}
@@ -136,13 +147,17 @@ const Item = ({ id, itemName, amount, category, description }) => {
             isUpdateBtn ? handleUpdateItem : () => handleOpenEditMode("NAME")
           }
         >
-          {isUpdateBtn && val === "NAME" ? "Update" : <AiOutlineEdit />}
+          {isUpdateBtn && editCategory === "NAME" ? (
+            "Update"
+          ) : (
+            <AiOutlineEdit />
+          )}
         </Button>
       </Flex>
       <Flex justifyContent="space-between" alignItems="center">
         <Flex flexDirection="row" alignItems="center">
           Amount:{" "}
-          {isEditing && val === "AMOUNT" ? (
+          {isEditing && editCategory === "AMOUNT" ? (
             <Input
               ml={2}
               ref={amountInputRef}
@@ -157,35 +172,45 @@ const Item = ({ id, itemName, amount, category, description }) => {
           variant="outline"
           border="none"
           onClick={
-            isUpdateBtn && val === "AMOUNT"
+            isUpdateBtn && editCategory === "AMOUNT"
               ? handleUpdateItem
               : () => handleOpenEditMode("AMOUNT")
           }
         >
-          {isUpdateBtn && val === "AMOUNT" ? "Update" : <AiOutlineEdit />}
+          {isUpdateBtn && editCategory === "AMOUNT" ? (
+            "Update"
+          ) : (
+            <AiOutlineEdit />
+          )}
         </Button>
       </Flex>
       <Flex justifyContent="space-between" alignItems="center">
         <Flex flexDirection="row" alignItems="center">
           Category:{" "}
-          {isEditing && val === "CATEGORY" ? selectOptionTag : category}
+          {isEditing && editCategory === "CATEGORY"
+            ? selectOptionTag
+            : category}
         </Flex>
         <Button
           variant="outline"
           border="none"
           onClick={
-            isUpdateBtn && val === "CATEGORY"
+            isUpdateBtn && editCategory === "CATEGORY"
               ? handleUpdateItem
               : () => handleOpenEditMode("CATEGORY")
           }
         >
-          {isUpdateBtn && val === "CATEGORY" ? "Update" : <AiOutlineEdit />}
+          {isUpdateBtn && editCategory === "CATEGORY" ? (
+            "Update"
+          ) : (
+            <AiOutlineEdit />
+          )}
         </Button>
       </Flex>
       <Flex justifyContent="space-between" alignItems="center">
         <Flex flexDirection="row" alignItems="flex-start">
           Note:{" "}
-          {isEditing && val === "NOTE" ? (
+          {isEditing && editCategory === "NOTE" ? (
             <Textarea
               ml={2}
               name=""
@@ -205,7 +230,11 @@ const Item = ({ id, itemName, amount, category, description }) => {
             isUpdateBtn ? handleUpdateItem : () => handleOpenEditMode("NOTE")
           }
         >
-          {isUpdateBtn && val === "NOTE" ? "Update" : <AiOutlineEdit />}
+          {isUpdateBtn && editCategory === "NOTE" ? (
+            "Update"
+          ) : (
+            <AiOutlineEdit />
+          )}
         </Button>
       </Flex>
       <Button
