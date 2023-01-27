@@ -1,5 +1,4 @@
 import { Container, useMediaQuery } from "@chakra-ui/react";
-import React from "react";
 import GlobalAlert from "../components/Alert/GlobalAlert";
 import Nav from "../components/nav/Nav";
 import LoadingModal from "../components/modal/LoadingModal";

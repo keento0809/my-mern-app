@@ -1,4 +1,3 @@
-import React from "react";
 import { Text, Button, Box } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import useAuthContext from "../hooks/useAuthContext";
@@ -7,7 +6,6 @@ import { useLocation } from "react-router-dom";
 const NotFound = () => {
   const { isLoggedIn } = useAuthContext();
   const location = useLocation();
-  console.log(location.pathname);
   return (
     <>
       <Box

@@ -38,7 +38,6 @@ const ShoppingList = () => {
   useEffect(() => {
     getItemsFromDB();
   }, [items.length]);
-  console.log("render", items);
 
   return (
     <Box

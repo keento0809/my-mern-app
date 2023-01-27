@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { categories } from "../../data/data";
 import useItemsContext from "../../hooks/useItemsContext";
 import useAlertContext from "../../hooks/useAlertContext";
 import useAuthContext from "../../hooks/useAuthContext";
 import {
-  Button,
   Input,
   Select,
   Textarea,
@@ -14,9 +13,9 @@ import {
   FormErrorMessage,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { AiOutlinePlus } from "react-icons/ai";
 import { initialAlertInfoState } from "../../contexts/alertContext";
 import { addNewItem } from "../../helpers/api/addNewItem";
+import AddButton from "../Button/AddButton";
 
 const AddItemForm = ({ onClose }) => {
   const [itemInput, setItemInput] = useState({
@@ -174,16 +173,9 @@ const AddItemForm = ({ onClose }) => {
             placeholder="Enter Description"
           ></Textarea>
         </FormControl>
-        <Button
-          my={8}
-          type="submit"
-          leftIcon={<AiOutlinePlus />}
-          backgroundColor="pink.100"
-          _hover={{ bg: "#f8a0a0" }}
-          variant="solid"
-        >
-          Add
-        </Button>
+        <Box my={8}>
+          <AddButton />
+        </Box>
       </form>
     </Box>
   );
