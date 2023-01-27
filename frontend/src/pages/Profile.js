@@ -117,5 +117,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-// [...todos,newTodo]

@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator");
 const User = require("../models/UserModels");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const createNewToken = require("../helpers/createNewToken");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -9,7 +10,8 @@ const login = async (req, res) => {
   const hashComparison = await bcrypt.compare(password, loginUser.password);
   const payload = { email };
   const option = { expiresIn: 3600000 };
-  const newToken = await jwt.sign(payload, process.env.SECRET_KEY, option);
+  const newToken = await createNewToken(email);
+  // const newToken = await jwt.sign(payload, process.env.SECRET_KEY, option);
   if (loginUser && hashComparison) {
     res.json({
       _id: loginUser.id,
