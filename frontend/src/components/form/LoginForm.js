@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAlertContext from "../../hooks/useAlertContext";
 import {
@@ -7,13 +7,13 @@ import {
   FormErrorMessage,
   Input,
   Box,
-  Button,
   Text,
 } from "@chakra-ui/react";
 import useAuthContext from "../../hooks/useAuthContext";
 import { guestUser } from "../../data/data";
 import { initialAlertInfoState } from "../../contexts/alertContext";
 import { postAuthentication } from "../../helpers/api/postAuthentication";
+import SubmitButton from "../Button/SubmitButton";
 
 const LoginForm = () => {
   const [formInput, setFormInput] = useState({
@@ -61,11 +61,15 @@ const LoginForm = () => {
     setIsLoading(true);
     setIsSubmit(true);
     const { email, password } = formInput;
-    if (email === "" || password === "") return;
+    if (email === "" || password === "") {
+      setIsLoading(false);
+      return;
+    }
 
     const regexEmail = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;
     if (!email.match(regexEmail) === "") {
       alert("Invalid Credential.");
+      setIsLoading(false);
       return;
     }
     const enteredInfo = { email, password };
@@ -129,15 +133,9 @@ const LoginForm = () => {
             <FormErrorMessage>Password is required.</FormErrorMessage>
           )}
         </FormControl>
-        <Button
-          mt={16}
-          w="full"
-          type="submit"
-          backgroundColor="pink.100"
-          variant="solid"
-        >
-          Login
-        </Button>
+        <Box mt={16}>
+          <SubmitButton text={"Login"} />
+        </Box>
       </form>
       <Text
         textAlign="center"

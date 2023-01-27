@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAlertContext from "../../hooks/useAlertContext";
 import useAuthContext from "../../hooks/useAuthContext";
@@ -8,11 +8,11 @@ import {
   FormErrorMessage,
   Input,
   Box,
-  Button,
   Text,
 } from "@chakra-ui/react";
 import { initialAlertInfoState } from "../../contexts/alertContext";
 import { postAuthentication } from "../../helpers/api/postAuthentication";
+import SubmitButton from "../Button/SubmitButton";
 
 const SignupForm = () => {
   const [formInput, setFormInput] = useState({
@@ -23,10 +23,8 @@ const SignupForm = () => {
   });
   const [isSubmit, setIsSubmit] = useState(false);
   const [error, setError] = useState();
-
   const { setAlertInfo } = useAlertContext();
-  const { setIsLoggedIn, setCurrentUser } = useAuthContext();
-
+  const { setIsLoggedIn, setCurrentUser, setIsLoading } = useAuthContext();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -65,7 +63,7 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     setIsSubmit(true);
 
     if (
@@ -73,20 +71,24 @@ const SignupForm = () => {
       formInput.emailForSignup === "" ||
       formInput.passwordForSignup === "" ||
       formInput.passwordConfirmation === ""
-    )
+    ) {
+      setIsLoading(false);
       return;
+    }
 
     const regexEmail = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;
-    const regex = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
+    // const regex = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
 
     // validation
     if (!formInput.emailForSignup.match(regexEmail)) {
       alert("Invalid input.");
+      setIsLoading(false);
       return;
     }
 
     if (formInput.passwordForSignup !== formInput.passwordConfirmation) {
       alert("Password not matched.");
+      setIsLoading(false);
       return;
     }
 
@@ -97,6 +99,7 @@ const SignupForm = () => {
     };
 
     fetchPostRequestForSignup(enteredInfo);
+    setIsLoading(false);
   };
 
   return (
@@ -187,15 +190,9 @@ const SignupForm = () => {
             </FormErrorMessage>
           )}
         </FormControl>
-        <Button
-          mt={16}
-          w="full"
-          type="submit"
-          backgroundColor="pink.100"
-          variant="solid"
-        >
-          Signup
-        </Button>
+        <Box mt={16}>
+          <SubmitButton text={"Signup"} />
+        </Box>
       </form>
     </Box>
   );

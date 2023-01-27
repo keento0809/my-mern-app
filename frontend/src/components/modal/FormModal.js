@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef } from "react";
 import AddItemForm from "../form/AddItemForm";
 import {
   Button,
@@ -22,8 +22,8 @@ const FormModal = () => {
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
+  const initialRef = useRef(null);
+  const finalRef = useRef(null);
 
   return (
     <Box
