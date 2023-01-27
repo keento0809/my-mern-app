@@ -1,10 +1,8 @@
 import { useState, useRef } from "react";
 import useItemsContext from "../../hooks/useItemsContext";
 import useAlertContext from "../../hooks/useAlertContext";
-import { categories } from "../../data/data";
 import {
   Box,
-  Select,
   Button,
   Flex,
   Input,
@@ -20,6 +18,7 @@ import {
   setBorderColor,
   setColor,
 } from "../../helpers/style/setColor";
+import ItemCategorySelect from "../select/ItemCategorySelect";
 
 const Item = ({ id, itemName, amount, category, description }) => {
   const { dispatch } = useItemsContext();
@@ -98,20 +97,9 @@ const Item = ({ id, itemName, amount, category, description }) => {
   };
 
   const selectOptionTag = (
-    <Select
-      ml={2}
-      onChange={handleSetCategory}
-      placeholder="Select"
-      id="category"
-    >
-      {categories.map((category, index) => {
-        return (
-          <option key={index} value={category}>
-            {category}
-          </option>
-        );
-      })}
-    </Select>
+    <Box ml={2}>
+      <ItemCategorySelect onChange={handleSetCategory} />
+    </Box>
   );
 
   return (

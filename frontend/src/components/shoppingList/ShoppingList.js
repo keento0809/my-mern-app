@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { categories } from "../../data/data";
 import Item from "../item/Item";
 import useItemsContext from "../../hooks/useItemsContext";
 import styles from "./ShoppingList.module.css";
-import { Select, Box, Text, useMediaQuery } from "@chakra-ui/react";
+import { Box, Text, useMediaQuery } from "@chakra-ui/react";
 import { getShoppingItems } from "../../helpers/api/getShoppingItems";
+import ItemCategorySelect from "../select/ItemCategorySelect";
 
 const ShoppingList = () => {
   const [chosenCategory, setChosenCategory] = useState("");
@@ -54,22 +54,7 @@ const ShoppingList = () => {
     >
       <Box className="" pb={8}>
         <Text pb={2}>Filtered by: </Text>
-        <Select
-          focusBorderColor="pink.100"
-          onChange={handleSetCategory}
-          name=""
-          id="category"
-          placeholder="Select"
-          maxWidth={isLargerThan1280 && "364px"}
-        >
-          {categories.map((category, index) => {
-            return (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            );
-          })}
-        </Select>
+        <ItemCategorySelect onChange={handleSetCategory} maxWidth={"364px"} />
       </Box>
       <Box overflow="scroll">
         <ul className={styles.listUl}>
