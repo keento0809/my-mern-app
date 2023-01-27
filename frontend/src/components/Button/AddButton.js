@@ -4,6 +4,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 const AddButton = () => {
   return (
     <Button
+      w="full"
       type="submit"
       leftIcon={<AiOutlinePlus />}
       backgroundColor="pink.100"

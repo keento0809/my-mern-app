@@ -13,7 +13,7 @@ import useAuthContext from "../../hooks/useAuthContext";
 import { guestUser } from "../../data/data";
 import { initialAlertInfoState } from "../../contexts/alertContext";
 import { postAuthentication } from "../../helpers/api/postAuthentication";
-import SubmitButton from "../Button/SubmitButton";
+import SubmitButton from "../button/SubmitButton";
 
 const LoginForm = () => {
   const [formInput, setFormInput] = useState({
