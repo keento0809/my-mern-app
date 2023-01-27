@@ -1,19 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAlertContext from "../../hooks/useAlertContext";
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Input,
-  Box,
-  Text,
-} from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Box, Text } from "@chakra-ui/react";
 import useAuthContext from "../../hooks/useAuthContext";
 import { guestUser } from "../../data/data";
 import { initialAlertInfoState } from "../../contexts/alertContext";
 import { postAuthentication } from "../../helpers/api/postAuthentication";
 import SubmitButton from "../button/SubmitButton";
+import ErrorMessage from "../errorMessage/ErrorMessage";
 
 const LoginForm = () => {
   const [formInput, setFormInput] = useState({
@@ -112,7 +106,7 @@ const LoginForm = () => {
             type="email"
             placeholder="Enter email"
           />
-          {isSubmit && <FormErrorMessage>Email is required.</FormErrorMessage>}
+          {isSubmit && <ErrorMessage text={"Email is required."} />}
         </FormControl>
         <FormControl isInvalid={isSubmit && formInput.password === ""}>
           <FormLabel htmlFor="password" pt={4}>
@@ -129,9 +123,7 @@ const LoginForm = () => {
             type="password"
             placeholder="Enter password"
           />
-          {isSubmit && (
-            <FormErrorMessage>Password is required.</FormErrorMessage>
-          )}
+          {isSubmit && <ErrorMessage text={"Password is required."} />}
         </FormControl>
         <Box mt={16}>
           <SubmitButton text={"Login"} />

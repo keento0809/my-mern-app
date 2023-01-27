@@ -8,13 +8,13 @@ import {
   FormLabel,
   FormControl,
   Box,
-  FormErrorMessage,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { initialAlertInfoState } from "../../contexts/alertContext";
 import { addNewItem } from "../../helpers/api/addNewItem";
 import AddButton from "../button/AddButton";
 import ItemCategorySelect from "../select/ItemCategorySelect";
+import ErrorMessage from "../errorMessage/ErrorMessage";
 
 const AddItemForm = ({ onClose }) => {
   const [itemInput, setItemInput] = useState({
@@ -102,9 +102,7 @@ const AddItemForm = ({ onClose }) => {
             type="text"
             placeholder="Enter ItemName"
           />
-          {isSubmit && (
-            <FormErrorMessage>ItemName is required.</FormErrorMessage>
-          )}
+          {isSubmit && <ErrorMessage text={"ItemName is required."} />}
         </FormControl>
         <FormControl isInvalid={isSubmit && itemInput.itemAmount === ""}>
           <FormLabel
@@ -125,7 +123,7 @@ const AddItemForm = ({ onClose }) => {
             type="number"
             placeholder="Enter Amount"
           />
-          {isSubmit && <FormErrorMessage>Amount is required.</FormErrorMessage>}
+          {isSubmit && <ErrorMessage text={"Amount is required."} />}
         </FormControl>
         <FormControl isInvalid={isSubmit && itemInput.itemCategory === ""}>
           <FormLabel
@@ -140,9 +138,7 @@ const AddItemForm = ({ onClose }) => {
             name={"itemCategory"}
             value={itemInput.itemCategory}
           />
-          {isSubmit && (
-            <FormErrorMessage>Category is required.</FormErrorMessage>
-          )}
+          {isSubmit && <ErrorMessage text={"Category is required."} />}
         </FormControl>
         <FormControl>
           <FormLabel htmlFor="price" pt={4} fontSize={isLargerThan1024 && "sm"}>

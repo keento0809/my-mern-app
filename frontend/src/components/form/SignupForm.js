@@ -2,17 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAlertContext from "../../hooks/useAlertContext";
 import useAuthContext from "../../hooks/useAuthContext";
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Input,
-  Box,
-  Text,
-} from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Box, Text } from "@chakra-ui/react";
 import { initialAlertInfoState } from "../../contexts/alertContext";
 import { postAuthentication } from "../../helpers/api/postAuthentication";
 import SubmitButton from "../button/SubmitButton";
+import ErrorMessage from "../errorMessage/ErrorMessage";
 
 const SignupForm = () => {
   const [formInput, setFormInput] = useState({
@@ -127,9 +121,7 @@ const SignupForm = () => {
             type="text"
             placeholder="Enter Username"
           />
-          {isSubmit && (
-            <FormErrorMessage>Username is required.</FormErrorMessage>
-          )}
+          {isSubmit && <ErrorMessage text={"Username is required."} />}
         </FormControl>
         <FormControl isInvalid={isSubmit && formInput.emailForSignup === ""}>
           <FormLabel htmlFor="emailForSignup" pt={4}>
@@ -146,7 +138,7 @@ const SignupForm = () => {
             type="email"
             placeholder="Enter email"
           />
-          {isSubmit && <FormErrorMessage>Email is required.</FormErrorMessage>}
+          {isSubmit && <ErrorMessage text={"Email is required."} />}
         </FormControl>
         <FormControl isInvalid={isSubmit && formInput.passwordForSignup === ""}>
           <FormLabel htmlFor="passwordForSignup" pt={4}>
@@ -163,9 +155,7 @@ const SignupForm = () => {
             type="password"
             placeholder="Enter password"
           />
-          {isSubmit && (
-            <FormErrorMessage>Password is required.</FormErrorMessage>
-          )}
+          {isSubmit && <ErrorMessage text={"Password is required."} />}
         </FormControl>
         <FormControl
           isInvalid={isSubmit && formInput.passwordConfirmation === ""}
@@ -185,9 +175,7 @@ const SignupForm = () => {
             placeholder="Enter password"
           />
           {isSubmit && (
-            <FormErrorMessage>
-              Password confirmation is required.
-            </FormErrorMessage>
+            <ErrorMessage text={"Password confirmation is required."} />
           )}
         </FormControl>
         <Box mt={16}>
