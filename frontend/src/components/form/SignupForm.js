@@ -71,15 +71,12 @@ const SignupForm = () => {
     }
 
     const regexEmail = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;
-    // const regex = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
-
     // validation
     if (!formInput.emailForSignup.match(regexEmail)) {
       alert("Invalid input.");
       setIsLoading(false);
       return;
     }
-
     if (formInput.passwordForSignup !== formInput.passwordConfirmation) {
       alert("Password not matched.");
       setIsLoading(false);

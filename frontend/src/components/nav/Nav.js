@@ -12,7 +12,7 @@ import { BsMoonStars, BsSun } from "react-icons/bs";
 import { BiLogIn } from "react-icons/bi";
 import { AiOutlineUser } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
-import Side from "../side/Side";
+import SideMenu from "../sideMenu/SideMenu";
 import useAuthContext from "../../hooks/useAuthContext";
 import useAlertContext from "../../hooks/useAlertContext";
 import { initialAlertInfoState } from "../../contexts/alertContext";
@@ -56,7 +56,7 @@ const Nav = () => {
         <Box display={isLargerThan1024 && "none"}>
           <Flex justifyContent="space-between" alignItems="center">
             <Flex justifyContent="center" textAlign="center">
-              {isLoggedIn && <Side />}
+              {isLoggedIn && <SideMenu />}
               {!isLoggedIn && (
                 <Link to="/auth">
                   <Tooltip label="Login">

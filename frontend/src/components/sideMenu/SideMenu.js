@@ -12,7 +12,7 @@ import useAuthContext from "../../hooks/useAuthContext";
 import useAlertContext from "../../hooks/useAlertContext";
 import { initialAlertInfoState } from "../../contexts/alertContext";
 
-const Side = () => {
+const SideMenu = () => {
   const { setIsLoggedIn, setCurrentUser } = useAuthContext();
   const { setAlertInfo } = useAlertContext();
 
@@ -54,4 +54,4 @@ const Side = () => {
   );
 };
 
-export default Side;
+export default SideMenu;
