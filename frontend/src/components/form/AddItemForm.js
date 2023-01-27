@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { categories } from "../../data/data";
 import useItemsContext from "../../hooks/useItemsContext";
 import useAlertContext from "../../hooks/useAlertContext";
 import useAuthContext from "../../hooks/useAuthContext";
 import {
   Input,
-  Select,
   Textarea,
   FormLabel,
   FormControl,
@@ -16,6 +14,7 @@ import {
 import { initialAlertInfoState } from "../../contexts/alertContext";
 import { addNewItem } from "../../helpers/api/addNewItem";
 import AddButton from "../button/AddButton";
+import ItemCategorySelect from "../select/ItemCategorySelect";
 
 const AddItemForm = ({ onClose }) => {
   const [itemInput, setItemInput] = useState({
@@ -28,17 +27,15 @@ const AddItemForm = ({ onClose }) => {
   const { dispatch } = useItemsContext();
   const { setAlertInfo } = useAlertContext();
   const { currentUser } = useAuthContext();
-
   const [isLargerThan1024] = useMediaQuery("(min-width:1024px)");
-
   const [isSubmit, setIsSubmit] = useState(false);
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     setItemInput({
       ...itemInput,
       [e.target.name]: e.target.value,
     });
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,11 +69,13 @@ const AddItemForm = ({ onClose }) => {
         });
       })
       .catch((error) => console.log(error.message));
+
     setAlertInfo({
       isAlert: true,
       status: "success",
       text: "Item successfully added to List!",
     });
+
     onClose();
     setTimeout(() => {
       setAlertInfo(initialAlertInfoState);
@@ -136,22 +135,11 @@ const AddItemForm = ({ onClose }) => {
           >
             Category
           </FormLabel>
-          <Select
-            focusBorderColor="pink.100"
+          <ItemCategorySelect
             onChange={handleChange}
-            name="itemCategory"
+            name={"itemCategory"}
             value={itemInput.itemCategory}
-            id="category"
-            placeholder="Select"
-          >
-            {categories.map((category, index) => {
-              return (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              );
-            })}
-          </Select>
+          />
           {isSubmit && (
             <FormErrorMessage>Category is required.</FormErrorMessage>
           )}
