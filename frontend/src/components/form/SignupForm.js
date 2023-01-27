@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { initialAlertInfoState } from "../../contexts/alertContext";
 import { postAuthentication } from "../../helpers/api/postAuthentication";
-import SubmitButton from "../Button/SubmitButton";
+import SubmitButton from "../button/SubmitButton";
 
 const SignupForm = () => {
   const [formInput, setFormInput] = useState({

@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { initialAlertInfoState } from "../../contexts/alertContext";
 import { addNewItem } from "../../helpers/api/addNewItem";
-import AddButton from "../Button/AddButton";
+import AddButton from "../button/AddButton";
 
 const AddItemForm = ({ onClose }) => {
   const [itemInput, setItemInput] = useState({
@@ -49,7 +49,7 @@ const AddItemForm = ({ onClose }) => {
       itemInput.itemAmount === "" ||
       itemInput.chosenCategory === ""
     ) {
-      console.log("error");
+      console.log("Invalid input value");
       return;
     }
 

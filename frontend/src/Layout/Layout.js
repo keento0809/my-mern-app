@@ -1,5 +1,5 @@
 import { Container, useMediaQuery } from "@chakra-ui/react";
-import GlobalAlert from "../components/Alert/GlobalAlert";
+import GlobalAlert from "../components/alert/GlobalAlert";
 import Nav from "../components/nav/Nav";
 import LoadingModal from "../components/modal/LoadingModal";
 import useAuthContext from "../hooks/useAuthContext";
