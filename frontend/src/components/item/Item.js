@@ -196,17 +196,17 @@ const Item = ({ id, itemName, amount, category, description }) => {
         </Button>
       </Flex>
       <Flex justifyContent="space-between" alignItems="center">
-        <Flex flexDirection="row" alignItems="flex-start">
+        <Flex flexDirection="row" alignItems="center">
           Note:{" "}
           {isEditing && editCategory === "NOTE" ? (
-            <Textarea
+            <Input
               ml={2}
               name=""
               ref={descriptionInputRef}
               cols="26"
               rows="4"
               placeholder={description}
-            ></Textarea>
+            />
           ) : (
             description
           )}
