@@ -10,16 +10,6 @@ const getAllItem = async (req, res) => {
   }
 };
 
-const getOneItem = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const item = await Item.findById(id);
-    res.status(200).json(item);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
 const getUserItem = async (req, res) => {
   const { userId } = req.params;
   try {
@@ -52,24 +42,6 @@ const postUserItem = async (req, res) => {
   }
 };
 
-const postItem = async (req, res) => {
-  if (!req.body.itemName || !req.body.amount) {
-    res.status(400);
-    throw Error("Invalid request");
-  }
-  try {
-    const newItem = await Item.create({
-      itemName: req.body.itemName,
-      amount: req.body.amount,
-      category: req.body.category,
-      description: req.body.description ? req.body.description : "",
-    });
-    res.status(200).json(newItem);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
 const updateItem = async (req, res) => {
   try {
     const { id } = req.params;
@@ -89,11 +61,9 @@ const updateItem = async (req, res) => {
 const reset = async (req, res) => {
   try {
     const allItems = await Item.deleteMany({});
-
     if (!allItems) {
       return res.status(400).json({ error: "Items not exist" });
     }
-
     res.status(200).json(allItems);
   } catch (error) {
     res.status(400).json(error);
@@ -120,8 +90,6 @@ const deleteItem = async (req, res) => {
 module.exports = {
   getAllItem,
   getUserItem,
-  getOneItem,
-  postItem,
   postUserItem,
   updateItem,
   deleteItem,
