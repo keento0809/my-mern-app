@@ -27,9 +27,9 @@ const signup = async (req, res) => {
   if (hasErrors) {
     return res.status(400).json({ errors: errors.array() });
   }
-  // check existing users
   const { username, email, password } = req.body;
   const existingUser = await User.findOne({ email });
+  // check existing users
   if (existingUser) {
     return res.status(400).json({
       error: "This user has already existed.",
@@ -37,7 +37,6 @@ const signup = async (req, res) => {
   }
   const hashedPassword = await createNewHash(password);
   const newToken = await createNewToken(email);
-  // Add new user to DB
   const newUser = await User.create({
     username,
     email,

@@ -65,10 +65,10 @@ const Item = ({ id, itemName, amount, category, description }) => {
     await updateItem(id, enteredInfo)
       .then(() => {
         setIsUpdateBtn(false);
-        setIsEditing(false);
       })
       .catch((error) => console.log(error));
     dispatch({ type: "UPDATE_ITEM", payload: enteredInfo });
+    setIsEditing(false);
     setAlertInfo({
       isAlert: true,
       status: "success",
