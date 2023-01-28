@@ -6,7 +6,7 @@ const createNewToken = async (email) => {
   const option = { expiresIn: 3600000 };
   // issue new token
   const newToken = await jwt.sign(payload, process.env.SECRET_KEY, option);
-  return { newToken, hashedPassword };
+  return newToken;
 };
 
-module.exports = { createNewToken };
+module.exports = createNewToken;
